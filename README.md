@@ -1,18 +1,15 @@
-Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif)My name is Mg Wunna
-================================================================================================================================
+# Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif)My name is Mg Wunna
 
-Fullstack Web & Application Developer & Designer.
--------------------------------------------------
+## Fullstack Web & Application Developer & Designer.
 
 I have been coding for 4+ years and working as fullstack developer.I use my skill to work as freelance developer in my free time.Also I am start learning in dev ops enginer.
 
-* 🌍  I'm based in Mandalay
-* 🖥️  See my portfolio at [https://www.wunna.info](http://www.wunna.info)
-* ✉️  You can contact me at [mgwunna.mw@icloud.com](mailto:mgwunna.mw@icloud.com)
-* ⚡  I love coffee and coding.
+- 🌍  I'm based in Mandalay
+- 🖥️  See my portfolio at [https://www.wunna.info](http://www.wunna.info)
+- ✉️  You can contact me at [mgwunna.mw@icloud.com](mailto:mgwunna.mw@icloud.com)
+- ⚡  I love coffee and coding.
 
 ### Skills
-
 
 <p align="left">
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg" width="36" height="36" alt="JavaScript" /></a>
@@ -39,7 +36,11 @@ I have been coding for 4+ years and working as fullstack developer.I use my skil
 <a href="https://www.figma.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/figma-colored.svg" width="36" height="36" alt="Figma" /></a>
 </p>
 
-
 ### Socials
 
 <p align="left"> <a href="https://www.facebook.com/mg.wunna.mandalay" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/facebook.svg" width="32" height="32" /></a> <a href="https://www.github.com/mg-wunna" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" width="32" height="32" /></a></p>
+
+### Example Projects
+
+1. [Qr Code Component - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--qr-code-component/)
+1. [Todo Web Application](https://mg-wunna.github.io/todo-web-application/)
