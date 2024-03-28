@@ -42,5 +42,6 @@ I have been coding for 4+ years and working as fullstack developer.I use my skil
 
 ### Example Projects
 
-1. [Qr Code Component - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--qr-code-component/)
 1. [Todo Web Application](https://mg-wunna.github.io/todo-web-application/)
+1. [Qr Code Component - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--qr-code-component/)
+1. [Recipe Page - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--recipe-page/)
