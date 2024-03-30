@@ -42,8 +42,9 @@ I have been coding for 4+ years and working as fullstack developer.I use my skil
 
 ### Example Projects
 
+1. [Newsletter Sign Up - From frontend mentor ( Junior Lvl )](https://mg-wunna.github.io/frontend-mentor--newsletter-sign-up-with-success-message/)
+1. [Results Summary Component - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--results-summary-component/)
+1. [Blog Preview - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--blog-preview-card/)
+1. [Recipe Page - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--recipe-page/)
+1. [Qr Code Component - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--qr-code-component/)
 1. [Todo Web Application](https://mg-wunna.github.io/todo-web-application/)
-1. [Qr Code Component - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--qr-code-component/)
-1. [Recipe Page - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--recipe-page/)
-1. [Blog Preview - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--blog-preview-card/)
-1. [Results Summary Component - From frontend mentor](https://mg-wunna.github.io/frontend-mentor--results-summary-component/)
