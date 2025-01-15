@@ -1,9 +1,20 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
 const Markdown = ({ content }: { content: string }) => {
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  const handleCopyCode = async (code: string) => {
+    await navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 2000);
+  };
+
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
@@ -66,11 +77,86 @@ const Markdown = ({ content }: { content: string }) => {
             {children}
           </blockquote>
         ),
-        code: ({ children }) => (
-          <code className="rounded-md bg-gray-800 px-2 py-1 font-mono text-sm text-orange-300">
-            {children}
-          </code>
-        ),
+        code: ({ children, className }) => {
+          const match = /language-(\w+)/.exec(className || '');
+          const codeString = children as string;
+          const isCopied = copiedCode === codeString;
+
+          return match ? (
+            // Fenced code block
+            <div className="group relative my-8 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 shadow-md">
+              <div className="flex items-center justify-between border-b border-gray-200 px-6 py-3">
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-full bg-red-400" />
+                  <div className="h-3 w-3 rounded-full bg-yellow-400" />
+                  <div className="h-3 w-3 rounded-full bg-green-400" />
+                </div>
+                <span className="text-sm font-medium text-gray-600">
+                  {match[1]}
+                </span>
+                <div className="absolute right-6">
+                  <button
+                    className={`group/btn relative rounded-lg px-4 py-1.5 text-sm font-medium transition-all ${
+                      isCopied
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                    onClick={() => handleCopyCode(codeString)}
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      {isCopied ? (
+                        <>
+                          <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                            />
+                          </svg>
+                          Copy
+                        </>
+                      )}
+                    </span>
+                    <span className="absolute inset-0 -z-10 scale-x-0 rounded-lg bg-gradient-to-r from-orange-400 to-pink-500 opacity-0 transition-all group-hover/btn:scale-x-100 group-hover/btn:opacity-20" />
+                  </button>
+                </div>
+              </div>
+              <pre className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300 overflow-x-auto bg-gray-50 p-6">
+                <code className="block font-mono text-sm leading-relaxed tracking-wide text-gray-800">
+                  {children}
+                </code>
+              </pre>
+            </div>
+          ) : (
+            // Inline code
+            <code className="relative inline-block rounded-md bg-gradient-to-br from-orange-500/10 to-pink-500/10 px-3 py-1 font-mono text-sm text-orange-500 ring-1 ring-orange-500/20">
+              {children}
+            </code>
+          );
+        },
         img: ({ src, alt }) => (
           <div className="group relative w-full overflow-hidden rounded-xl shadow-2xl transition-all duration-300 hover:shadow-orange-200/50">
             <Image

@@ -19,7 +19,7 @@ type CardProps = {
   }[];
 };
 
-const ProjectDetail = () => {
+const BlogDetail = () => {
   const {
     title,
     description,
@@ -31,121 +31,53 @@ const ProjectDetail = () => {
   }: CardProps = useMemo(() => {
     return {
       type: 'project',
-      title: 'Dodecia - Digital agency web design',
-      description: `I'm working on this personal project as a UI designer and developer. A web design, design and implementation that provides services. The site has a fun and relaxed atmosphere. Service and portfolio sections are important aspects of the overall design. I focus on a good user experience and clearly communicate information.`,
+      title:
+        'Frontend vs Backend Development: The Two Pillars of Web Development',
+      description: `In the world of web development, the distinction between frontend and backend development is fundamental. While they work together seamlessly in a finished application, each has its unique role and challenges. Let's dive into what makes each special and how they complement each other.`,
       category: 'UX/UI design',
       date: new Date('2023-01-01'),
       imageUrl: '/images/projects/project-1.png',
       href: '/projects/1',
       content: `
-## About the Project
+In the world of web development, the distinction between frontend and backend development is fundamental. While they work together seamlessly in a finished application, each has its unique role and challenges. Let's dive into what makes each special and how they complement each other.
 
-Dodecia is a personal project where I serve as both the UI designer and developer. It's a comprehensive web design implementation for a digital agency providing creative services. The site features a modern, playful atmosphere while maintaining professionalism.
+Frontend development is all about the user experience. It's what you see and interact with in your browser - from the layout and colors to buttons and animations. Frontend developers work with HTML, CSS, and JavaScript to create responsive, intuitive interfaces. Modern frontend development often involves frameworks like React, Vue, or Angular, which help build complex user interfaces efficiently.
 
-Key aspects of the project include:
+On the backend, developers focus on server-side logic, databases, and application architecture. This is where data is stored, processed, and secured. Backend developers typically work with languages like Python, Java, or Node.js, and manage databases using SQL or NoSQL solutions. They ensure the application can handle user requests, process data, and maintain security.
 
-- Clean, intuitive user interface design
-- Engaging service showcase sections
-- Interactive portfolio displays
-- Optimized user experience
-- Clear information architecture
-- Responsive design for all devices
+The magic happens when frontend and backend work together. When you click a button on a website, the frontend sends a request to the backend. The backend processes this request, perhaps fetches data from a database, and sends back a response. The frontend then updates what you see based on this response.
 
-## Screenshots
+Think of it like a restaurant - the frontend is the dining area and menu (what customers see and interact with), while the backend is the kitchen (where the actual processing happens). Both are essential for a great dining experience, just as both frontend and backend are crucial for a successful web application.
 
-![Homepage Hero Section](/images/projects/project-1.png)
-![Services Overview](/images/projects/project-1.png)
-![Portfolio Grid](/images/projects/project-1.png)
-![Contact Section](/images/projects/project-1.png)
+![Development Architecture](/images/blogs/blog-1.png)
 
-## Tools and Technology
+Understanding both aspects of web development helps create more efficient, user-friendly applications. Whether you choose to specialize in frontend or backend, knowing how they interact is key to becoming a well-rounded developer.
 
-### Frontend
+## Conclusion
 
-- **React.js** - Core frontend framework
-- **Next.js** - For server-side rendering and optimal performance
-- **TypeScript** - Ensuring type safety and better development experience
-- **TailwindCSS** - Utility-first CSS framework for styling
-- **Framer Motion** - Powering smooth animations and transitions
+In the end, both frontend and backend development are essential for creating functional and engaging web applications. While they may seem different at first glance, the synergy between frontend and backend is what makes the web work.
 
-### Design
+Whether you're a frontend developer creating beautiful user interfaces or a backend developer ensuring data is secure and processed efficiently, your work is crucial to the success of any web application.
 
-- **Figma** - UI/UX design and prototyping
-- **Adobe Photoshop** - Image optimization and graphics
-- **Adobe Illustrator** - Vector graphics and icons
+So, the next time you use a website or web application, remember the hard work that goes into making it all work together. Frontend and backend developers are the unsung heroes behind the scenes, making the magic happen.
 
-### Development Tools
+## Code Examples
 
-- **Git** - Version control
-- **VS Code** - Primary IDE
-- **ESLint/Prettier** - Code formatting and quality
-- **Chrome DevTools** - Testing and debugging
+\`\`\`jsx
+const MyComponent = () => {
+  return <div>Hello, World!</div>;
+};
 
-### Deployment
+export default MyComponent;
+\`\`\`
 
-- **Vercel** - Hosting and deployment
-- **GitHub Actions** - CI/CD pipeline
-- **Google Analytics** - User analytics and tracking
+## References
 
-## Key Features
-
-1. **Responsive Design**
-
-   - Mobile-first approach
-   - Fluid layouts
-   - Optimized for all screen sizes
-
-2. **Performance Optimization**
-
-   - Lazy loading images
-   - Code splitting
-   - Optimized asset delivery
-   - 90+ Lighthouse score
-
-3. **Interactive Elements**
-
-   - Smooth scroll animations
-   - Hover effects
-   - Loading states
-   - Form validation
-
-4. **Accessibility**
-   - WCAG 2.1 compliant
-   - Semantic HTML
-   - Keyboard navigation
-   - Screen reader friendly
-
-## Challenges and Solutions
-
-One of the main challenges was balancing aesthetic appeal with performance. This was solved by:
-
-- Implementing efficient loading strategies
-- Optimizing images and assets
-- Using modern CSS techniques
-- Careful consideration of animation performance
-
-## Future Improvements
-
-- Add dark mode support
-- Implement more interactive features
-- Enhance mobile animations
-- Add multilingual support
-- Integrate a headless CMS
-
-## Project Status
-
-Currently in production and actively maintained. Regular updates and improvements are being made based on user feedback and performance metrics.
+- [Frontend vs Backend Development: What's the Difference?](https://www.freecodecamp.org/news/frontend-vs-backend-development/)
+- [What is Frontend Development?](https://www.freecodecamp.org/news/what-is-frontend-development/)
+- [What is Backend Development?](https://www.freecodecamp.org/news/what-is-backend-development/)
 `,
-      links: [
-        {
-          title: 'Visit Website',
-          url: 'https://dodecia.vercel.app',
-        },
-        {
-          title: 'GitHub Repository',
-          url: 'https://github.com/your-username/dodecia',
-        },
-      ],
+      links: [],
     };
   }, []);
 
@@ -243,4 +175,4 @@ Currently in production and actively maintained. Regular updates and improvement
   );
 };
 
-export default ProjectDetail;
+export default BlogDetail;

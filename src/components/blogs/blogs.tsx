@@ -44,7 +44,7 @@ const Blogs = () => {
       description: faker.lorem.paragraph(),
       category: faker.lorem.word(),
       imageUrl: '/images/projects/project-1.png',
-      href: faker.internet.url(),
+      href: '/blogs/1',
       date: faker.date.recent(),
     }));
   }, []);

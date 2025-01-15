@@ -11,7 +11,7 @@ type Review = {
   date: Date;
 };
 
-const ProjectDetailComments = () => {
+const CommentsAndReviews = () => {
   const [rating, setRating] = useState<number>(0);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -230,4 +230,4 @@ const ProjectDetailComments = () => {
   );
 };
 
-export default ProjectDetailComments;
+export default CommentsAndReviews;
