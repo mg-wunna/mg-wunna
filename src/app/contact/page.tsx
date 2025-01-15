@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Contact from '../../components/contact';
 import Footer from '../../components/footer';
 
 export const metadata: Metadata = {
@@ -7,9 +8,10 @@ export const metadata: Metadata = {
 };
 
 // ☐ create contact page
-export default function Contact() {
+export default function ContactPage() {
   return (
     <>
+      <Contact />
       <Footer />
     </>
   );
