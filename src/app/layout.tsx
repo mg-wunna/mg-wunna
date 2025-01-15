@@ -46,7 +46,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={twMerge(beVietnamPro.className, 'bg-white text-secondary')}
+        className={twMerge(beVietnamPro.className, 'bg-white text-gray-500')}
       >
         <Header />
         {children}

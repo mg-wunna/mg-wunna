@@ -66,7 +66,7 @@ const Card = ({
           <div className="absolute left-4 top-4">
             {Math.floor((new Date().getTime() - date.getTime()) / 1000) <
             intervals.week ? (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-sm font-medium text-white shadow-lg ring-2 ring-primary/20 backdrop-blur-sm">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-500 px-3 py-1 text-sm font-medium text-white shadow-lg ring-2 ring-orange-500/20 backdrop-blur-sm">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white"></span>
@@ -84,10 +84,10 @@ const Card = ({
         {/* Content */}
         <div className="relative space-y-3 p-6">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-primary">
+            <span className="text-xs font-semibold uppercase tracking-wider text-orange-500">
               {category}
             </span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform duration-300 group-hover:rotate-45">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-500/10 text-orange-500 transition-transform duration-300 group-hover:rotate-45">
               <svg
                 className="h-4 w-4"
                 fill="none"
@@ -105,7 +105,7 @@ const Card = ({
           </div>
 
           <div>
-            <h2 className="text-xl font-bold text-gray-900 group-hover:text-primary">
+            <h2 className="text-xl font-bold text-gray-900 group-hover:text-orange-500">
               {title}
             </h2>
             <p className="mt-2 line-clamp-2 text-sm text-gray-600">
@@ -114,12 +114,12 @@ const Card = ({
           </div>
 
           <div className="pt-4">
-            <div className="h-px w-full bg-gradient-to-r from-primary/5 via-primary/20 to-primary/5" />
+            <div className="h-px w-full bg-gradient-to-r from-orange-500/5 via-orange-500/20 to-orange-500/5" />
             <div className="flex items-center justify-between pt-4">
-              <span className="text-sm font-medium text-primary">
+              <span className="text-sm font-medium text-orange-500">
                 {type === 'project' ? 'View Project' : 'View Blog'}
               </span>
-              <span className="inline-block h-2 w-2 rounded-full bg-primary/50 group-hover:animate-ping" />
+              <span className="inline-block h-2 w-2 rounded-full bg-orange-500/50 group-hover:animate-ping" />
             </div>
           </div>
         </div>

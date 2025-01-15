@@ -8,7 +8,7 @@ const Header = () => {
       <header className="container mx-auto">
         <nav className="flex h-28 items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-primary ring-offset-2">
+            <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-orange-500 ring-offset-2">
               <Image
                 src="/logo.png"
                 alt="Mg Wunna's logo"
@@ -18,10 +18,10 @@ const Header = () => {
               />
             </div>
             <div className="flex flex-col">
-              <h1 className="bg-gradient-to-r from-primary to-orange-300 bg-clip-text text-lg font-bold text-transparent">
+              <h1 className="bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-lg font-bold text-transparent">
                 Mg Wunna
               </h1>
-              <p className="text-xs text-secondary/70">Fullstack Developer</p>
+              <p className="text-xs text-gray-500/70">Fullstack Developer</p>
             </div>
           </div>
           <div className="flex items-center gap-8">

@@ -32,7 +32,7 @@ const Footer = () => {
     <footer className="relative bg-gray-50">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-      <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent" />
 
       <div className="container relative mx-auto px-4 py-16 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
@@ -51,11 +51,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold text-gray-900">Quick Links</h3>
             <nav className="mt-4 flex flex-col space-y-2">
-              {['Projects', 'Blog', 'Contact'].map((item) => (
+              {['Projects', 'Blogs', 'About', 'Contact'].map((item) => (
                 <Link
                   key={item}
                   href={`/${item.toLowerCase()}`}
-                  className="text-gray-600 transition-colors duration-200 hover:text-primary"
+                  className="text-gray-600 transition-colors duration-200 hover:text-orange-500"
                 >
                   {item}
                 </Link>
@@ -71,13 +71,13 @@ const Footer = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group rounded-full bg-white p-2.5 shadow-md ring-1 ring-gray-200/50 transition-all duration-200 hover:scale-110 hover:shadow-lg hover:ring-primary/50"
+                  className="group rounded-full bg-white p-2.5 shadow-md ring-1 ring-gray-200/50 transition-all duration-200 hover:scale-110 hover:shadow-lg hover:ring-orange-500/50"
                   aria-label={link.label}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <svg
-                    className="h-5 w-5 text-gray-700 transition-colors group-hover:text-primary"
+                    className="h-5 w-5 text-gray-700 transition-colors group-hover:text-orange-500"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
