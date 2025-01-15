@@ -15,7 +15,7 @@ const HeaderItem = ({ title }: HeaderItemProps) => {
 
   const isActive = useMemo(() => {
     if (title === 'Home') return pathname === '/';
-    return pathname === `/${title.toLowerCase()}`;
+    return pathname.startsWith(`/${title.toLowerCase()}`);
   }, [pathname, title]);
 
   const href = title === 'Home' ? '/' : `/${title.toLowerCase()}`;
