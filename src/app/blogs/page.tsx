@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Blogs from '../../components/blogs/blogs';
 import Footer from '../../components/footer';
 
 export const metadata: Metadata = {
@@ -7,9 +8,10 @@ export const metadata: Metadata = {
 };
 
 // ☐ create blogs page
-export default function Blogs() {
+export default function BlogsPage() {
   return (
     <>
+      <Blogs />
       <Footer />
     </>
   );
