@@ -30,7 +30,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="container relative mx-auto px-4 py-24 sm:px-6 lg:px-8">
+    <section className="container relative mx-auto px-4 py-24 pt-40 sm:px-6 lg:px-8">
       {/* Background decorative elements */}
       <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-orange-500/5 blur-3xl"></div>
       <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-orange-500/5 blur-3xl"></div>
@@ -38,26 +38,23 @@ const Hero = () => {
       <div className="relative">
         {/* Hero Header */}
         <div className="mb-12 text-center">
-          <h1 className="group relative mb-6 inline-flex flex-col items-center text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+          <h1 className="group relative mb-6 inline-flex flex-col items-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             <span className="mb-4">Hey, I&apos;m Wunna</span>
             <Link
               href="/contact"
-              className="relative inline-flex cursor-pointer select-none items-center gap-2 rounded-full bg-orange-500/10 px-6 py-2 text-lg font-medium tracking-wider text-orange-500 transition-all duration-300 hover:-translate-y-1 hover:bg-orange-500/20 hover:shadow-lg"
+              className="relative inline-flex items-center gap-1 rounded-full bg-orange-500/10 px-4 py-1.5 text-base tracking-wide text-orange-500 transition hover:-translate-y-1 hover:bg-orange-500/20 hover:shadow"
             >
               Available for hire
               <span className="animate-bounce">✨</span>
             </Link>
           </h1>
 
-          <div className="relative mx-auto max-w-3xl select-none overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500/5 via-orange-500/10 to-transparent p-8 backdrop-blur-sm">
-            <div className="absolute -right-8 -top-8 h-32 w-32 rotate-12 bg-orange-500/10 blur-3xl"></div>
-            <h2 className="bg-gradient-to-r from-slate-800 via-orange-500 to-slate-800 bg-clip-text text-3xl font-bold text-transparent">
-              Creative Full Stack Developer & UI/UX Enthusiast
-            </h2>
-            <p className="mt-3 text-xl font-medium text-slate-700">
-              {yearsOfExperience}+ Years Crafting Digital Experiences
-            </p>
-          </div>
+          <h2 className="bg-gradient-to-r from-slate-800 via-orange-500 to-slate-800 bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
+            Creative Full Stack Developer & UI/UX Enthusiast
+          </h2>
+          <p className="mt-3 text-xl font-medium text-slate-700">
+            {yearsOfExperience}+ Years Crafting Digital Experiences
+          </p>
         </div>
 
         {/* Feature Cards */}
