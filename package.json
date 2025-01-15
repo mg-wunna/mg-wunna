@@ -19,7 +19,9 @@
     "release": "npm run lint && npm run build && standard-version && npm run push"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.4.0",
     "ejs": "^3.1.10",
+    "framer-motion": "^11.18.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.469.0",
     "mongoose": "^8.9.2",
