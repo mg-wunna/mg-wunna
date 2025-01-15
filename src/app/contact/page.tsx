@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 // ☐ create contact page
 export default function Contact() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-full w-full flex-1 items-center justify-center">
       <h1 className="text-4xl font-bold">Contact Page</h1>
     </div>
   );

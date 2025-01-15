@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Mg Wunna | About',
-  description: "Mg Wunna's About",
+  title: 'Mg Wunna | Blogs',
+  description: "Mg Wunna's Blogs",
 };
 
-// ☐ create about page
-export default function About() {
+// ☐ create blogs page
+export default function Blogs() {
   return (
     <div className="flex h-full w-full flex-1 items-center justify-center">
-      <h1 className="text-4xl font-bold">About Page</h1>
+      <h1 className="text-4xl font-bold">Blogs Page</h1>
     </div>
   );
 }

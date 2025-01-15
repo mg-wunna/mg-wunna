@@ -1,4 +1,8 @@
 import type { Metadata } from 'next';
+import Blogs from '../components/blogs';
+import Footer from '../components/footer';
+import Hero from '../components/hero';
+import Projects from '../components/projects';
 
 export const metadata: Metadata = {
   title: 'Mg Wunna | Portfolio',
@@ -8,8 +12,11 @@ export const metadata: Metadata = {
 // ☐ create home page
 export default function Home() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <h1 className="text-4xl font-bold">Home Page</h1>
-    </div>
+    <>
+      <Hero />
+      <Projects />
+      <Blogs />
+      <Footer />
+    </>
   );
 }
