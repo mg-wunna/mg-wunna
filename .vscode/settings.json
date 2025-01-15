@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "tailwindCSS.experimental.configFile": "tailwind.config.ts",
+  "editor.codeActionsOnSave": {
+    "source.removeUnusedImports": "always"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "cSpell.words": [""]
+}

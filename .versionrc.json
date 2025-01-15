@@ -1,0 +1,44 @@
+{
+  "header": "# MG WUNNA\n\nMg Wunna's Portfolio Website\n",
+  "types": [
+    {
+      "type": "chore",
+      "section": "Build process or auxiliary tool changes"
+    },
+    {
+      "type": "ci",
+      "section": "CI related changes"
+    },
+    {
+      "type": "docs",
+      "section": "Documentation only changes"
+    },
+    {
+      "type": "feat",
+      "section": "A new feature"
+    },
+    {
+      "type": "fix",
+      "section": "A bug fix"
+    },
+    {
+      "type": "perf",
+      "section": "A code change that improves performance"
+    },
+    {
+      "type": "refactor",
+      "section": "A code change that neither fixes a bug or adds a feature"
+    },
+    {
+      "type": "style",
+      "section": "Markup, white-space, formatting, missing semi-colons..."
+    },
+    {
+      "type": "test",
+      "section": "Adding missing tests"
+    }
+  ],
+  "commitUrlFormat": "https://github.com/mg-wunna/mg-wunna/commits/{{hash}}",
+  "compareUrlFormat": "https://github.com/mg-wunna/mg-wunna/compare/{{previousTag}}...{{currentTag}}",
+  "releaseCommitMessageFormat": "release: new version {{currentTag}}"
+}
