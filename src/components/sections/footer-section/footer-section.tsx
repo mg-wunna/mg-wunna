@@ -90,10 +90,10 @@ const FooterSection = () => {
             </h3>
             <div className="mt-4 flex flex-col space-y-2 text-gray-600">
               <a
-                href="mailto:mgwunna.dev@gmail.com"
+                href="mailto:mgwunna.mw@icloud.com"
                 className="transition-colors duration-200 hover:text-orange-500"
               >
-                mgwunna.dev@gmail.com
+                mgwunna.mw@icloud.com
               </a>
               <a
                 href="tel:+959777177317"

@@ -6,7 +6,7 @@ import { Contact } from '../../../types/contact-type';
 import { contactValidator } from '../../../validators/contact-validator';
 import ContactPageFormSubmittedPopup from './contact-page--form-submitted-popup';
 
-// ☐ create contact page form section
+// ✔ create contact page form section
 const ContactPageFormSection = () => {
   const [formData, setFormData] = useState({
     name: '',
