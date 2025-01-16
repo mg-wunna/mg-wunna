@@ -86,6 +86,47 @@ const ProjectsPageProjectsSection = () => {
         </div>
       </div>
 
+      {filteredProjects.length === 0 && (
+        <div className="relative mx-auto max-w-2xl overflow-hidden p-12 pb-20 text-center">
+          <div className="relative">
+            <h3 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
+              Looking Empty Here
+            </h3>
+
+            <p className="mb-8 text-lg leading-relaxed text-gray-600">
+              We searched high and low but couldn&apos;t find any matching
+              projects. Try different keywords or browse all posts.
+            </p>
+
+            <button
+              onClick={() => {
+                setSelectedCategory('all');
+              }}
+              className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-orange-500 px-8 py-4 font-medium text-white transition-all hover:bg-orange-600"
+            >
+              <span className="absolute -end-full transition-all group-hover:end-4">
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </span>
+              <span className="transition-all group-hover:me-4">
+                Reset Search
+              </span>
+            </button>
+          </div>
+        </div>
+      )}
+
       <motion.div
         layout
         initial={{ opacity: 0, rotateY: 0 }}
