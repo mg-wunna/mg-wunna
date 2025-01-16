@@ -1,31 +1,25 @@
-import { faker } from '@faker-js/faker';
+import { Project } from '@/types/project-type';
 import { NextResponse } from 'next/server';
-import { Project } from '../../../types/project-type';
+import ProjectModel from '../../../models/project-model';
+import database from '../../../utilities/database';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const category = searchParams.get('category') || 'all';
+    const category = searchParams.get('category')?.toLowerCase() || 'all';
 
-    const projects: Project[] = Array.from({ length: 10 }, () => ({
-      _id: faker.string.uuid(),
-      slug: faker.lorem.slug(),
-      title: faker.lorem.sentence(),
-      image: '/images/blogs/blog-1.png',
-      description: faker.lorem.paragraph(),
-      categories: category === 'all' ? [faker.lorem.word()] : [category],
-      content: faker.lorem.paragraphs(),
-      createdAt: faker.date.recent().toISOString(),
-      updatedAt: faker.date.recent().toISOString(),
-      links: [],
-    }));
+    await database.connect();
+
+    const projects: Project[] = await ProjectModel.find(
+      category === 'all' ? {} : { categories: { $in: [category] } }
+    )
+      .sort({ createdAt: -1 })
+      .limit(10);
 
     return NextResponse.json({
       status: '200',
       message: 'Projects fetched successfully.',
-      meta: {
-        isMoreProjectsExist: true,
-      },
+      meta: { isMoreProjectsExist: false },
       data: projects,
     });
   } catch (error) {

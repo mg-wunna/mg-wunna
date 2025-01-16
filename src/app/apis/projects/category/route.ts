@@ -1,21 +1,18 @@
 import { Category } from '@/types/category-type';
-import { faker } from '@faker-js/faker';
 import { NextResponse } from 'next/server';
+import ProjectModel from '../../../../models/project-model';
+import database from '../../../../utilities/database';
 
 export async function GET() {
   try {
-    const categories: Category[] = Array.from({ length: 10 }, () => ({
-      _id: faker.string.uuid(),
-      name: faker.lorem.word(),
-      type: 'project',
-      createdAt: faker.date.recent().toISOString(),
-      updatedAt: faker.date.recent().toISOString(),
-    }));
+    await database.connect();
+
+    const categories: Category[] = await ProjectModel.distinct('categories');
 
     return NextResponse.json({
       status: '200',
       message: 'Categories fetched successfully.',
-      data: categories,
+      data: categories.map((category) => ({ name: category, type: 'project' })),
     });
   } catch (error) {
     console.log('error', error);

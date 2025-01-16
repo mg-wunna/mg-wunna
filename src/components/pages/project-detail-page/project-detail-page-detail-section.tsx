@@ -18,10 +18,20 @@ const ProjectDetailPageDetailSection = () => {
   }, [params?.slug]);
 
   useEffect(() => {
-    if (project) return;
+    if (!slug || project) return;
+
     fetch(`/apis/projects/${slug}`)
       .then((response) => response.json())
-      .then((data) => setProject(data.data))
+      .then(async (data) => {
+        const contentResponse = await fetch(
+          `/projects/${data.data.slug}/content.md`
+        );
+        const content = (await contentResponse.text()).replaceAll(
+          '(../../projects/',
+          '(/projects/'
+        );
+        setProject({ ...data.data, content });
+      })
       .catch((error) => console.error('Error fetching project:', error));
   }, [project, slug]);
 
