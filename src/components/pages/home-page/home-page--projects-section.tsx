@@ -1,3 +1,6 @@
+'use client';
+
+import Link from 'next/link';
 import Card from '../../commons/card';
 
 // ☐ create projects component
@@ -30,6 +33,15 @@ const HomePageProjectsSection = () => {
             date={new Date()}
           />
         ))}
+      </div>
+
+      <div className="mt-12 text-center">
+        <Link
+          href="/projects"
+          className="rounded-lg bg-orange-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:text-base"
+        >
+          View All Projects
+        </Link>
       </div>
     </div>
   );

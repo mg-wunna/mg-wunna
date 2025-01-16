@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Card from '../../commons/card';
 
 // ☐ create blogs component
@@ -29,6 +30,15 @@ const HomePageBlogsSection = () => {
             date={new Date('2024-01-01')}
           />
         ))}
+      </div>
+
+      <div className="mt-12 text-center">
+        <Link
+          href="/blogs"
+          className="rounded-lg bg-orange-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:text-base"
+        >
+          View All Blogs
+        </Link>
       </div>
     </div>
   );
