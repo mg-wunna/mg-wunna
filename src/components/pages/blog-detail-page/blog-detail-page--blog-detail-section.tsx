@@ -22,7 +22,16 @@ const BlogDetailPageBlogDetailSection = () => {
 
     fetch(`/apis/blogs/${slug}`)
       .then((response) => response.json())
-      .then((data) => setBlog(data.data))
+      .then(async (data) => {
+        const contentResponse = await fetch(
+          `/blogs/${data.data.slug}/content.md`
+        );
+        const content = (await contentResponse.text()).replaceAll(
+          '(../../blogs/',
+          '(/blogs/'
+        );
+        setBlog({ ...data.data, content });
+      })
       .catch((error) => console.error('Error fetching blog:', error));
   }, [blog, slug]);
 

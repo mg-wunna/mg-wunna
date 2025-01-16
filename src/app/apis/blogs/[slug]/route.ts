@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { NextRequest, NextResponse } from 'next/server';
 import BlogModel from '../../../../models/blog-model';
 import { Blog } from '../../../../types/blog-type';
@@ -22,10 +21,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         { status: 404 }
       );
     }
-
-    blog.content = fs
-      .readFileSync(`public/blogs/${blog.slug}/content.md`, 'utf-8')
-      .replaceAll('(../../blogs/', '(/blogs/');
 
     return NextResponse.json({
       status: '200',
