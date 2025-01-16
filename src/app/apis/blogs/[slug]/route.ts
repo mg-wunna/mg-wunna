@@ -1,16 +1,15 @@
 import { faker } from '@faker-js/faker';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Blog } from '../../../../types/blog-type';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } }
-) {
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
+    const slug = request?.nextUrl?.pathname.split('/').pop() || '';
+
     // Generate a single blog post with the given slug
     const blog: Blog = {
       _id: faker.string.uuid(),
-      slug: params.slug,
+      slug: slug,
       title: faker.lorem.sentence(),
       image: '/images/blogs/blog-1.png',
       description: faker.lorem.paragraph(),
@@ -106,10 +105,13 @@ Here are some valuable resources to learn more:
       data: blog,
     });
   } catch (error) {
-    console.log('error', error);
-    return NextResponse.json({
-      status: '500',
-      message: 'Blog fetch failed.',
-    });
+    console.error('Error fetching blog:', error);
+    return NextResponse.json(
+      {
+        status: '500',
+        message: 'Blog fetch failed.',
+      },
+      { status: 500 }
+    );
   }
 }

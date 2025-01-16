@@ -1,16 +1,15 @@
 import { faker } from '@faker-js/faker';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Project } from '../../../../types/project-type';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
+    const slug = request?.nextUrl?.pathname.split('/').pop() || '';
+
     // Generate a single project with the given slug
     const project: Project = {
       _id: faker.string.uuid(),
-      slug: params.slug,
+      slug: slug,
       title: faker.lorem.sentence(),
       image: '/images/blogs/blog-1.png',
       description: faker.lorem.paragraph(),

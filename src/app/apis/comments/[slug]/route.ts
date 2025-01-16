@@ -1,13 +1,10 @@
 import { faker } from '@faker-js/faker';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Comment } from '../../../../types/comment-type';
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
-    const { id: parentId } = params;
+    const parentId = request?.nextUrl?.pathname.split('/').pop() || '';
 
     const comments: Comment[] = Array(5)
       .fill('')

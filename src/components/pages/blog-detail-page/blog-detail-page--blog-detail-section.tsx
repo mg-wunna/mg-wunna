@@ -11,8 +11,11 @@ import BlogDetailSkeletonSection from './blog-detail-page--skeleton-section';
 const BlogDetailPageBlogDetailSection = () => {
   const [blog, setBlog] = useState<Blog | null>(null);
   const slug = useMemo(() => {
-    const pathSegments = window.location.pathname.split('/');
-    return pathSegments[pathSegments.length - 1];
+    if (typeof window !== 'undefined') {
+      const pathSegments = window.location.pathname.split('/');
+      return pathSegments[pathSegments.length - 1];
+    }
+    return '';
   }, []);
 
   useEffect(() => {

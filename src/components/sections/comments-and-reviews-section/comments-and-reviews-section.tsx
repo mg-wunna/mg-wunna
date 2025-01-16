@@ -22,6 +22,7 @@ const CommentsAndReviews = ({ _id }: CommentsAndReviewsProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
+    if (!_id) return;
     (async () => {
       setMeta((prev) => ({ ...prev, isLoading: true }));
       await new Promise((resolve) => setTimeout(resolve, 1000));
