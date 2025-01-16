@@ -30,81 +30,139 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="container relative mx-auto px-4 py-24 pt-40 sm:px-6 lg:px-8">
-      {/* Background decorative elements */}
-      <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-orange-500/5 blur-3xl"></div>
-      <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-orange-500/5 blur-3xl"></div>
+    <section className="relative mb-32 min-h-[calc(100vh-7rem)] overflow-hidden bg-white">
+      {/* Decorative SVG waves */}
+      <div className="absolute inset-0 z-0">
+        <svg
+          className="absolute left-0 top-0 h-48 w-full text-orange-50"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="currentColor"
+            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+          ></path>
+        </svg>
+        <svg
+          className="absolute bottom-0 left-0 h-48 w-full rotate-180 text-orange-50"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="currentColor"
+            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+          ></path>
+        </svg>
+        <svg
+          className="absolute left-0 top-1/4 h-32 w-32 text-orange-100/50"
+          viewBox="0 0 100 100"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            fill="currentColor"
+          />
+        </svg>
+        <svg
+          className="absolute right-0 top-3/4 h-40 w-40 text-orange-100/50"
+          viewBox="0 0 100 100"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
 
-      <div className="relative">
-        {/* Hero Header */}
-        <div className="mb-12 text-center">
-          <h1 className="group relative mb-6 inline-flex flex-col items-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            <span className="mb-4">Hey, I&apos;m Wunna</span>
-            <Link
-              href="/contact"
-              className="relative inline-flex items-center gap-1 rounded-full bg-orange-500/10 px-4 py-1.5 text-base tracking-wide text-orange-500 transition hover:-translate-y-1 hover:bg-orange-500/20 hover:shadow"
-            >
-              Available for hire
-              <span className="animate-bounce">✨</span>
-            </Link>
-          </h1>
-
-          <h2 className="bg-gradient-to-r from-slate-800 via-orange-500 to-slate-800 bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
-            Creative Full Stack Developer & UI/UX Enthusiast
-          </h2>
-          <p className="mt-3 text-xl font-medium text-slate-700">
-            {yearsOfExperience}+ Years Crafting Digital Experiences
-          </p>
-        </div>
-
-        {/* Feature Cards */}
-        <div className="mb-12 grid gap-6 sm:grid-cols-2">
-          <div className="group select-none rounded-2xl bg-gradient-to-br from-white via-orange-500/5 to-transparent p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-            <p className="relative text-base leading-relaxed text-slate-600 transition-all duration-300 group-hover:translate-x-2">
-              Mastering modern web development with React, Next.js, and Node.js.
-              Turning complex problems into elegant solutions.
-              <span className="absolute -right-2 -top-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                ✨
+      <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-7rem)] flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl">
+          {/* Main content */}
+          <div className="space-y-6 text-center">
+            <div className="relative inline-block">
+              <span className="relative z-10 text-lg font-medium text-orange-600">
+                Hey there! 👋
               </span>
-            </p>
+              <div className="animate-spin-slow absolute -inset-1 -z-10 rounded-full bg-gradient-to-r from-orange-200 to-orange-400 opacity-30 blur"></div>
+            </div>
+
+            <h1 className="relative mx-auto max-w-3xl bg-gradient-to-br from-gray-900 via-orange-600 to-gray-900 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-7xl">
+              I&apos;m Wunna
+              <div className="animate-float absolute -right-4 top-0 h-16 w-16 rounded-full bg-orange-400/20 blur-xl"></div>
+            </h1>
+
+            <div className="relative">
+              <h2 className="text-2xl font-semibold text-gray-800 sm:text-3xl">
+                Creative Full Stack Developer & UI/UX Enthusiast
+              </h2>
+              <p className="mt-2 text-lg text-gray-600">
+                {yearsOfExperience}+ Years Crafting Digital Experiences
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Link
+                href="/contact"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-orange-500 px-8 py-3 text-white transition-all hover:bg-orange-600"
+              >
+                <span className="relative">Let&apos;s Work Together</span>
+                <span className="relative transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+                <div className="absolute -right-2 top-0 h-full w-12 translate-x-12 rotate-12 bg-white opacity-20 transition-transform group-hover:translate-x-0"></div>
+              </Link>
+
+              <Link
+                href="/projects"
+                className="group inline-flex items-center gap-2 rounded-full border-2 border-orange-200 px-8 py-3 text-orange-600 transition-all hover:border-orange-300 hover:bg-orange-50"
+              >
+                View My Work
+                <span className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
           </div>
 
-          <div className="group select-none rounded-2xl bg-gradient-to-br from-white via-orange-500/5 to-transparent p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-            <p className="relative text-base leading-relaxed text-slate-600 transition-all duration-300 group-hover:translate-x-2">
-              From pixel-perfect frontends to robust backends, creating seamless
-              digital experiences users love.
-              <span className="absolute -right-2 -top-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                ✨
-              </span>
-            </p>
-          </div>
-        </div>
+          {/* Feature grid */}
+          <div className="mt-16 grid gap-6 sm:grid-cols-2">
+            <div className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl">
+              <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-orange-100 opacity-0 transition-opacity group-hover:opacity-100"></div>
+              <h3 className="mb-2 font-semibold text-gray-900">
+                Modern Tech Stack
+              </h3>
+              <p className="text-gray-600">
+                Leveraging React, Next.js, and Node.js to build scalable and
+                performant applications
+              </p>
+            </div>
 
-        {/* CTA Section */}
-        <div className="mb-12">
-          <div className="group relative select-none overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500/10 via-orange-500/5 to-orange-500/10 p-6 text-center transition-all duration-300 hover:shadow-lg">
-            <div className="absolute inset-0 bg-orange-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-            <p className="relative text-lg font-medium text-orange-500">
-              Let&apos;s collaborate to bring your vision to life with clean
-              code, innovative solutions, and delightful user experiences
-              <span className="ml-2 inline-block animate-pulse transition-transform duration-300 group-hover:rotate-12">
-                ✨
-              </span>
-            </p>
+            <div className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl">
+              <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-orange-100 opacity-0 transition-opacity group-hover:opacity-100"></div>
+              <h3 className="mb-2 font-semibold text-gray-900">
+                User-Centric Design
+              </h3>
+              <p className="text-gray-600">
+                Creating intuitive and delightful experiences that users love to
+                interact with
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Social Links */}
-        <div className="flex flex-wrap justify-center gap-6">
-          {SocialLinks.map((link) => (
-            <SocialLink
-              key={link.href}
-              href={link.href}
-              label={link.label}
-            >
-              {link.children}
-            </SocialLink>
-          ))}
+          {/* Social links */}
+          <div className="mt-12 flex justify-center gap-4">
+            {SocialLinks.map((link) => (
+              <SocialLink
+                key={link.href}
+                href={link.href}
+                label={link.label}
+              >
+                {link.children}
+              </SocialLink>
+            ))}
+          </div>
         </div>
       </div>
     </section>
