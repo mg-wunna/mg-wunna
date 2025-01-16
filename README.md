@@ -1,50 +1,66 @@
-# Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif) My name is Mg Wunna
+# Hi! I'm Mg Wunna 👋
 
-## Fullstack Web & Application Developer & Designer.
+<div align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=32&duration=3000&pause=1000&color=FF6B00&center=true&vCenter=true&random=false&width=500&height=70&lines=Full+Stack+Developer;UI%2FUX+Designer;Available+for+hire" alt="Typing SVG" />
+</div>
 
-I have been coding for 4+ years and working as fullstack developer.I use my skill to work as freelance developer in my free time.Also I am start learning in dev ops enginer.
+<div align="center">
+  <p align="center" style="max-width: 800px; margin: 20px auto;">
+    Passionate about crafting elegant digital experiences through modern web technologies. I transform complex challenges into intuitive solutions that delight users and drive business value.
+  </p>
+</div>
 
-- 🌍  I'm based in Mandalay
-- 🖥️  See my portfolio at [https://mg-wunna.github.io/mg-wunna/](https://mg-wunna.github.io/mg-wunna/)
-- ✉️  You can contact me at [mgwunna.mw@icloud.com](mailto:mgwunna.mw@icloud.com)
-- ⚡  I love coffee and coding.
+<div align="center">
+  <a href="https://mg-wunna.vercel.app/">
+    <img src="https://img.shields.io/badge/Portfolio-%23FF6B00.svg?style=for-the-badge&logo=About.me&logoColor=white" alt="Portfolio" />
+  </a>
+  <a href="mailto:mgwunna.mw@icloud.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+  <a href="https://www.facebook.com/mg.wunna.mandalay">
+    <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook" />
+  </a>
+  <a href="https://www.github.com/mg-wunna">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+</div>
 
-### Skills
+## 🎯 Current Focus
 
-<p align="left">
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg" width="36" height="36" alt="JavaScript" /></a>
-<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" /></a>
-<a href="https://www.python.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/python-colored.svg" width="36" height="36" alt="Python" /></a>
-<a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="36" height="36" alt="HTML5" /></a>
-<a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="36" height="36" alt="React" /></a>
-<a href="https://nextjs.org/docs" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nextjs-colored.svg" width="36" height="36" alt="NextJs" /></a>
-<a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg" width="36" height="36" alt="CSS3" /></a>
-<a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="36" height="36" alt="TailwindCSS" /></a>
-<a href="https://sass-lang.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/sass-colored.svg" width="36" height="36" alt="Sass" /></a>
-<a href="https://redux.js.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/redux-colored.svg" width="36" height="36" alt="Redux" /></a>
-<a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nodejs-colored.svg" width="36" height="36" alt="NodeJS" /></a>
-<a href="https://expressjs.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/express-colored.svg" width="36" height="36" alt="Express" /></a>
-<a href="https://fastapi.tiangolo.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/fastapi-colored.svg" width="36" height="36" alt="Fast API" /></a>
-<a href="https://graphql.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/graphql-colored.svg" width="36" height="36" alt="GraphQL" /></a>
-<a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mongodb-colored.svg" width="36" height="36" alt="MongoDB" /></a>
-<a href="https://www.mysql.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mysql-colored.svg" width="36" height="36" alt="MySQL" /></a>
-<a href="https://www.postgresql.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/postgresql-colored.svg" width="36" height="36" alt="PostgreSQL" /></a>
-<a href="https://firebase.google.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/firebase-colored.svg" width="36" height="36" alt="Firebase" /></a>
-<a href="https://www.adobe.com/uk/products/photoshop.html" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/photoshop-colored.svg" width="36" height="36" alt="Photoshop" /></a>
-<a href="adobe.com/uk/products/illustrator.html" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/illustrator-colored.svg" width="36" height="36" alt="Illustrator" /></a>
-<a href="https://www.adobe.com/uk/products/xd.html" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/xd-colored.svg" width="36" height="36" alt="XD" /></a>
-<a href="https://www.figma.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/figma-colored.svg" width="36" height="36" alt="Figma" /></a>
-</p>
+- 🌍 Based in Mandalay, Myanmar
+- 💼 Leading backend development at [Returning AI](https://returning.ai)
+- 🚀 Building scalable enterprise applications
+- 🎨 Crafting intuitive user experiences
+- 📚 Continuous learning & growth
 
-### Socials
+## 💡 Expertise
 
-<p align="left"> <a href="https://www.facebook.com/mg.wunna.mandalay" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/facebook.svg" width="32" height="32" /></a> <a href="https://www.github.com/mg-wunna" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" width="32" height="32" /></a></p>
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=js,ts,react,nextjs,nodejs,express,mongodb,html,css,tailwind,figma&theme=light&perline=6" />
+</div>
 
-### Example Projects
+## 🌟 Professional Journey
 
-1. [Newsletter Sign Up - From frontend mentor ( Junior Lvl )](https://mg-wunna.github.io/frontend-mentor--newsletter-sign-up-with-success-message/)
-1. [Results Summary Component - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--results-summary-component/)
-1. [Blog Preview - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--blog-preview-card/)
-1. [Recipe Page - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--recipe-page/)
-1. [Qr Code Component - From frontend mentor ( Newbie Lvl )](https://mg-wunna.github.io/frontend-mentor--qr-code-component/)
-1. [Todo Web Application](https://mg-wunna.github.io/todo-web-application/)
+### Current Roles
+
+| Role             | Company                               | Period         |
+| :--------------- | :------------------------------------ | :------------- |
+| 🚀 Back-End Lead | [Returning AI](https://returning.ai/) | 2024 - Present |
+| 💻 App Developer | Self-Employed                         | 2023 - Present |
+
+### Previous Experience
+
+| Role                    | Company                                                     | Period      |
+| :---------------------- | :---------------------------------------------------------- | :---------- |
+| 📊 Project Manager      | [Anaget](https://anaget.com)                                | 2023 - 2024 |
+| 🔧 Full Stack Developer | [Anaget](https://anaget.com)                                | 2021 - 2023 |
+| 💼 Full Stack Developer | [Alpha Digital Marketing](http://www.alphamarketingmm.com/) | 2020 - 2022 |
+| 🤖 Bot Developer        | [NAL Digital Marketing](https://www.nalmm.com/)             | 2020 - 2021 |
+
+## 📈 GitHub Stats
+
+[![Mg Wunna's GitHub stats](https://github-readme-stats.vercel.app/api?username=mg-wunna)](https://github.com/mg-wunna/github-readme-stats)
+
+<div align="center">
+  <sub>Let's build something amazing together! ✨</sub>
+</div>

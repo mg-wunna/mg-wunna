@@ -6,7 +6,7 @@
     "url": "git+https://github.com/mg-wunna/mg-wunna.git"
   },
   "author": "Wunna",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "type": "module",
