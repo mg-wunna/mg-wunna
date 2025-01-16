@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { Project } from '../../../types/project-type';
 import Markdown from '../../commons/markdown/markdown';
@@ -10,10 +11,11 @@ import ProjectDetailSkeletonSection from './project-detail-page--skeleton-sectio
 
 const ProjectDetailPageDetailSection = () => {
   const [project, setProject] = useState<Project | null>(null);
+  const params = useParams();
+
   const slug = useMemo(() => {
-    const pathSegments = window.location.pathname.split('/');
-    return pathSegments[pathSegments.length - 1];
-  }, []);
+    return typeof params?.slug === 'string' ? params.slug : '';
+  }, [params?.slug]);
 
   useEffect(() => {
     if (project) return;
@@ -57,7 +59,7 @@ const ProjectDetailPageDetailSection = () => {
             {project.title}
           </h1>
           <div className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800">
-            {project.category}
+            {project.categories}
           </div>
           <div className="mt-4 text-sm text-gray-500">
             {new Date(project.createdAt).toLocaleDateString('en-US', {

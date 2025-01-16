@@ -10,7 +10,7 @@ export async function GET() {
       title: faker.lorem.sentence(),
       image: '/images/blogs/blog-1.png',
       description: faker.lorem.paragraph(),
-      category: faker.lorem.word(),
+      categories: [faker.lorem.word()],
       content: faker.lorem.paragraphs(),
       createdAt: faker.date.recent().toISOString(),
       updatedAt: faker.date.recent().toISOString(),

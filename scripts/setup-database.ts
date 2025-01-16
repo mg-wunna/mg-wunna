@@ -9,8 +9,10 @@ console.log(
 ══════════════════════════════════════`
 );
 
-require('dotenv').config();
-const mongoose = require('mongoose');
+import 'dotenv/config';
+import fs from 'fs';
+import mongoose from 'mongoose';
+import BlogModel from '../src/models/blog-model.js';
 
 async function setupBlogData() {
   console.log(
@@ -18,26 +20,72 @@ async function setupBlogData() {
     `
   ╔════════════════════════════════╗
   ║      Setting Up Blog Data      ║
-  ╚════════════════════════════════╝`
+  ╚════════════════════════════════╝
+`
   );
 
-  /* === DO SOMETHING === */
+  const blogs = fs.readdirSync('./public/blogs');
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await Promise.all(
+    blogs.map(async (slug: string) => {
+      const blogData = await BlogModel.findOne({ slug: slug });
+      const metaData = JSON.parse(
+        fs.readFileSync(`./public/blogs/${slug}/meta.json`, 'utf-8')
+      );
+
+      if (!blogData) {
+        await BlogModel.create({
+          ...metaData,
+          createdAt: new Date(metaData.createdAt),
+          image:
+            '/blogs/architectures-of-modern-front-end-applications/cover.png',
+          slug,
+        });
+
+        console.log(
+          '\x1b[32m%s\x1b[0m',
+          `✨ Blog "${slug}" has been added successfully!`
+        );
+      } else if (
+        blogData._doc.title !== metaData.title ||
+        blogData._doc.description !== metaData.description ||
+        JSON.stringify(blogData._doc.categories) !==
+          JSON.stringify(metaData.categories)
+      ) {
+        await BlogModel.updateOne(
+          { slug },
+          {
+            title: metaData.title,
+            description: metaData.description,
+            categories: metaData.categories,
+            createdAt: new Date(metaData.createdAt),
+          }
+        );
+
+        console.log(
+          '\x1b[32m%s\x1b[0m',
+          `✨ Blog "${slug}" has been updated successfully!`
+        );
+      } else {
+        console.log(
+          '\x1b[32m%s\x1b[0m',
+          `✨ Blog "${slug}" already up to date!`
+        );
+      }
+    })
+  );
 }
 
 async function setupProjectData() {
   /* === DO SOMETHING === */
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
 async function setupContactData() {
   /* === DO SOMETHING === */
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI as string)
   .then(async () => {
     await setupBlogData();
     await setupProjectData();

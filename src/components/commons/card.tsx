@@ -8,7 +8,7 @@ type CardProps = {
   type: 'project' | 'blog';
   title: string;
   description: string;
-  category: string;
+  categories: string[];
   date: Date;
   imageUrl: string;
   href: string;
@@ -27,7 +27,7 @@ const Card = ({
   type,
   title,
   description,
-  category,
+  categories,
   date,
   imageUrl,
   href,
@@ -61,9 +61,21 @@ const Card = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-orange-600 backdrop-blur-sm">
-          {category}
-        </span>
+        <div className="absolute bottom-4 left-4 flex gap-2">
+          {categories.slice(0, 2).map((category, index) => (
+            <span
+              key={index}
+              className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-orange-600 backdrop-blur-sm"
+            >
+              {category}
+            </span>
+          ))}
+          {categories.length > 2 && (
+            <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-orange-600 backdrop-blur-sm">
+              +{categories.length - 2}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Content Container */}

@@ -2,14 +2,27 @@ import mongoose from 'mongoose';
 
 const database = {
   async connect() {
-    if (!process.env.MONGODB_URI) {
-      throw new Error('MONGODB_URI environment variable is not defined');
-    }
+    try {
+      if (!process.env.MONGODB_URI) {
+        throw new Error('MONGODB_URI environment variable is not defined');
+      }
 
-    await mongoose.connect(process.env.MONGODB_URI);
-  },
-  async disconnect() {
-    await mongoose.disconnect();
+      if (mongoose.connections[0].readyState) {
+        return;
+      }
+
+      const connection = await mongoose.connect(process.env.MONGODB_URI);
+
+      // Auto disconnect when there are no active queries
+      connection.connection.on('idle', () => {
+        mongoose.disconnect();
+      });
+
+      return connection;
+    } catch (error) {
+      console.error('MongoDB connection error:', error);
+      throw error;
+    }
   },
 };
 

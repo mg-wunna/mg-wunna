@@ -38,7 +38,7 @@ const HomePageBlogsSection = () => {
             key={blog._id}
             title={blog.title}
             description={blog.description}
-            category={blog.category}
+            categories={blog.categories}
             imageUrl={blog.image}
             href={`/blogs/${blog.slug}`}
             type="blog"

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { NextResponse } from 'next/server';
-import Contact from '../../../models/contact-model';
+import ContactModel from '../../../models/contact-model';
 import { contactValidator } from '../../../validators/contact-validator';
 
 export async function POST(request: Request) {
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     await mongoose.connect(process.env.MONGODB_URI as string);
 
     // Create new contact
-    const contact = new Contact({
+    const contact = new ContactModel({
       name: body.name,
       email: body.email,
       message: body.message,

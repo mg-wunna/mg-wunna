@@ -5,7 +5,7 @@ export namespace Project {
     slug: string;
     title: string;
     description: string;
-    category: string;
+    categories: string[];
     content: string;
     links: {
       title: string;

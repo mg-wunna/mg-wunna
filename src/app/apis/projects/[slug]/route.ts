@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       title: faker.lorem.sentence(),
       image: '/images/blogs/blog-1.png',
       description: faker.lorem.paragraph(),
-      category: faker.lorem.word(),
+      categories: [faker.lorem.word()],
       content: `
 ## About the Project
 

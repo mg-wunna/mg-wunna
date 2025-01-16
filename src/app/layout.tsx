@@ -45,7 +45,10 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={twMerge(beVietnamPro.className, 'bg-white text-gray-500')}
+        className={twMerge(
+          beVietnamPro.className,
+          'scroll-smooth bg-white text-gray-500'
+        )}
       >
         {children}
       </body>

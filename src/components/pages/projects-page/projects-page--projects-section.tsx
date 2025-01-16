@@ -20,7 +20,7 @@ const ProjectsPageProjectsSection = () => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await fetch('/apis/blogs/category');
+      const response = await fetch('/apis/projects/category');
       const data = await response.json();
 
       setCategories([
@@ -205,7 +205,7 @@ const ProjectsPageProjectsSection = () => {
               <Card
                 title={project.title}
                 description={project.description}
-                category={project.category}
+                categories={project.categories}
                 imageUrl={project.image}
                 href={`/projects/${project.slug}`}
                 type="project"

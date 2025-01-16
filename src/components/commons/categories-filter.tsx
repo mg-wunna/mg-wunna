@@ -15,10 +15,10 @@ const CategoriesFilter = ({
     <div className="flex flex-wrap justify-center gap-2 px-4 sm:gap-3">
       {categories.map((category) => (
         <button
-          key={category._id}
+          key={category.name}
           onClick={() => onCategoryChange(category)}
           className={`relative overflow-hidden rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-500/20 sm:px-6 sm:py-2 sm:text-sm ${
-            selectedCategory._id === category._id
+            selectedCategory.name === category.name
               ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25'
               : 'bg-white text-gray-600 shadow-md hover:shadow-lg hover:shadow-orange-500/10'
           }`}

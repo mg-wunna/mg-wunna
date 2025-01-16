@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { Blog } from '../../../types/blog-type';
 import Markdown from '../../commons/markdown/markdown';
@@ -10,16 +11,15 @@ import BlogDetailSkeletonSection from './blog-detail-page--skeleton-section';
 
 const BlogDetailPageBlogDetailSection = () => {
   const [blog, setBlog] = useState<Blog | null>(null);
+  const params = useParams();
+
   const slug = useMemo(() => {
-    if (typeof window !== 'undefined') {
-      const pathSegments = window.location.pathname.split('/');
-      return pathSegments[pathSegments.length - 1];
-    }
-    return '';
-  }, []);
+    return typeof params?.slug === 'string' ? params.slug : '';
+  }, [params?.slug]);
 
   useEffect(() => {
-    if (blog) return;
+    if (!slug || blog) return;
+
     fetch(`/apis/blogs/${slug}`)
       .then((response) => response.json())
       .then((data) => setBlog(data.data))
@@ -59,9 +59,15 @@ const BlogDetailPageBlogDetailSection = () => {
           <h1 className="mb-4 text-3xl font-bold text-gray-900">
             {blog.title}
           </h1>
-          <div className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800">
-            {blog.category}
-          </div>
+          {blog.categories.map((category) => (
+            <div
+              key={category}
+              className="mr-1 inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm capitalize text-blue-800"
+            >
+              {category}
+            </div>
+          ))}
+          <div className="mt-4 text-sm text-gray-500"></div>
           <div className="mt-4 text-sm text-gray-500">
             {new Date(blog.createdAt).toLocaleDateString('en-US', {
               year: 'numeric',

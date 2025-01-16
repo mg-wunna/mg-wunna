@@ -5,7 +5,7 @@ export namespace Blog {
     slug: string;
     title: string;
     description: string;
-    category: string;
+    categories: string[];
     content: string;
     createdAt: string;
     updatedAt: string;

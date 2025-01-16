@@ -39,7 +39,7 @@ const HomePageProjectsSection = () => {
             key={project._id}
             title={project.title}
             description={project.description}
-            category={project.category}
+            categories={project.categories}
             imageUrl={project.image}
             href={`/projects/${project.slug}`}
             type="project"

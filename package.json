@@ -9,6 +9,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,7 +18,7 @@
     "prepare": "husky",
     "push": "git push --no-verify && git push --tags --no-verify",
     "release": "npm run lint && npm run build && standard-version && npm run push",
-    "setup-database": "ts-node scripts/setup-database.ts"
+    "setup-database": "node --loader ts-node/esm scripts/setup-database.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^9.4.0",
@@ -41,7 +42,7 @@
     "@eslint/eslintrc": "^3",
     "@types/ejs": "^3.1.5",
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/node": "^20",
+    "@types/node": "^20.17.14",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -56,6 +57,6 @@
     "standard-version": "^9.5.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5.7.3"
   }
 }
