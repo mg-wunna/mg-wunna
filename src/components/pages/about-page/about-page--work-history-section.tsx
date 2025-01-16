@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 type WorkHistoryItemProps = {
@@ -8,30 +9,37 @@ type WorkHistoryItemProps = {
   description?: string;
   isParallel?: boolean;
   isFirst?: boolean;
+  logo?: string;
+  isPresent?: boolean;
 };
 
 const workHistoryData = [
   {
     title: 'Back-End Lead Developer',
+    logo: '/logos/returning-ai-logo.png',
     company: 'Returning AI',
     link: 'https://returning.ai/',
     period: '2024 - Present',
     description:
       'Lead developer for enterprise-scale web applications, mentoring junior developers and implementing best practices.',
     isParallel: true,
+    isPresent: true,
   },
   {
     title: 'Freelance Application Developer',
+    logo: '/logos/mg-wunna-logo.png',
     company: 'Self-Employed',
     link: '',
     period: '2023 - Present',
     description:
       'Developed and maintained multiple mobile applications using React Native, Node.js and MongoDB. Implemented responsive mobile UI/UX, user authentication flows, and integrated third-party APIs for enhanced functionality.',
     isParallel: true,
+    isPresent: true,
   },
   {
     title: 'Project Manager',
     company: 'Anaget',
+    logo: '/logos/anaget-logo.png',
     link: 'https://anaget.com',
     period: '2023 - 2024',
     description:
@@ -40,6 +48,7 @@ const workHistoryData = [
   {
     title: 'Full Stack Developer',
     company: 'Anaget',
+    logo: '/logos/anaget-logo.png',
     link: 'https://anaget.com',
     period: '2021 - 2023',
     description:
@@ -47,11 +56,23 @@ const workHistoryData = [
   },
   {
     title: 'Freelance Full Stack Developer',
+    logo: '/logos/alpha-digital-marketing-logo.jpg',
     company: 'Alpha Digital Marketing',
     link: 'http://www.alphamarketingmm.com/',
-    period: '2020 - 2021',
+    period: '2020 - 2022',
     description:
       'Developed and maintained multiple client websites using React, Node.js and MongoDB. Implemented responsive designs, user authentication, and integrated third-party APIs for enhanced functionality.',
+    isParallel: true,
+  },
+  {
+    title: 'Freelance Messenger Bot Developer',
+    logo: '/logos/nal-digital-marketing-logo.png',
+    company: 'NAL Digital Marketing',
+    link: 'https://www.nalmm.com/',
+    period: '2020 - 2021',
+    description:
+      'Developed and maintained Facebook Messenger chatbots for multiple clients using Node.js and Facebook Messenger Platform APIs. Implemented interactive flows, natural language processing, and integrated third-party services for automated customer support and engagement.',
+    isParallel: true,
   },
 ];
 
@@ -62,6 +83,8 @@ const WorkHistoryItem = ({
   period,
   description,
   isParallel,
+  logo,
+  isPresent,
 }: WorkHistoryItemProps) => (
   <div
     className={`relative flex flex-col items-start gap-6 pb-12 md:flex-row ${
@@ -94,32 +117,47 @@ const WorkHistoryItem = ({
       <Link
         href={link}
         className={`block rounded-lg p-4 shadow-sm transition-all hover:shadow-md sm:p-6 ${
-          isParallel ? 'bg-gradient-to-br from-orange-50 to-white' : 'bg-white'
+          isPresent ? 'bg-gradient-to-br from-orange-50 to-white' : 'bg-white'
         }`}
         target="_blank"
         rel="noopener noreferrer"
         tabIndex={0}
         aria-label={`${title} at ${company}`}
       >
-        <h3
-          className={`text-base font-medium sm:text-lg ${
-            isParallel ? 'text-gray-700' : 'text-gray-900'
-          }`}
-        >
-          {title}
-        </h3>
-        <div
-          className={`mt-1 text-sm sm:text-base ${
-            isParallel ? 'text-orange-500' : 'text-orange-600'
-          }`}
-        >
-          {company}
+        <div className="flex items-center gap-4">
+          {logo && (
+            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
+              <Image
+                src={logo}
+                alt={`${company} logo`}
+                width={48}
+                height={48}
+                className="h-full w-full object-contain mix-blend-multiply"
+              />
+            </div>
+          )}
+          <div>
+            <h3
+              className={`text-base font-medium sm:text-lg ${
+                isPresent ? 'text-gray-700' : 'text-gray-900'
+              }`}
+            >
+              {title}
+            </h3>
+            <div
+              className={`mt-1 text-sm sm:text-base ${
+                isPresent ? 'text-orange-500' : 'text-orange-600'
+              }`}
+            >
+              {company}
+            </div>
+            <div className="text-xs text-gray-500 sm:text-sm">{period}</div>
+          </div>
         </div>
-        <div className="text-xs text-gray-500 sm:text-sm">{period}</div>
         {description && (
           <p
             className={`mt-3 text-sm sm:text-base ${
-              isParallel ? 'text-gray-600' : 'text-gray-700'
+              isPresent ? 'text-gray-600' : 'text-gray-700'
             }`}
           >
             {description}
@@ -154,6 +192,8 @@ const AboutPageWorkHistorySection = () => {
             period={item.period}
             description={item.description}
             isParallel={item.isParallel}
+            logo={item.logo}
+            isPresent={item.isPresent}
           />
         ))}
       </div>
