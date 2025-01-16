@@ -1,13 +1,5 @@
-import Footer from '../../../components/footer';
-import ProjectDetail from '../../../components/project-detail/project-detail';
+import ProjectDetailPage from '../../../components/pages/project-detail-page/project-detail-page';
 
-const ProjectDetailPage = () => {
-  return (
-    <>
-      <ProjectDetail />
-      <Footer />
-    </>
-  );
-};
+// ☐ add project detail page metadata
 
 export default ProjectDetailPage;

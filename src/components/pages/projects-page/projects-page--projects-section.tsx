@@ -3,7 +3,7 @@
 import { faker } from '@faker-js/faker';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
-import Card from '../card';
+import Card from '../../commons/card';
 
 type CategoryFilterProps = {
   categories: string[];
@@ -38,7 +38,7 @@ const CategoryFilter = ({
 };
 
 // ☐ create projects component
-const Projects = () => {
+const ProjectsPageProjectsSection = () => {
   const projects = useMemo(() => {
     return Array.from({ length: 10 }).map(() => ({
       title: faker.lorem.sentence(),
@@ -166,4 +166,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default ProjectsPageProjectsSection;

@@ -108,7 +108,7 @@ const WorkHistoryItem = ({
   </div>
 );
 
-const WorkHistory = () => {
+const AboutPageWorkHistorySection = () => {
   return (
     <section className="pt-20">
       <div className="mb-12">
@@ -139,4 +139,4 @@ const WorkHistory = () => {
   );
 };
 
-export default WorkHistory;
+export default AboutPageWorkHistorySection;

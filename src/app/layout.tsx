@@ -3,7 +3,6 @@ import './index.css';
 import type { Metadata } from 'next';
 import { Be_Vietnam_Pro } from 'next/font/google';
 import { twMerge } from 'tailwind-merge';
-import Header from '../components/header/header';
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ['latin'],
@@ -48,7 +47,6 @@ export default function RootLayout({
       <body
         className={twMerge(beVietnamPro.className, 'bg-white text-gray-500')}
       >
-        <Header />
         {children}
       </body>
     </html>

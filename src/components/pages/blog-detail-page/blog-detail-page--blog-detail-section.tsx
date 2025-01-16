@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import CommentsAndReviews from '../comments-and-reviews/comments-and-reviews';
-import Markdown from '../markdown/markdown';
+import Markdown from '../../commons/markdown/markdown';
+import CommentsAndReviews from '../../sections/comments-and-reviews-section/comments-and-reviews-section';
 
 type CardProps = {
   type: 'project' | 'blog';
@@ -19,7 +19,7 @@ type CardProps = {
   }[];
 };
 
-const BlogDetail = () => {
+const BlogDetailPageBlogDetailSection = () => {
   const {
     title,
     description,
@@ -175,4 +175,4 @@ export default MyComponent;
   );
 };
 
-export default BlogDetail;
+export default BlogDetailPageBlogDetailSection;

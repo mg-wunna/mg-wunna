@@ -3,7 +3,7 @@
 import { faker } from '@faker-js/faker';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
-import Card from '../card';
+import Card from '../../commons/card';
 
 type CategoryFilterProps = {
   categories: string[];
@@ -37,7 +37,7 @@ const CategoryFilter = ({
   );
 };
 
-const Blogs = () => {
+const BlogsPageBlogsSection = () => {
   const blogs = useMemo(() => {
     return Array.from({ length: 10 }).map(() => ({
       title: faker.lorem.sentence(),
@@ -164,4 +164,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default BlogsPageBlogsSection;

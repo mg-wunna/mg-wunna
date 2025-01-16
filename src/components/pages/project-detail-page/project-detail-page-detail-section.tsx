@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import CommentsAndReviews from '../comments-and-reviews/comments-and-reviews';
-import Markdown from '../markdown/markdown';
+import Markdown from '../../commons/markdown/markdown';
+import CommentsAndReviews from '../../sections/comments-and-reviews-section/comments-and-reviews-section';
 
 type CardProps = {
   type: 'project' | 'blog';
@@ -19,7 +19,7 @@ type CardProps = {
   }[];
 };
 
-const ProjectDetail = () => {
+const ProjectDetailPageDetailSection = () => {
   const {
     title,
     description,
@@ -243,4 +243,4 @@ Currently in production and actively maintained. Regular updates and improvement
   );
 };
 
-export default ProjectDetail;
+export default ProjectDetailPageDetailSection;

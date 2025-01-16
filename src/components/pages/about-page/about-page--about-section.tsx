@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useMemo } from 'react';
-import WorkHistory from './about/work-history';
+import AboutPageWorkHistorySection from './about-page--work-history-section';
 
-const About = () => {
+const AboutPageAboutSection = () => {
   const yearsOfExperience = useMemo(() => {
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
@@ -108,10 +108,10 @@ const About = () => {
           </div>
         </section>
 
-        <WorkHistory />
+        <AboutPageWorkHistorySection />
       </div>
     </div>
   );
 };
 
-export default About;
+export default AboutPageAboutSection;

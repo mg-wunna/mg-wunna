@@ -1,18 +1,9 @@
 import type { Metadata } from 'next';
-import Blogs from '../../components/blogs/blogs';
-import Footer from '../../components/footer';
+import BlogsPage from '../../components/pages/blogs-page/blogs-page';
 
 export const metadata: Metadata = {
   title: 'Mg Wunna | Blogs',
   description: "Mg Wunna's Blogs",
 };
 
-// ☐ create blogs page
-export default function BlogsPage() {
-  return (
-    <>
-      <Blogs />
-      <Footer />
-    </>
-  );
-}
+export default BlogsPage;

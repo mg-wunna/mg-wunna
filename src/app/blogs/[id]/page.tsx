@@ -1,13 +1,5 @@
-import BlogDetail from '../../../components/blog-detail/blog-detail';
-import Footer from '../../../components/footer';
+import BlogDetailPage from '../../../components/pages/blog-detail-page/blog-detail-page';
 
-const BlogDetailPage = () => {
-  return (
-    <>
-      <BlogDetail />
-      <Footer />
-    </>
-  );
-};
+// ☐ add blog detail page metadata
 
 export default BlogDetailPage;

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo } from 'react';
-import SocialLink from './social-link';
+import SocialLink from '../../commons/social-link';
 
 const SocialLinks = [
   {
@@ -22,7 +22,7 @@ const SocialLinks = [
   },
 ];
 
-const Hero = () => {
+const HomePageHeroSection = () => {
   const yearsOfExperience = useMemo(() => {
     const startYear = 2020;
     const currentYear = new Date().getFullYear();
@@ -169,4 +169,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HomePageHeroSection;

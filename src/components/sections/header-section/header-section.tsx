@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import HeaderItem from './header--item';
+import HeaderItem from './header-section--item';
 
 // ✔ create header component
-const Header = () => {
+const HeaderSection = () => {
   return (
     <div className="sticky top-0 z-50 h-28 bg-white/70 backdrop-blur-3xl">
       <header className="container mx-auto">
@@ -37,4 +37,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderSection;

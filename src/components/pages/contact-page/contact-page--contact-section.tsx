@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-const Contact = () => {
+const ContactPageContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -255,4 +255,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactPageContactSection;

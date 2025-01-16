@@ -27,7 +27,7 @@ const SocialLinks = [
   },
 ];
 
-const Footer = () => {
+const FooterSection = () => {
   return (
     <footer className="relative bg-gray-50">
       {/* Background Pattern */}
@@ -100,4 +100,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterSection;

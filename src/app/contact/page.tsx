@@ -1,18 +1,9 @@
 import type { Metadata } from 'next';
-import Contact from '../../components/contact';
-import Footer from '../../components/footer';
+import ContactPage from '../../components/pages/contact-page/contact-page';
 
 export const metadata: Metadata = {
   title: 'Mg Wunna | Contact',
   description: "Mg Wunna's Contact",
 };
 
-// ☐ create contact page
-export default function ContactPage() {
-  return (
-    <>
-      <Contact />
-      <Footer />
-    </>
-  );
-}
+export default ContactPage;
