@@ -1,153 +1,31 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { Project } from '../../../types/project-type';
 import Markdown from '../../commons/markdown/markdown';
 import CommentsAndReviews from '../../sections/comments-and-reviews-section/comments-and-reviews-section';
-
-type CardProps = {
-  type: 'project' | 'blog';
-  title: string;
-  description: string;
-  category: string;
-  date: Date;
-  imageUrl: string;
-  href: string;
-  content?: string;
-  links?: {
-    title: string;
-    url: string;
-  }[];
-};
+import ProjectDetailSkeletonSection from './project-detail-page--skeleton-section';
 
 const ProjectDetailPageDetailSection = () => {
-  const {
-    title,
-    description,
-    category,
-    date,
-    imageUrl,
-    content,
-    links,
-  }: CardProps = useMemo(() => {
-    return {
-      type: 'project',
-      title: 'Dodecia - Digital agency web design',
-      description: `I'm working on this personal project as a UI designer and developer. A web design, design and implementation that provides services. The site has a fun and relaxed atmosphere. Service and portfolio sections are important aspects of the overall design. I focus on a good user experience and clearly communicate information.`,
-      category: 'UX/UI design',
-      date: new Date('2023-01-01'),
-      imageUrl: '/images/projects/project-1.png',
-      href: '/projects/1',
-      content: `
-## About the Project
-
-Dodecia is a personal project where I serve as both the UI designer and developer. It's a comprehensive web design implementation for a digital agency providing creative services. The site features a modern, playful atmosphere while maintaining professionalism.
-
-Key aspects of the project include:
-
-- Clean, intuitive user interface design
-- Engaging service showcase sections
-- Interactive portfolio displays
-- Optimized user experience
-- Clear information architecture
-- Responsive design for all devices
-
-## Screenshots
-
-![Homepage Hero Section](/images/projects/project-1.png)
-![Services Overview](/images/projects/project-1.png)
-![Portfolio Grid](/images/projects/project-1.png)
-![Contact Section](/images/projects/project-1.png)
-
-## Tools and Technology
-
-### Frontend
-
-- **React.js** - Core frontend framework
-- **Next.js** - For server-side rendering and optimal performance
-- **TypeScript** - Ensuring type safety and better development experience
-- **TailwindCSS** - Utility-first CSS framework for styling
-- **Framer Motion** - Powering smooth animations and transitions
-
-### Design
-
-- **Figma** - UI/UX design and prototyping
-- **Adobe Photoshop** - Image optimization and graphics
-- **Adobe Illustrator** - Vector graphics and icons
-
-### Development Tools
-
-- **Git** - Version control
-- **VS Code** - Primary IDE
-- **ESLint/Prettier** - Code formatting and quality
-- **Chrome DevTools** - Testing and debugging
-
-### Deployment
-
-- **Vercel** - Hosting and deployment
-- **GitHub Actions** - CI/CD pipeline
-- **Google Analytics** - User analytics and tracking
-
-## Key Features
-
-1. **Responsive Design**
-
-   - Mobile-first approach
-   - Fluid layouts
-   - Optimized for all screen sizes
-
-2. **Performance Optimization**
-
-   - Lazy loading images
-   - Code splitting
-   - Optimized asset delivery
-   - 90+ Lighthouse score
-
-3. **Interactive Elements**
-
-   - Smooth scroll animations
-   - Hover effects
-   - Loading states
-   - Form validation
-
-4. **Accessibility**
-   - WCAG 2.1 compliant
-   - Semantic HTML
-   - Keyboard navigation
-   - Screen reader friendly
-
-## Challenges and Solutions
-
-One of the main challenges was balancing aesthetic appeal with performance. This was solved by:
-
-- Implementing efficient loading strategies
-- Optimizing images and assets
-- Using modern CSS techniques
-- Careful consideration of animation performance
-
-## Future Improvements
-
-- Add dark mode support
-- Implement more interactive features
-- Enhance mobile animations
-- Add multilingual support
-- Integrate a headless CMS
-
-## Project Status
-
-Currently in production and actively maintained. Regular updates and improvements are being made based on user feedback and performance metrics.
-`,
-      links: [
-        {
-          title: 'Visit Website',
-          url: 'https://dodecia.vercel.app',
-        },
-        {
-          title: 'GitHub Repository',
-          url: 'https://github.com/your-username/dodecia',
-        },
-      ],
-    };
+  const [project, setProject] = useState<Project | null>(null);
+  const slug = useMemo(() => {
+    const pathSegments = window.location.pathname.split('/');
+    return pathSegments[pathSegments.length - 1];
   }, []);
+
+  useEffect(() => {
+    if (project) return;
+    fetch(`/apis/projects/${slug}`)
+      .then((response) => response.json())
+      .then((data) => setProject(data.data))
+      .catch((error) => console.error('Error fetching project:', error));
+  }, [project, slug]);
+
+  if (!project) {
+    return <ProjectDetailSkeletonSection />;
+  }
 
   return (
     <main className="min-h-screen bg-white px-4 py-8 sm:px-6 lg:px-8">
@@ -168,17 +46,21 @@ Currently in production and actively maintained. Regular updates and improvement
             Projects
           </Link>
           <span>/</span>
-          <span className="text-gray-900">Dodecia</span>
+          <span className="capitalize text-gray-900">
+            {project.slug.split('-').join(' ')}
+          </span>
         </nav>
 
         {/* Title Section */}
         <div className="mb-8">
-          <h1 className="mb-4 text-3xl font-bold text-gray-900">{title}</h1>
+          <h1 className="mb-4 text-3xl font-bold text-gray-900">
+            {project.title}
+          </h1>
           <div className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800">
-            {category}
+            {project.category}
           </div>
           <div className="mt-4 text-sm text-gray-500">
-            {date.toLocaleDateString('en-US', {
+            {new Date(project.createdAt).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
@@ -189,8 +71,8 @@ Currently in production and actively maintained. Regular updates and improvement
         {/* Main Image */}
         <div className="mb-8 overflow-hidden rounded-lg">
           <Image
-            src={imageUrl}
-            alt={title}
+            src={project.image}
+            alt={project.title}
             width={800}
             height={450}
             className="w-full object-cover"
@@ -199,9 +81,9 @@ Currently in production and actively maintained. Regular updates and improvement
         </div>
 
         {/* Links */}
-        {links.length > 0 && (
+        {project.links.length > 0 && (
           <div className="mb-8 flex flex-wrap gap-4">
-            {links?.map((link) => (
+            {project.links?.map((link) => (
               <Link
                 key={link.title}
                 href={link.url}
@@ -229,15 +111,17 @@ Currently in production and actively maintained. Regular updates and improvement
 
         {/* Description */}
         <div className="mb-12">
-          <p className="text-lg leading-relaxed text-gray-600">{description}</p>
+          <p className="text-lg leading-relaxed text-gray-600">
+            {project.description}
+          </p>
         </div>
 
         {/* Tools and Technology */}
         <div className="prose prose-lg max-w-none">
-          <Markdown content={content} />
+          <Markdown content={project.content} />
         </div>
 
-        <CommentsAndReviews />
+        <CommentsAndReviews _id={project._id} />
       </div>
     </main>
   );

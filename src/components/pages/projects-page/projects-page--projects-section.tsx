@@ -1,35 +1,75 @@
 'use client';
 
-import { faker } from '@faker-js/faker';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Category } from '../../../types/category-type';
+import { Project } from '../../../types/project-type';
 import Card from '../../commons/card';
 import CategoriesFilter from '../../commons/categories-filter';
 
+let previousLoadedProjects = 0;
 // ☐ create projects component
 const ProjectsPageProjectsSection = () => {
-  const projects = useMemo(() => {
-    return Array.from({ length: 10 }).map(() => ({
-      title: faker.lorem.sentence(),
-      description: faker.lorem.paragraph(),
-      category: faker.lorem.word(),
-      imageUrl: '/images/projects/project-1.png',
-      href: '/projects/1',
-      type: 'project',
-      date: faker.date.recent(),
-    }));
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isMoreProjectsExist, setIsMoreProjectsExist] = useState(false);
+  const [isMoreProjectsLoading, setIsMoreProjectsLoading] = useState(true);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null
+  );
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await fetch('/apis/blogs/category');
+      const data = await response.json();
+
+      setCategories([
+        {
+          _id: 'all',
+          name: 'All',
+          type: 'blog',
+          createdAt: '',
+          updatedAt: '',
+        } as Category,
+        ...data.data,
+      ]);
+    };
+    fetchCategories();
   }, []);
 
-  const categories = useMemo(() => {
-    return ['All', ...new Set(projects.map((project) => project.category))];
-  }, [projects]);
+  useEffect(() => {
+    const fetchProjects = async () => {
+      previousLoadedProjects = 0;
+      setProjects([]);
+      setIsMoreProjectsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch(
+        selectedCategory
+          ? `/apis/projects?category=${selectedCategory?.name}`
+          : '/apis/projects'
+      );
+      const data = await response.json();
+      setProjects(data.data);
+      setIsMoreProjectsExist(data.meta.isMoreProjectsExist);
+      setIsMoreProjectsLoading(false);
+    };
+    fetchProjects();
+  }, [selectedCategory]);
 
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === 'All') return projects;
-    return projects.filter((project) => project.category === selectedCategory);
-  }, [projects, selectedCategory]);
+  const fetchMoreProjects = async () => {
+    previousLoadedProjects = projects.length;
+    setIsMoreProjectsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const response = await fetch(
+      `/apis/projects?category=${selectedCategory?.name}&offset=${previousLoadedProjects}`
+    );
+    const data = await response.json();
+    setProjects([...projects, ...data.data]);
+    setIsMoreProjectsExist(
+      previousLoadedProjects > 30 ? false : data.meta.isMoreProjectsExist
+    );
+    setIsMoreProjectsLoading(false);
+  };
 
   return (
     <div className="container mx-auto mb-32 mt-20 px-4 sm:px-6 lg:px-8">
@@ -80,13 +120,13 @@ const ProjectsPageProjectsSection = () => {
         <div className="flex justify-center">
           <CategoriesFilter
             categories={categories}
-            selectedCategory={selectedCategory}
+            selectedCategory={selectedCategory || categories[0]}
             onCategoryChange={setSelectedCategory}
           />
         </div>
       </div>
 
-      {filteredProjects.length === 0 && (
+      {projects.length === 0 && !isMoreProjectsLoading && (
         <div className="relative mx-auto max-w-2xl overflow-hidden p-12 pb-20 text-center">
           <div className="relative">
             <h3 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
@@ -100,7 +140,7 @@ const ProjectsPageProjectsSection = () => {
 
             <button
               onClick={() => {
-                setSelectedCategory('all');
+                setSelectedCategory(categories[0]);
               }}
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-orange-500 px-8 py-4 font-medium text-white transition-all hover:bg-orange-600"
             >
@@ -141,7 +181,7 @@ const ProjectsPageProjectsSection = () => {
         className="grid grid-cols-1 gap-6 sm:grid-cols-2"
       >
         <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.title}
               variants={{
@@ -150,7 +190,10 @@ const ProjectsPageProjectsSection = () => {
                   opacity: 1,
                   y: 0,
                   transition: {
-                    delay: i * 0.1,
+                    delay:
+                      i < previousLoadedProjects
+                        ? 0
+                        : (i - previousLoadedProjects) * 0.1,
                   },
                 }),
               }}
@@ -163,15 +206,72 @@ const ProjectsPageProjectsSection = () => {
                 title={project.title}
                 description={project.description}
                 category={project.category}
-                imageUrl={project.imageUrl}
-                href={project.href}
+                imageUrl={project.image}
+                href={`/projects/${project.slug}`}
                 type="project"
-                date={project.date}
+                date={new Date(project.createdAt)}
               />
             </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>
+
+      {isMoreProjectsLoading && (
+        <motion.div
+          layout
+          initial={{ opacity: 0, rotateY: 0 }}
+          animate={{ opacity: 1, rotateY: 0 }}
+          exit={{ opacity: 0, rotateY: 90 }}
+          transition={{
+            type: 'spring',
+            stiffness: 100,
+            damping: 12,
+          }}
+          style={{ transformPerspective: '1000px' }}
+          className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2"
+        >
+          <AnimatePresence mode="popLayout">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: (i: number) => ({
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      delay: i * 0.1,
+                    },
+                  }),
+                }}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                custom={index}
+                className="flex h-[400px] animate-pulse flex-col overflow-hidden rounded-2xl bg-gradient-to-tr from-gray-100 to-gray-50 shadow-lg"
+              >
+                <div className="relative h-56 w-full bg-gray-200" />
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-4 h-4 w-24 rounded bg-gray-200" />
+                  <div className="mb-3 h-6 w-3/4 rounded bg-gray-200" />
+                  <div className="h-16 w-full rounded bg-gray-200" />
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      )}
+
+      {isMoreProjectsExist && !isMoreProjectsLoading && (
+        <div className="mt-12 text-center">
+          <button
+            className="rounded-lg bg-orange-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:text-base"
+            onClick={() => fetchMoreProjects()}
+          >
+            View More
+          </button>
+        </div>
+      )}
     </div>
   );
 };

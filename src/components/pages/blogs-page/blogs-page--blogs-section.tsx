@@ -1,33 +1,75 @@
 'use client';
 
-import { faker } from '@faker-js/faker';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Blog } from '../../../types/blog-type';
+import { Category } from '../../../types/category-type';
 import Card from '../../commons/card';
 import CategoriesFilter from '../../commons/categories-filter';
 
+let previousLoadedBlogs = 0;
+
 const BlogsPageBlogsSection = () => {
-  const blogs = useMemo(() => {
-    return Array.from({ length: 10 }).map(() => ({
-      title: faker.lorem.sentence(),
-      description: faker.lorem.paragraph(),
-      category: faker.lorem.word(),
-      imageUrl: '/images/projects/project-1.png',
-      href: '/blogs/1',
-      date: faker.date.recent(),
-    }));
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [isMoreBlogsExist, setIsMoreBlogsExist] = useState(false);
+  const [isMoreBlogsLoading, setIsMoreBlogsLoading] = useState(true);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null
+  );
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await fetch('/apis/blogs/category');
+      const data = await response.json();
+
+      setCategories([
+        {
+          _id: 'all',
+          name: 'All',
+          type: 'blog',
+          createdAt: '',
+          updatedAt: '',
+        } as Category,
+        ...data.data,
+      ]);
+    };
+    fetchCategories();
   }, []);
 
-  const categories = useMemo(() => {
-    return ['All', ...new Set(blogs.map((blog) => blog.category))];
-  }, [blogs]);
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      previousLoadedBlogs = 0;
+      setBlogs([]);
+      setIsMoreBlogsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch(
+        selectedCategory
+          ? `/apis/blogs?category=${selectedCategory?.name}`
+          : '/apis/blogs'
+      );
+      const data = await response.json();
+      setBlogs(data.data);
+      setIsMoreBlogsExist(data.meta.isMoreBlogsExist);
+      setIsMoreBlogsLoading(false);
+    };
+    fetchBlogs();
+  }, [selectedCategory]);
 
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const filteredBlogs = useMemo(() => {
-    if (selectedCategory === 'All') return blogs;
-    return blogs.filter((blog) => blog.category === selectedCategory);
-  }, [blogs, selectedCategory]);
+  const fetchMoreBlogs = async () => {
+    previousLoadedBlogs = blogs.length;
+    setIsMoreBlogsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const response = await fetch(
+      `/apis/blogs?category=${selectedCategory?.name}&offset=${previousLoadedBlogs}`
+    );
+    const data = await response.json();
+    setBlogs([...blogs, ...data.data]);
+    setIsMoreBlogsExist(
+      previousLoadedBlogs > 30 ? false : data.meta.isMoreBlogsExist
+    );
+    setIsMoreBlogsLoading(false);
+  };
 
   return (
     <div className="container mx-auto mb-32 mt-20 px-4 sm:px-6 lg:px-8">
@@ -78,13 +120,13 @@ const BlogsPageBlogsSection = () => {
         <div className="flex justify-center">
           <CategoriesFilter
             categories={categories}
-            selectedCategory={selectedCategory}
+            selectedCategory={selectedCategory || categories[0]}
             onCategoryChange={setSelectedCategory}
           />
         </div>
       </div>
 
-      {filteredBlogs.length === 0 && (
+      {blogs.length === 0 && !isMoreBlogsLoading && (
         <div className="relative mx-auto max-w-2xl overflow-hidden p-12 pb-20 text-center">
           <div className="relative">
             <h3 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">
@@ -98,7 +140,7 @@ const BlogsPageBlogsSection = () => {
 
             <button
               onClick={() => {
-                setSelectedCategory('all');
+                setSelectedCategory(categories[0]);
               }}
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-orange-500 px-8 py-4 font-medium text-white transition-all hover:bg-orange-600"
             >
@@ -139,7 +181,7 @@ const BlogsPageBlogsSection = () => {
         className="grid grid-cols-1 gap-6 sm:grid-cols-2"
       >
         <AnimatePresence mode="popLayout">
-          {filteredBlogs.map((blog, index) => (
+          {blogs.map((blog, index) => (
             <motion.div
               key={blog.title}
               variants={{
@@ -148,7 +190,10 @@ const BlogsPageBlogsSection = () => {
                   opacity: 1,
                   y: 0,
                   transition: {
-                    delay: i * 0.1,
+                    delay:
+                      i < previousLoadedBlogs
+                        ? 0
+                        : (i - previousLoadedBlogs) * 0.1,
                   },
                 }),
               }}
@@ -161,15 +206,72 @@ const BlogsPageBlogsSection = () => {
                 title={blog.title}
                 description={blog.description}
                 category={blog.category}
-                imageUrl={blog.imageUrl}
-                href={blog.href}
+                imageUrl={blog.image}
+                href={`/blogs/${blog.slug}`}
                 type="blog"
-                date={blog.date}
+                date={new Date(blog.createdAt)}
               />
             </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>
+
+      {isMoreBlogsLoading && (
+        <motion.div
+          layout
+          initial={{ opacity: 0, rotateY: 0 }}
+          animate={{ opacity: 1, rotateY: 0 }}
+          exit={{ opacity: 0, rotateY: 90 }}
+          transition={{
+            type: 'spring',
+            stiffness: 100,
+            damping: 12,
+          }}
+          style={{ transformPerspective: '1000px' }}
+          className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2"
+        >
+          <AnimatePresence mode="popLayout">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: (i: number) => ({
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      delay: i * 0.1,
+                    },
+                  }),
+                }}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                custom={index}
+                className="flex h-[400px] animate-pulse flex-col overflow-hidden rounded-2xl bg-gradient-to-tr from-gray-100 to-gray-50 shadow-lg"
+              >
+                <div className="relative h-56 w-full bg-gray-200" />
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-4 h-4 w-24 rounded bg-gray-200" />
+                  <div className="mb-3 h-6 w-3/4 rounded bg-gray-200" />
+                  <div className="h-16 w-full rounded bg-gray-200" />
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      )}
+
+      {isMoreBlogsExist && !isMoreBlogsLoading && (
+        <div className="mt-12 text-center">
+          <button
+            className="rounded-lg bg-orange-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:text-base"
+            onClick={() => fetchMoreBlogs()}
+          >
+            View More
+          </button>
+        </div>
+      )}
     </div>
   );
 };

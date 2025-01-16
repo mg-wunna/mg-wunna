@@ -1,8 +1,23 @@
+'use client';
+
+import { Blog } from '@/types/blog-type';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Card from '../../commons/card';
 
 // ☐ create blogs component
 const HomePageBlogsSection = () => {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const response = await fetch('/apis/blogs/popular');
+      const data = await response.json();
+      setBlogs(data.data);
+    };
+    fetchBlogs();
+  }, []);
+
   return (
     <div className="container mx-auto mb-32 px-4 sm:px-6 lg:px-8">
       <div className="mb-12 text-center">
@@ -18,16 +33,16 @@ const HomePageBlogsSection = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {blogs.map((blog) => (
           <Card
-            key={index}
-            title="Dodecia - Digital agency web design"
-            description="Dodeca is a company (digital agency) that focuses on designing, web development and branding for startups. This is my one-page exploration of digital companies."
-            category="Design and Development"
-            imageUrl="/images/blogs/blog-1.png"
-            href="/blogs/dodecia"
+            key={blog._id}
+            title={blog.title}
+            description={blog.description}
+            category={blog.category}
+            imageUrl={blog.image}
+            href={`/blogs/${blog.slug}`}
             type="blog"
-            date={new Date('2024-01-01')}
+            date={new Date(blog.createdAt)}
           />
         ))}
       </div>

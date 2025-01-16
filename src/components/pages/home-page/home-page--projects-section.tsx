@@ -1,10 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Project } from '../../../types/project-type';
 import Card from '../../commons/card';
 
 // ☐ create projects component
 const HomePageProjectsSection = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const response = await fetch('/apis/projects/popular');
+      const data = await response.json();
+      setProjects(data.data);
+    };
+    fetchProjects();
+  }, []);
+
   return (
     <div className="container mx-auto mb-32 px-4 sm:px-6 lg:px-8">
       <div className="mb-12 text-center">
@@ -21,16 +34,16 @@ const HomePageProjectsSection = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {Array.from({ length: 10 }).map((_, index) => (
+        {projects.map((project) => (
           <Card
-            key={index}
-            title="Dodecia - Digital agency web design"
-            description="Dodeca is a company (digital agency) that focuses on designing, web development and branding for startups. This is my one-page exploration of digital companies."
-            category="Design and Development"
-            imageUrl="/images/projects/project-1.png"
-            href="/projects/dodecia"
+            key={project._id}
+            title={project.title}
+            description={project.description}
+            category={project.category}
+            imageUrl={project.image}
+            href={`/projects/${project.slug}`}
             type="project"
-            date={new Date()}
+            date={new Date(project.createdAt)}
           />
         ))}
       </div>
