@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { Comment } from '../../../types/comment-type';
+import CommentsSectionForm from './comments-section--form';
 
 type CommentsAndReviewsProps = {
-  _id: string;
+  type: 'blogs' | 'projects';
+  slug: string;
 };
 
-const CommentsAndReviews = ({ _id }: CommentsAndReviewsProps) => {
+const CommentsSection = ({ type, slug }: CommentsAndReviewsProps) => {
   const [meta, setMeta] = useState<{
     total: number;
     page: number;
@@ -22,11 +24,11 @@ const CommentsAndReviews = ({ _id }: CommentsAndReviewsProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
-    if (!_id) return;
+    if (!slug) return;
     (async () => {
       setMeta((prev) => ({ ...prev, isLoading: true }));
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      fetch(`/apis/comments/${_id}`)
+      fetch(`/apis/comments/${type}/${slug}`)
         .then((response) => response.json())
         .then((data) => {
           setComments(data.data);
@@ -35,25 +37,12 @@ const CommentsAndReviews = ({ _id }: CommentsAndReviewsProps) => {
         })
         .catch((error) => console.error('Error fetching comments:', error));
     })();
-  }, [_id]);
-
-  const [rating, setRating] = useState<number>(0);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [comment, setComment] = useState('');
-
-  const handleRatingClick = (value: number) => {
-    setRating(value);
-  };
-
-  const handleSubmitReview = () => {
-    alert('Submit comment');
-  };
+  }, [type, slug]);
 
   const handleLoadMore = async () => {
     setMeta((prev) => ({ ...prev, isLoading: true }));
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    fetch(`/apis/comments/${_id}?page=${meta.page + 1}`)
+    fetch(`/apis/comments/${type}/${slug}?page=${meta.page + 1}`)
       .then((response) => response.json())
       .then((data) => {
         setComments([...comments, ...data.data]);
@@ -65,72 +54,13 @@ const CommentsAndReviews = ({ _id }: CommentsAndReviewsProps) => {
 
   return (
     <div className="mt-10 space-y-12">
-      {/* Rate this project */}
-      <div className="border-t border-gray-200 pt-8">
-        <h2 className="mb-6 text-xl font-medium text-gray-900 sm:text-2xl">
-          Share Your Thoughts
-        </h2>
-        <div className="space-y-4">
-          <div className="flex items-center gap-1 sm:gap-2">
-            {[1, 2, 3, 4, 5].map((value) => (
-              <button
-                key={value}
-                onClick={() => handleRatingClick(value)}
-                className={`h-8 w-8 rounded-md transition-colors sm:h-10 sm:w-10 ${
-                  rating >= value
-                    ? 'bg-orange-500 text-white'
-                    : 'bg-gray-100 hover:bg-gray-200'
-                }`}
-                aria-label={`Rate ${value} stars`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="mx-auto h-4 w-4 sm:h-5 sm:w-5"
-                >
-                  <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
-                </svg>
-              </button>
-            ))}
-          </div>
+      <CommentsSectionForm
+        type={type}
+        slug={slug}
+        addComment={(comment) => setComments((prev) => [comment, ...prev])}
+      />
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your Name"
-              className="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 placeholder:text-gray-400 focus:border-orange-400 focus:outline-none sm:p-4 sm:text-base"
-            />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your Email"
-              className="rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 placeholder:text-gray-400 focus:border-orange-400 focus:outline-none sm:p-4 sm:text-base"
-            />
-          </div>
-
-          <textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="Share your thoughts about this project..."
-            className="w-full rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 placeholder:text-gray-400 focus:border-orange-400 focus:outline-none sm:p-4 sm:text-base"
-            rows={4}
-          />
-
-          <button
-            onClick={handleSubmitReview}
-            disabled={rating === 0 || !name || !email}
-            className="w-full rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-orange-600 disabled:opacity-50 sm:px-6 sm:py-3 sm:text-base"
-          >
-            Submit Review
-          </button>
-        </div>
-      </div>
-
-      {/* Reviews */}
+      {/* Comments */}
       <div>
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-medium text-gray-900 sm:text-2xl">
@@ -140,6 +70,12 @@ const CommentsAndReviews = ({ _id }: CommentsAndReviewsProps) => {
             {meta.total}
           </span>
         </div>
+
+        {meta.page === 1 && comments.length === 0 && (
+          <div className="my-20 text-center text-sm text-gray-500">
+            No comments yet. Be the first to comment!
+          </div>
+        )}
 
         <div className="space-y-4">
           {comments.map((comment) => (
@@ -242,4 +178,4 @@ const CommentsAndReviews = ({ _id }: CommentsAndReviewsProps) => {
   );
 };
 
-export default CommentsAndReviews;
+export default CommentsSection;

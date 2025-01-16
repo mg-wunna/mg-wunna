@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { Blog } from '../../../types/blog-type';
 import Markdown from '../../commons/markdown/markdown';
-import CommentsAndReviews from '../../sections/comments-and-reviews-section/comments-and-reviews-section';
+import CommentsSection from '../../sections/comments-section/comments-section';
 import BlogDetailSkeletonSection from './blog-detail-page--skeleton-section';
 
 const BlogDetailPageBlogDetailSection = () => {
@@ -110,7 +110,10 @@ const BlogDetailPageBlogDetailSection = () => {
           <Markdown content={blog.content} />
         </div>
 
-        <CommentsAndReviews _id={blog._id} />
+        <CommentsSection
+          type="blogs"
+          slug={blog.slug}
+        />
       </div>
     </main>
   );

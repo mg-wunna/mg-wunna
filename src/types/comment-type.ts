@@ -1,7 +1,7 @@
 export namespace Comment {
   export type Schema = {
     _id: string;
-    parentId: string;
+    slug: string;
     name: string;
     email: string;
     rating: number;

@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { Project } from '../../../types/project-type';
 import Markdown from '../../commons/markdown/markdown';
-import CommentsAndReviews from '../../sections/comments-and-reviews-section/comments-and-reviews-section';
+import CommentsSection from '../../sections/comments-section/comments-section';
 import ProjectDetailSkeletonSection from './project-detail-page--skeleton-section';
 
 const ProjectDetailPageDetailSection = () => {
@@ -68,9 +68,14 @@ const ProjectDetailPageDetailSection = () => {
           <h1 className="mb-4 text-3xl font-bold text-gray-900">
             {project.title}
           </h1>
-          <div className="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800">
-            {project.categories}
-          </div>
+          {project.categories.map((category) => (
+            <div
+              key={category}
+              className="mr-1 inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm capitalize text-blue-800"
+            >
+              {category}
+            </div>
+          ))}
           <div className="mt-4 text-sm text-gray-500">
             {new Date(project.createdAt).toLocaleDateString('en-US', {
               year: 'numeric',
@@ -133,7 +138,10 @@ const ProjectDetailPageDetailSection = () => {
           <Markdown content={project.content} />
         </div>
 
-        <CommentsAndReviews _id={project._id} />
+        <CommentsSection
+          type="projects"
+          slug={project.slug}
+        />
       </div>
     </main>
   );
