@@ -31,7 +31,7 @@ const ContactPageContactSection = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden">
+    <div className="relative min-h-screen w-full overflow-x-hidden md:min-h-min">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         {/* Decorative elements */}
         <div className="fixed -left-4 top-0 h-64 w-64 rounded-full bg-orange-100/50 blur-3xl" />
