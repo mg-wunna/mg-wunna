@@ -1,35 +1,92 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 import HeaderItem from './header-section--item';
 
-// ✔ create header component
 const HeaderSection = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <div className="sticky top-0 z-50 h-28 bg-white/70 backdrop-blur-3xl">
-      <header className="container mx-auto">
-        <nav className="flex h-28 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-orange-500 ring-offset-2">
-              <Image
-                src="/logo.png"
-                alt="Mg Wunna's logo"
-                fill
-                className="object-cover"
-                priority
-              />
+    <div className="sticky top-0 z-50 bg-white/70 backdrop-blur-3xl">
+      <header className="container mx-auto px-4 sm:px-6">
+        <nav className="relative px-4">
+          <div className="flex h-20 items-center justify-between md:h-28">
+            <div className="flex items-center gap-3">
+              <div className="relative h-8 w-8 overflow-hidden rounded-full ring-2 ring-orange-500 ring-offset-2 md:h-10 md:w-10">
+                <Image
+                  src="/logo.png"
+                  alt="Mg Wunna's logo"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className="flex flex-col">
+                <h1 className="bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-base font-bold text-transparent md:text-lg">
+                  Mg Wunna
+                </h1>
+                <p className="text-xs text-gray-500/70">Fullstack Developer</p>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <h1 className="bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-lg font-bold text-transparent">
-                Mg Wunna
-              </h1>
-              <p className="text-xs text-gray-500/70">Fullstack Developer</p>
+
+            {/* Mobile menu button */}
+            <button
+              className="rounded-lg p-2 text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500 md:hidden"
+              onClick={handleToggleMenu}
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+
+            {/* Desktop menu */}
+            <div className="hidden items-center gap-4 md:flex lg:gap-8">
+              <HeaderItem title="Home" />
+              <HeaderItem title="Projects" />
+              <HeaderItem title="Blogs" />
+              <HeaderItem title="About" />
+              <HeaderItem title="Contact" />
             </div>
           </div>
-          <div className="flex items-center gap-8">
-            <HeaderItem title="Home" />
-            <HeaderItem title="Projects" />
-            <HeaderItem title="Blogs" />
-            <HeaderItem title="About" />
-            <HeaderItem title="Contact" />
+
+          {/* Mobile menu */}
+          <div
+            className={`${
+              isMenuOpen ? 'block' : 'hidden'
+            } absolute left-0 right-0 top-full bg-white px-4 py-2 shadow-lg md:hidden`}
+          >
+            <div className="flex flex-col gap-2 pb-4">
+              <HeaderItem title="Home" />
+              <HeaderItem title="Projects" />
+              <HeaderItem title="Blogs" />
+              <HeaderItem title="About" />
+              <HeaderItem title="Contact" />
+            </div>
           </div>
         </nav>
       </header>

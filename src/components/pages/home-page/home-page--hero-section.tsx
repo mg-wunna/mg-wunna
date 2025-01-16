@@ -30,7 +30,7 @@ const HomePageHeroSection = () => {
   }, []);
 
   return (
-    <section className="relative mb-32 min-h-[calc(100vh-7rem)] overflow-hidden bg-white">
+    <section className="relative mb-16 w-full overflow-hidden bg-white py-16 md:mb-32 md:py-48">
       {/* Decorative SVG waves */}
       <div className="absolute inset-0 z-0">
         <svg
@@ -77,27 +77,27 @@ const HomePageHeroSection = () => {
         </svg>
       </div>
 
-      <div className="container relative z-10 mx-auto flex min-h-[calc(100vh-7rem)] flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl">
+      <div className="container relative z-10 mx-auto flex w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-4xl">
           {/* Main content */}
           <div className="space-y-6 text-center">
             <div className="relative inline-block">
-              <span className="relative z-10 text-lg font-medium text-orange-600">
+              <span className="relative z-10 text-base font-medium text-orange-600 md:text-lg">
                 Hey there! 👋
               </span>
               <div className="animate-spin-slow absolute -inset-1 -z-10 rounded-full bg-gradient-to-r from-orange-200 to-orange-400 opacity-30 blur"></div>
             </div>
 
-            <h1 className="relative mx-auto max-w-3xl bg-gradient-to-br from-gray-900 via-orange-600 to-gray-900 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-7xl">
+            <h1 className="relative mx-auto max-w-3xl bg-gradient-to-br from-gray-900 via-orange-600 to-gray-900 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl md:text-7xl">
               I&apos;m Wunna
               <div className="animate-float absolute -right-4 top-0 h-16 w-16 rounded-full bg-orange-400/20 blur-xl"></div>
             </h1>
 
             <div className="relative">
-              <h2 className="text-2xl font-semibold text-gray-800 sm:text-3xl">
+              <h2 className="text-xl font-semibold text-gray-800 sm:text-2xl md:text-3xl">
                 Creative Full Stack Developer & UI/UX Enthusiast
               </h2>
-              <p className="mt-2 text-lg text-gray-600">
+              <p className="mt-2 text-base text-gray-600 md:text-lg">
                 {yearsOfExperience}+ Years Crafting Digital Experiences
               </p>
             </div>
@@ -105,7 +105,7 @@ const HomePageHeroSection = () => {
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-orange-500 px-8 py-3 text-white transition-all hover:bg-orange-600"
+                className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-orange-500 px-6 py-3 text-white transition-all hover:bg-orange-600 sm:w-auto sm:px-8"
               >
                 <span className="relative">Let&apos;s Work Together</span>
                 <span className="relative transition-transform group-hover:translate-x-1">
@@ -116,7 +116,7 @@ const HomePageHeroSection = () => {
 
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-2 rounded-full border-2 border-orange-200 px-8 py-3 text-orange-600 transition-all hover:border-orange-300 hover:bg-orange-50"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-orange-200 px-6 py-3 text-orange-600 transition-all hover:border-orange-300 hover:bg-orange-50 sm:w-auto sm:px-8"
               >
                 View My Work
                 <span className="transition-transform group-hover:translate-x-1">
@@ -127,24 +127,24 @@ const HomePageHeroSection = () => {
           </div>
 
           {/* Feature grid */}
-          <div className="mt-16 grid gap-6 sm:grid-cols-2">
-            <div className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl">
+          <div className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6">
+            <div className="group relative overflow-hidden rounded-2xl bg-white p-4 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl sm:p-6">
               <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-orange-100 opacity-0 transition-opacity group-hover:opacity-100"></div>
               <h3 className="mb-2 font-semibold text-gray-900">
                 Modern Tech Stack
               </h3>
-              <p className="text-gray-600">
+              <p className="text-sm text-gray-600 sm:text-base">
                 Leveraging React, Next.js, and Node.js to build scalable and
                 performant applications
               </p>
             </div>
 
-            <div className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl">
+            <div className="group relative overflow-hidden rounded-2xl bg-white p-4 shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl sm:p-6">
               <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-orange-100 opacity-0 transition-opacity group-hover:opacity-100"></div>
               <h3 className="mb-2 font-semibold text-gray-900">
                 User-Centric Design
               </h3>
-              <p className="text-gray-600">
+              <p className="text-sm text-gray-600 sm:text-base">
                 Creating intuitive and delightful experiences that users love to
                 interact with
               </p>
@@ -152,7 +152,7 @@ const HomePageHeroSection = () => {
           </div>
 
           {/* Social links */}
-          <div className="mt-12 flex justify-center gap-4">
+          <div className="mt-8 flex justify-center gap-4 sm:mt-12">
             {SocialLinks.map((link) => (
               <SocialLink
                 key={link.href}

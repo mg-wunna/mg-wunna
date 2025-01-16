@@ -36,37 +36,16 @@ const FooterSection = () => {
 
       <div className="container relative mx-auto px-4 py-16 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className="grid gap-12 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {/* Brand Section */}
-          <div className="lg:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-1">
             <h2 className="text-2xl font-bold text-gray-900">Mg Wunna</h2>
-            <p className="mt-4 max-w-md text-gray-600">
+            <p className="mt-4 text-gray-600">
               Passionate developer crafting beautiful and functional web
-              experiences. Always learning, always creating, and dedicated to
-              delivering exceptional digital solutions.
+              experiences. Always learning, always creating.
             </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900">Quick Links</h3>
-            <nav className="mt-4 flex flex-col space-y-2">
-              {['Projects', 'Blogs', 'About', 'Contact'].map((item) => (
-                <Link
-                  key={item}
-                  href={`/${item.toLowerCase()}`}
-                  className="text-gray-600 transition-colors duration-200 hover:text-orange-500"
-                >
-                  {item}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900">Connect</h3>
-            <div className="mt-4 flex gap-4">
+            {/* Social Links */}
+            <div className="mt-6 flex gap-4">
               {SocialLinks.map((link) => (
                 <a
                   key={link.href}
@@ -87,13 +66,51 @@ const FooterSection = () => {
               ))}
             </div>
           </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">Quick Links</h3>
+            <nav className="mt-4 flex flex-col space-y-2">
+              {['Projects', 'Blogs', 'About', 'Contact'].map((item) => (
+                <Link
+                  key={item}
+                  href={`/${item.toLowerCase()}`}
+                  className="text-gray-600 transition-colors duration-200 hover:text-orange-500"
+                >
+                  {item}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">
+              Get in Touch
+            </h3>
+            <div className="mt-4 flex flex-col space-y-2 text-gray-600">
+              <a
+                href="mailto:mgwunna.dev@gmail.com"
+                className="transition-colors duration-200 hover:text-orange-500"
+              >
+                mgwunna.dev@gmail.com
+              </a>
+              <a
+                href="tel:+959777177317"
+                className="transition-colors duration-200 hover:text-orange-500"
+              >
+                +959 777 177 317
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-gray-200 pt-8 md:flex-row">
-          <p className="text-center text-sm text-gray-600">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 text-center sm:flex-row">
+          <p className="text-sm text-gray-600">
             © {new Date().getFullYear()} Mg Wunna. All rights reserved.
           </p>
+          <p className="text-sm text-gray-500">Made in Myanmar 🇲🇲</p>
         </div>
       </div>
     </footer>

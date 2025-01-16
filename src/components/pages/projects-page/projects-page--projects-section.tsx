@@ -4,38 +4,7 @@ import { faker } from '@faker-js/faker';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
 import Card from '../../commons/card';
-
-type CategoryFilterProps = {
-  categories: string[];
-  selectedCategory: string;
-  onCategoryChange: (category: string) => void;
-};
-
-const CategoryFilter = ({
-  categories,
-  selectedCategory,
-  onCategoryChange,
-}: CategoryFilterProps) => {
-  return (
-    <div className="flex flex-wrap gap-3">
-      {categories.map((category) => (
-        <button
-          key={category}
-          onClick={() => onCategoryChange(category)}
-          className={`relative overflow-hidden rounded-lg px-6 py-2 text-sm font-medium capitalize transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-500/20 ${
-            selectedCategory === category
-              ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25'
-              : 'bg-white text-gray-600 shadow-md hover:shadow-lg hover:shadow-orange-500/10'
-          }`}
-          aria-label={`Filter by ${category} projects`}
-        >
-          <span className="relative z-10">{category}</span>
-          <div className="absolute inset-0 -z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-200/40 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100" />
-        </button>
-      ))}
-    </div>
-  );
-};
+import CategoriesFilter from '../../commons/categories-filter';
 
 // ☐ create projects component
 const ProjectsPageProjectsSection = () => {
@@ -109,7 +78,7 @@ const ProjectsPageProjectsSection = () => {
 
         {/* Category Filter */}
         <div className="flex justify-center">
-          <CategoryFilter
+          <CategoriesFilter
             categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={setSelectedCategory}

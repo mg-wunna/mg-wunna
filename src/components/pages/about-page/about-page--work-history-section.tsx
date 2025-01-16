@@ -64,23 +64,23 @@ const WorkHistoryItem = ({
   isParallel,
 }: WorkHistoryItemProps) => (
   <div
-    className={`relative flex items-start gap-6 pb-12 ${isParallel ? 'ml-12' : ''}`}
+    className={`relative flex flex-col items-start gap-6 pb-12 md:flex-row ${
+      isParallel ? 'ml-0 md:ml-12' : ''
+    }`}
   >
     {!isParallel && (
       <>
-        <div className="absolute left-[7px] top-[50%] h-[calc(100%+48px)] w-[2px] -translate-y-1/2 bg-orange-200" />
-        {/* Add a horizontal connector for non-parallel items */}
-        <div className="absolute left-[7px] top-[50%] h-[2px] w-[2px] -translate-y-1/2 bg-orange-200" />
+        <div className="absolute left-[7px] top-[50%] hidden h-[calc(100%+48px)] w-[2px] -translate-y-1/2 bg-orange-200 md:block" />
+        <div className="absolute left-[7px] top-[50%] hidden h-[2px] w-[2px] -translate-y-1/2 bg-orange-200 md:block" />
       </>
     )}
     {isParallel && (
       <>
-        <div className="absolute -left-[41px] top-[50%] h-[calc(100%+48px+48px)] w-[2px] -translate-y-1/2 bg-orange-200" />
-        {/* Add a horizontal connector for first parallel item */}
-        <div className="absolute -left-[41px] top-[50%] h-[2px] w-[2px] -translate-y-1/2 bg-orange-200" />
+        <div className="absolute -left-[41px] top-[50%] hidden h-[calc(100%+48px+48px)] w-[2px] -translate-y-1/2 bg-orange-200 md:block" />
+        <div className="absolute -left-[41px] top-[50%] hidden h-[2px] w-[2px] -translate-y-1/2 bg-orange-200 md:block" />
       </>
     )}
-    <div className="relative self-center">
+    <div className="relative hidden self-center md:block">
       {isParallel ? (
         <>
           <div className="absolute -left-[40px] top-1/2 h-[2px] w-[40px] -translate-y-1/2 bg-orange-300" />
@@ -90,19 +90,41 @@ const WorkHistoryItem = ({
         <div className="h-4 w-4 rounded-full bg-orange-600 ring-4 ring-orange-100" />
       )}
     </div>
-    <div className="flex-1">
+    <div className="w-full flex-1">
       <Link
         href={link}
-        className="block rounded-lg bg-white p-6 shadow-sm transition-all hover:shadow-md"
+        className={`block rounded-lg p-4 shadow-sm transition-all hover:shadow-md sm:p-6 ${
+          isParallel ? 'bg-gradient-to-br from-orange-50 to-white' : 'bg-white'
+        }`}
         target="_blank"
         rel="noopener noreferrer"
         tabIndex={0}
         aria-label={`${title} at ${company}`}
       >
-        <h3 className="font-medium text-gray-900">{title}</h3>
-        <div className="mt-1 text-orange-600">{company}</div>
-        <div className="text-sm text-gray-500">{period}</div>
-        {description && <p className="mt-3 text-gray-700">{description}</p>}
+        <h3
+          className={`text-base font-medium sm:text-lg ${
+            isParallel ? 'text-gray-700' : 'text-gray-900'
+          }`}
+        >
+          {title}
+        </h3>
+        <div
+          className={`mt-1 text-sm sm:text-base ${
+            isParallel ? 'text-orange-500' : 'text-orange-600'
+          }`}
+        >
+          {company}
+        </div>
+        <div className="text-xs text-gray-500 sm:text-sm">{period}</div>
+        {description && (
+          <p
+            className={`mt-3 text-sm sm:text-base ${
+              isParallel ? 'text-gray-600' : 'text-gray-700'
+            }`}
+          >
+            {description}
+          </p>
+        )}
       </Link>
     </div>
   </div>
@@ -110,17 +132,17 @@ const WorkHistoryItem = ({
 
 const AboutPageWorkHistorySection = () => {
   return (
-    <section className="pt-20">
-      <div className="mb-12">
-        <h2 className="relative mb-4 inline-block -translate-x-[30px] text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+    <section className="px-4 pt-20 sm:px-6 lg:px-8">
+      <div className="mb-12 flex flex-col items-center">
+        <h2 className="relative mb-4 inline-block text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
           Work History
           <div className="absolute -right-6 -top-6 h-12 w-12 rotate-12 rounded-lg bg-orange-500/50 blur-xl" />
           <div className="absolute -bottom-6 -left-6 h-12 w-12 -rotate-12 rounded-lg bg-orange-500/50 blur-xl" />
         </h2>
-        <p className="max-w-2xl -translate-x-[30px] text-lg text-gray-600">
+        <p className="max-w-2xl text-base text-gray-600 sm:text-lg">
           Explore my work history
         </p>
-        <div className="z-50 mt-4 h-1 w-20 -translate-x-[calc(50%-8px)] rounded bg-gradient-to-r from-orange-500/5 via-orange-500 to-orange-500/5"></div>
+        <div className="z-50 mt-4 h-1 w-20 rounded bg-gradient-to-r from-orange-500/5 via-orange-500 to-orange-500/5"></div>
       </div>
       <div className="relative">
         {workHistoryData.map((item, index) => (
