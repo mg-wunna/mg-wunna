@@ -11,12 +11,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run setup-database && next build",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
     "push": "git push --no-verify && git push --tags --no-verify",
-    "release": "npm run lint && npm run build && standard-version && npm run push"
+    "release": "npm run lint && npm run build && standard-version && npm run push",
+    "setup-database": "ts-node scripts/setup-database.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^9.4.0",
@@ -53,6 +54,7 @@
     "prettier-plugin-tailwindcss": "^0.6.9",
     "standard-version": "^9.5.0",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
