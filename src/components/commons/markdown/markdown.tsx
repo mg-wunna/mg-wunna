@@ -54,6 +54,7 @@ const Markdown = ({ content }: { content: string }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [selectedImage]);
 
+  if (content === '') return null;
   return (
     <>
       <div

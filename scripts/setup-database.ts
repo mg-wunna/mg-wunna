@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import 'dotenv/config';
 import fs from 'fs';
 import mongoose from 'mongoose';
