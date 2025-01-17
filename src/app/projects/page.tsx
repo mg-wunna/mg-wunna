@@ -8,8 +8,9 @@ const isProjectsEnabled = config.projects_featured === 'enabled';
 
 export const metadata: Metadata = isProjectsEnabled
   ? {
-      title: 'Mg Wunna | Projects',
-      description: "Mg Wunna's Projects",
+      title: 'Mg Wunna — Projects',
+      description:
+        'Explore my portfolio of innovative web projects showcasing full-stack development expertise. From responsive web apps to scalable backend solutions using modern technologies.',
     }
   : notFoundMetadata;
 

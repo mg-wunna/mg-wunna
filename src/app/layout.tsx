@@ -10,8 +10,28 @@ const beVietnamPro = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: 'Mg Wunna | Portfolio',
-  description: "Mg Wunna's Portfolio Website",
+  title: 'Mg Wunna — Fullstack Developer',
+  description:
+    'Creative Full Stack Developer & UI/UX Enthusiast 5+ Years Crafting Digital Experiences. Leveraging React, Next.js, and Node.js to build scalable and performant applications',
+  keywords:
+    'Mg Wunna, Fullstack Developer, Portfolio, React, Next.js, Node.js, JavaScript, TypeScript, HTML, CSS, Tailwind CSS, UI/UX, Design, Web Development, Web Design, Web Application, Web Development, Web Design, Web Application, Web Development, Web Design, Web Application',
+  openGraph: {
+    type: 'website',
+    title: 'Mg Wunna — Fullstack Developer',
+    description:
+      'Creative Full Stack Developer & UI/UX Enthusiast 5+ Years Crafting Digital Experiences. Leveraging React, Next.js, and Node.js to build scalable and performant applications',
+    url: 'https://mg-wunna.vercel.app/',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://mg-wunna.vercel.app/meta.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Mg Wunna Portfolio Website Preview',
+        type: 'image/jpeg',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
