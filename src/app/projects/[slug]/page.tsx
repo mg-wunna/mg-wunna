@@ -1,5 +1,9 @@
 import ProjectDetailPage from '../../../components/pages/project-detail-page/project-detail-page';
+import config from '../../../config';
+import NotFoundPage from '../../not-found';
 
 // ☐ add project detail page metadata
 
-export default ProjectDetailPage;
+const isProjectsEnabled = config.projects_featured === 'enabled';
+
+export default isProjectsEnabled ? ProjectDetailPage : NotFoundPage;

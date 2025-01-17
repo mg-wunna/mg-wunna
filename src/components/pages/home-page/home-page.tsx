@@ -1,3 +1,4 @@
+import config from '../../../config';
 import FooterSection from '../../sections/footer-section/footer-section';
 import HeaderSection from '../../sections/header-section/header-section';
 import ScrollToTopSection from '../../sections/scroll-to-top-section/scroll-to-top-section';
@@ -11,7 +12,7 @@ const HomePage = () => {
     <>
       <HeaderSection />
       <HomePageHeroSection />
-      <HomePageProjectsSection />
+      {config.projects_featured === 'enabled' && <HomePageProjectsSection />}
       <HomePageBlogsSection />
       <FooterSection />
       <ScrollToTopSection />

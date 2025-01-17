@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import config from '../../../config';
 import HeaderItem from './header-section--item';
 
 const HeaderSection = () => {
@@ -87,7 +88,9 @@ const HeaderSection = () => {
               {/* Desktop menu */}
               <div className="hidden items-center gap-4 md:flex lg:gap-8">
                 <HeaderItem title="Home" />
-                <HeaderItem title="Projects" />
+                {config.projects_featured === 'enabled' && (
+                  <HeaderItem title="Projects" />
+                )}
                 <HeaderItem title="Blogs" />
                 <HeaderItem title="About" />
                 <HeaderItem title="Contact" />
@@ -104,7 +107,9 @@ const HeaderSection = () => {
             >
               <div className="flex flex-col gap-2 pb-4">
                 <HeaderItem title="Home" />
-                <HeaderItem title="Projects" />
+                {config.projects_featured === 'enabled' && (
+                  <HeaderItem title="Projects" />
+                )}
                 <HeaderItem title="Blogs" />
                 <HeaderItem title="About" />
                 <HeaderItem title="Contact" />
