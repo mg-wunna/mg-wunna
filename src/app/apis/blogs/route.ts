@@ -25,7 +25,7 @@ export async function GET(request: Request) {
             }),
           }
     )
-      .sort(search ? { score: { $meta: 'textScore' } } : { createdAt: -1 })
+      .sort(search ? { score: { $meta: 'textScore' } } : { publishedAt: -1 })
       .select(search ? { score: { $meta: 'textScore' } } : {})
       .limit(10);
 

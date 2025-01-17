@@ -26,6 +26,9 @@ blogSchema.index({ categories: 1 });
 // ✔ create index for views field
 blogSchema.index({ views: -1 });
 
+// ✔ create index for publishedAt field
+blogSchema.index({ publishedAt: -1 });
+
 // ✔ create blog model
 const BlogModel = mongoose.models.Blog || mongoose.model('Blog', blogSchema);
 

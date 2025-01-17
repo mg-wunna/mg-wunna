@@ -32,6 +32,9 @@ projectSchema.index({ categories: 1 });
 // ✔ create index for views field
 projectSchema.index({ views: -1 });
 
+// ✔ create index for publishedAt field
+projectSchema.index({ publishedAt: -1 });
+
 // ✔ create project model
 const ProjectModel =
   mongoose.models.Project || mongoose.model('Project', projectSchema);
