@@ -175,7 +175,10 @@ const BlogsPageBlogsSection = () => {
           <p className="text-sm text-gray-500">
             Pro tip: Press{' '}
             <kbd className="rounded-md border border-gray-300 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-800 shadow-sm">
-              {navigator.platform.toLowerCase().includes('mac') ? '⌘' : 'Ctrl'}{' '}
+              {typeof window !== 'undefined' &&
+              window.navigator.platform.toLowerCase().includes('mac')
+                ? '⌘'
+                : 'Ctrl'}{' '}
               + K
             </kbd>{' '}
             to focus search

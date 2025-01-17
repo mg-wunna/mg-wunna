@@ -77,7 +77,7 @@ const ProjectDetailPageDetailSection = () => {
             </div>
           ))}
           <div className="mt-4 text-sm text-gray-500">
-            {new Date(project.createdAt).toLocaleDateString('en-US', {
+            {new Date(project.publishedAt).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
