@@ -3,5 +3,10 @@
   "slug": "javascript-memory-and-optimization-techniques-for-large-scale-application",
   "description": "Learn about JavaScript memory management and optimization techniques for large-scale applications. Explore strategies for efficient memory usage, garbage collection, and performance tuning.",
   "publishedAt": "2025-01-15T20:58:13.784+06:30",
-  "categories": ["best-practices", "frontend", "backend"]
+  "categories": [
+    "best-practices",
+    "frontend",
+    "backend"
+  ],
+  "keywords": "understanding automatically applications accidentally optimization appropriate performance development management javascript techniques collection allocation references repeatedly structures conclusion performant efficient practical variables allocates collector forgotten listeners temporary essential following practices building optimize problems creating elements removing smallest remember crucial explore handles manages through garbage objects program running cleanup runtime storage weakmap weakset pooling instead ordered monitor browser smaller nesting memory system create arrays longer needed common global entire timers always better unique values unused pieces learn works usage frees avoid clear event clean allow reuse pairs lists scope tools break large write fast code uses stay page make sure weak data ones tips keep deep good dom new key dev"
 }

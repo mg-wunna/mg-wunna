@@ -3,5 +3,9 @@
   "slug": "architectures-of-modern-front-end-applications",
   "description": "Modern frontend applications need to be flexible, scalable, and maintainable. Let's explore different architectural approaches that can help achieve these goals.",
   "publishedAt": "2025-01-16T14:02:13.784+06:30",
-  "categories": ["architecture", "frontend"]
+  "categories": [
+    "architecture",
+    "frontend"
+  ],
+  "keywords": "communication architecture organization independent reusability developers organizing navigation components foundation boundaries recommends structure different separated principle dependent scattered organizes important includes together business yourself breaking problems projects maintain approach learning distinct elements features entities benefits flexible folders keeping conquer smaller classic helpers modular modules example instead widgets beyond repeat divide simple become across layers public sliced design bottom shared strong better think parts clear makes sense logic start pages works small messy grows files teams short below rules needs takes level using kebab names much good easy away ones like gets hard well tiny term code keep next case app dry big mvp use api fsd top pro tip"
 }

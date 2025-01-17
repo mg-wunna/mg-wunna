@@ -7,6 +7,7 @@ const blogSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
+    keywords: { type: String, required: true },
     categories: { type: [String], required: true },
     views: { type: Number, default: 0 },
     publishedAt: { type: Date, required: true },
@@ -18,7 +19,7 @@ const blogSchema = new mongoose.Schema(
 );
 
 // ✔ create index for title and description fields for text search
-blogSchema.index({ title: 'text', description: 'text' });
+blogSchema.index({ title: 'text', description: 'text', keywords: 'text' });
 
 // ✔ create index for categories field
 blogSchema.index({ categories: 1 });

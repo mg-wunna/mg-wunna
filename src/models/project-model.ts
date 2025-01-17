@@ -7,6 +7,7 @@ const projectSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
+    keywords: { type: String, required: true },
     categories: { type: [String], required: true },
     links: [
       {
@@ -24,7 +25,7 @@ const projectSchema = new mongoose.Schema(
 );
 
 // ✔ create index for title and description fields for text search
-projectSchema.index({ title: 'text', description: 'text' });
+projectSchema.index({ title: 'text', description: 'text', keywords: 'text' });
 
 // ✔ create index for categories field
 projectSchema.index({ categories: 1 });
