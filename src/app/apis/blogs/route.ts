@@ -1,4 +1,3 @@
-import { Blog } from '@/types/blog-type';
 import { NextResponse } from 'next/server';
 import BlogModel from '../../../models/blog-model';
 import database from '../../../utilities/database';
@@ -11,23 +10,67 @@ export async function GET(request: Request) {
 
     await database.connect();
 
-    const blogs: Blog[] = await BlogModel.find(
-      category === 'all'
-        ? search
-          ? {
+    const categoryMatch =
+      category === 'all' ? {} : { categories: { $in: [category] } };
+
+    // First query: Text search
+    const textResults = search
+      ? await BlogModel.aggregate([
+          {
+            $match: {
+              ...categoryMatch,
               $text: { $search: search },
-            }
-          : {}
-        : {
-            categories: { $in: [category] },
-            ...(search && {
-              $text: { $search: search },
-            }),
-          }
-    )
-      .sort(search ? { score: { $meta: 'textScore' } } : { publishedAt: -1 })
-      .select(search ? { score: { $meta: 'textScore' } } : {})
-      .limit(10);
+            },
+          },
+          {
+            $addFields: {
+              score: { $meta: 'textScore' },
+            },
+          },
+          {
+            $sort: { score: { $meta: 'textScore' } },
+          },
+        ])
+      : [];
+
+    // Second query: Regex search
+    const regexResults = search
+      ? await BlogModel.aggregate([
+          {
+            $match: {
+              ...categoryMatch,
+              $or: [
+                { title: { $regex: search, $options: 'i' } },
+                { description: { $regex: search, $options: 'i' } },
+                { keywords: { $regex: search, $options: 'i' } },
+              ],
+            },
+          },
+          {
+            $sort: { publishedAt: -1 },
+          },
+        ])
+      : await BlogModel.aggregate([
+          {
+            $match: categoryMatch,
+          },
+          {
+            $sort: { publishedAt: -1 },
+          },
+        ]);
+
+    // Combine and remove duplicates using Set
+    const combinedResults = [...textResults, ...regexResults].reduce(
+      (unique, blog) => {
+        const exists = unique.find(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (item: any) => item._id.toString() === blog._id.toString()
+        );
+        return exists ? unique : [...unique, blog];
+      },
+      []
+    );
+    const blogs = combinedResults.slice(0, 10);
 
     return NextResponse.json({
       status: '200',
