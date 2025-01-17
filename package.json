@@ -18,6 +18,7 @@
     "prepare": "husky",
     "push": "git push --no-verify && git push --tags --no-verify",
     "release": "npm run lint && npm run build && standard-version && npm run push",
+    "generate-keywords": "node --loader ts-node/esm scripts/generate-keywords.ts",
     "setup-database": "node --loader ts-node/esm scripts/setup-database.ts"
   },
   "dependencies": {
