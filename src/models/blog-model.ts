@@ -9,9 +9,10 @@ const blogSchema = new mongoose.Schema(
     description: { type: String, required: true },
     categories: { type: [String], required: true },
     views: { type: Number, default: 0 },
+    publishedAt: { type: Date, required: true },
   },
   {
-    timestamps: true,
+    timestamps: false,
     versionKey: false,
   }
 );

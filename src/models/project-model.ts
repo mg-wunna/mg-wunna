@@ -15,9 +15,10 @@ const projectSchema = new mongoose.Schema(
       },
     ],
     views: { type: Number, default: 0 },
+    publishedAt: { type: Date, required: true },
   },
   {
-    timestamps: true,
+    timestamps: false,
     versionKey: false,
   }
 );

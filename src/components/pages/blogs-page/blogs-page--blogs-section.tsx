@@ -17,7 +17,7 @@ const BlogsPageBlogsSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
-
+  const [searchKeyword, setSearchKeyword] = useState('');
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch('/apis/blogs/category');
@@ -50,26 +50,71 @@ const BlogsPageBlogsSection = () => {
       );
       const data = await response.json();
       setBlogs(data.data);
+      previousLoadedBlogs = data.data.length;
       setIsMoreBlogsExist(data.meta.isMoreBlogsExist);
       setIsMoreBlogsLoading(false);
     };
     fetchBlogs();
   }, [selectedCategory]);
 
-  const fetchMoreBlogs = async () => {
-    previousLoadedBlogs = blogs.length;
+  const handleSearch = async () => {
+    previousLoadedBlogs = 0;
+    setBlogs([]);
     setIsMoreBlogsLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const response = await fetch(
-      `/apis/blogs?category=${selectedCategory?.name}&offset=${previousLoadedBlogs}`
+      `/apis/blogs?${
+        selectedCategory && selectedCategory.name !== 'All'
+          ? `category=${selectedCategory?.name}`
+          : ''
+      }&${searchKeyword ? `search=${searchKeyword}` : ''}`
     );
     const data = await response.json();
-    setBlogs([...blogs, ...data.data]);
+    console.log('data.data :>> ', data.data);
+    setBlogs(data.data);
+    previousLoadedBlogs = data.data.length;
     setIsMoreBlogsExist(
       previousLoadedBlogs > 30 ? false : data.meta.isMoreBlogsExist
     );
     setIsMoreBlogsLoading(false);
   };
+
+  const fetchMoreBlogs = async (resetSearch: boolean = false) => {
+    previousLoadedBlogs = blogs.length;
+    setIsMoreBlogsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const response = await fetch(
+      `/apis/blogs?${
+        resetSearch
+          ? ''
+          : `${
+              selectedCategory && selectedCategory.name !== 'All'
+                ? `category=${selectedCategory?.name}`
+                : ''
+            }&offset=${previousLoadedBlogs}&${
+              searchKeyword ? `search=${searchKeyword}` : ''
+            }`
+      }`
+    );
+    const data = await response.json();
+    setBlogs([...blogs, ...data.data]);
+    previousLoadedBlogs = data.data.length;
+    setIsMoreBlogsExist(
+      previousLoadedBlogs > 30 ? false : data.meta.isMoreBlogsExist
+    );
+    setIsMoreBlogsLoading(false);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        document.getElementById('search-input')?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <div className="container mx-auto mb-32 mt-20 px-4 sm:px-6 lg:px-8">
@@ -86,17 +131,26 @@ const BlogsPageBlogsSection = () => {
         <div className="mx-auto mt-4 h-1 w-20 rounded bg-gradient-to-r from-orange-500/5 via-orange-500 to-orange-500/5"></div>
       </div>
 
-      <div className="mb-8 flex flex-col gap-6">
+      <div className="mb-8 flex flex-col gap-4">
         {/* Search Box */}
         <div className="relative mx-auto w-full max-w-2xl rounded-2xl border border-orange-500/50">
           <div className="group relative">
             <input
               type="text"
+              id="search-input"
               placeholder="Search blogs..."
               className="w-full rounded-2xl border-none bg-gradient-to-br from-white to-orange-50 px-6 py-4 text-base shadow-lg shadow-orange-500/5 transition duration-300 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-orange-500/20 group-hover:shadow-xl group-hover:shadow-orange-500/10"
               aria-label="Search blogs"
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleSearch();
+              }}
             />
-            <div className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-2">
+            <button
+              onClick={handleSearch}
+              className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-2"
+            >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500 text-white shadow-lg shadow-orange-500/25 transition-transform duration-300 group-hover:scale-95">
                 <svg
                   className="h-5 w-5"
@@ -112,16 +166,31 @@ const BlogsPageBlogsSection = () => {
                   />
                 </svg>
               </div>
-            </div>
+            </button>
           </div>
         </div>
 
+        {/* Pro tip */}
+        <div className="text-center">
+          <p className="text-sm text-gray-500">
+            Pro tip: Press{' '}
+            <kbd className="rounded-md border border-gray-300 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-800 shadow-sm">
+              {navigator.platform.toLowerCase().includes('mac') ? '⌘' : 'Ctrl'}{' '}
+              + K
+            </kbd>{' '}
+            to focus search
+          </p>
+        </div>
+
         {/* Category Filter */}
-        <div className="flex justify-center">
+        <div className="mt-6 flex justify-center">
           <CategoriesFilter
             categories={categories}
             selectedCategory={selectedCategory || categories[0]}
-            onCategoryChange={setSelectedCategory}
+            onCategoryChange={(category) => {
+              setSelectedCategory(category);
+              setSearchKeyword('');
+            }}
           />
         </div>
       </div>
@@ -141,6 +210,8 @@ const BlogsPageBlogsSection = () => {
             <button
               onClick={() => {
                 setSelectedCategory(categories[0]);
+                setSearchKeyword('');
+                fetchMoreBlogs(true);
               }}
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-orange-500 px-8 py-4 font-medium text-white transition-all hover:bg-orange-600"
             >
@@ -209,7 +280,7 @@ const BlogsPageBlogsSection = () => {
                 imageUrl={blog.image}
                 href={`/blogs/${blog.slug}`}
                 type="blog"
-                date={new Date(blog.createdAt)}
+                date={new Date(blog.publishedAt)}
               />
             </motion.div>
           ))}

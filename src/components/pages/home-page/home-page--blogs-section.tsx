@@ -42,7 +42,7 @@ const HomePageBlogsSection = () => {
             imageUrl={blog.image}
             href={`/blogs/${blog.slug}`}
             type="blog"
-            date={new Date(blog.createdAt)}
+            date={new Date(blog.publishedAt)}
           />
         ))}
       </div>

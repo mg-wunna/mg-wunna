@@ -22,9 +22,11 @@ const CategoriesFilter = ({
               ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25'
               : 'bg-white text-gray-600 shadow-md hover:shadow-lg hover:shadow-orange-500/10'
           }`}
-          aria-label={`Filter by ${category.name} projects`}
+          aria-label={`Filter by ${category.name.replace(/-/g, ' ')} projects`}
         >
-          <span className="relative z-10">{category.name}</span>
+          <span className="relative z-10">
+            {category.name.replace(/-/g, ' ')}
+          </span>
           <div className="absolute inset-0 -z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-200/40 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100" />
         </button>
       ))}

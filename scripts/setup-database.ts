@@ -35,7 +35,7 @@ async function createBlog(slug: string, metaData: any) {
   try {
     await BlogModel.create({
       ...metaData,
-      createdAt: new Date(metaData.createdAt),
+      publishedAt: new Date(metaData.publishedAt),
       image: `/blogs/${slug}/cover.png`,
       slug,
     });
@@ -56,7 +56,7 @@ async function updateBlog(slug: string, metaData: any) {
         description: metaData.description,
         categories: metaData.categories,
         image: `/blogs/${slug}/cover.png`,
-        createdAt: new Date(metaData.createdAt),
+        publishedAt: new Date(metaData.publishedAt),
       }
     );
     logSuccess(`✨ Blog "${slug}" has been updated successfully!`);
@@ -86,7 +86,9 @@ async function setupBlogData() {
           blogData._doc.description !== metaData.description ||
           JSON.stringify(blogData._doc.categories) !==
             JSON.stringify(metaData.categories) ||
-          blogData._doc.image !== `/blogs/${slug}/cover.png`
+          blogData._doc.image !== `/blogs/${slug}/cover.png` ||
+          new Date(blogData._doc.publishedAt).getTime() !==
+            new Date(metaData.publishedAt).getTime()
         ) {
           await updateBlog(slug, metaData);
         } else {
@@ -121,7 +123,7 @@ async function createProject(slug: string, metaData: any) {
   try {
     await ProjectModel.create({
       ...metaData,
-      createdAt: new Date(metaData.createdAt),
+      publishedAt: new Date(metaData.publishedAt),
       image: `/projects/${slug}/cover.png`,
       slug,
     });
@@ -142,7 +144,7 @@ async function updateProject(slug: string, metaData: any) {
         description: metaData.description,
         categories: metaData.categories,
         image: `/projects/${slug}/cover.png`,
-        createdAt: new Date(metaData.createdAt),
+        publishedAt: new Date(metaData.publishedAt),
       }
     );
     logSuccess(`✨ Project "${slug}" has been updated successfully!`);
@@ -173,7 +175,9 @@ async function setupProjectData() {
           JSON.stringify(projectData._doc.categories) !==
             JSON.stringify(metaData.categories) ||
           projectData._doc.status !== metaData.status ||
-          projectData._doc.image !== `/projects/${slug}/cover.png`
+          projectData._doc.image !== `/projects/${slug}/cover.png` ||
+          new Date(projectData._doc.publishedAt).getTime() !==
+            new Date(metaData.publishedAt).getTime()
         ) {
           await updateProject(slug, metaData);
         } else {

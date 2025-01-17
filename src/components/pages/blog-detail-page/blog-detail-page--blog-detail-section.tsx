@@ -78,7 +78,7 @@ const BlogDetailPageBlogDetailSection = () => {
           ))}
           <div className="mt-4 text-sm text-gray-500"></div>
           <div className="mt-4 text-sm text-gray-500">
-            {new Date(blog.createdAt).toLocaleDateString('en-US', {
+            {new Date(blog.publishedAt).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',

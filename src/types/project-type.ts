@@ -11,8 +11,7 @@ export namespace Project {
       title: string;
       url: string;
     }[];
-    createdAt: string;
-    updatedAt: string;
+    publishedAt: string;
   };
 }
 

@@ -7,13 +7,26 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category')?.toLowerCase() || 'all';
+    const search = searchParams.get('search') || '';
 
     await database.connect();
 
     const blogs: Blog[] = await BlogModel.find(
-      category === 'all' ? {} : { categories: { $in: [category] } }
+      category === 'all'
+        ? search
+          ? {
+              $text: { $search: search },
+            }
+          : {}
+        : {
+            categories: { $in: [category] },
+            ...(search && {
+              $text: { $search: search },
+            }),
+          }
     )
-      .sort({ createdAt: -1 })
+      .sort(search ? { score: { $meta: 'textScore' } } : { createdAt: -1 })
+      .select(search ? { score: { $meta: 'textScore' } } : {})
       .limit(10);
 
     return NextResponse.json({

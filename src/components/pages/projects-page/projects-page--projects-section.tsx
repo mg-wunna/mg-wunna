@@ -209,7 +209,7 @@ const ProjectsPageProjectsSection = () => {
                 imageUrl={project.image}
                 href={`/projects/${project.slug}`}
                 type="project"
-                date={new Date(project.createdAt)}
+                date={new Date(project.publishedAt)}
               />
             </motion.div>
           ))}

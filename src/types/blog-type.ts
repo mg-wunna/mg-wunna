@@ -7,8 +7,7 @@ export namespace Blog {
     description: string;
     categories: string[];
     content: string;
-    createdAt: string;
-    updatedAt: string;
+    publishedAt: string;
   };
 }
 
