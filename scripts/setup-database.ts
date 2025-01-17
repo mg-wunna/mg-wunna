@@ -36,7 +36,7 @@ async function createBlog(slug: string, metaData: any) {
     await BlogModel.create({
       ...metaData,
       createdAt: new Date(metaData.createdAt),
-      image: '/blogs/architectures-of-modern-front-end-applications/cover.png',
+      image: `/blogs/${slug}/cover.png`,
       slug,
     });
     logSuccess(`✨ Blog "${slug}" has been added successfully!`);
@@ -55,6 +55,7 @@ async function updateBlog(slug: string, metaData: any) {
         title: metaData.title,
         description: metaData.description,
         categories: metaData.categories,
+        image: `/blogs/${slug}/cover.png`,
         createdAt: new Date(metaData.createdAt),
       }
     );
@@ -84,7 +85,8 @@ async function setupBlogData() {
           blogData._doc.title !== metaData.title ||
           blogData._doc.description !== metaData.description ||
           JSON.stringify(blogData._doc.categories) !==
-            JSON.stringify(metaData.categories)
+            JSON.stringify(metaData.categories) ||
+          blogData._doc.image !== `/blogs/${slug}/cover.png`
         ) {
           await updateBlog(slug, metaData);
         } else {
@@ -139,11 +141,7 @@ async function updateProject(slug: string, metaData: any) {
         title: metaData.title,
         description: metaData.description,
         categories: metaData.categories,
-        tools: metaData.tools,
-        features: metaData.features,
-        challenges: metaData.challenges,
-        improvements: metaData.improvements,
-        status: metaData.status,
+        image: `/projects/${slug}/cover.png`,
         createdAt: new Date(metaData.createdAt),
       }
     );
@@ -174,15 +172,8 @@ async function setupProjectData() {
           projectData._doc.description !== metaData.description ||
           JSON.stringify(projectData._doc.categories) !==
             JSON.stringify(metaData.categories) ||
-          JSON.stringify(projectData._doc.tools) !==
-            JSON.stringify(metaData.tools) ||
-          JSON.stringify(projectData._doc.features) !==
-            JSON.stringify(metaData.features) ||
-          JSON.stringify(projectData._doc.challenges) !==
-            JSON.stringify(metaData.challenges) ||
-          JSON.stringify(projectData._doc.improvements) !==
-            JSON.stringify(metaData.improvements) ||
-          projectData._doc.status !== metaData.status
+          projectData._doc.status !== metaData.status ||
+          projectData._doc.image !== `/projects/${slug}/cover.png`
         ) {
           await updateProject(slug, metaData);
         } else {
