@@ -57,11 +57,15 @@ const Card = ({
           src={imageUrl}
           alt={title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          className="absolute inset-0 h-full w-full object-scale-down object-center transition-transform duration-500 group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
+          quality={85}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        <div className="absolute bottom-4 left-4 flex gap-2">
+
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-transparent to-blue-500/20 transition-opacity duration-300 group-hover:opacity-50" />
+
+        <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
           {categories.slice(0, 2).map((category, index) => (
             <span
               key={index}

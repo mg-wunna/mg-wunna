@@ -73,7 +73,7 @@ const ProjectDetailPageDetailSection = () => {
               key={category}
               className="mr-1 inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm capitalize text-blue-800"
             >
-              {category}
+              {category.split('-').join(' ')}
             </div>
           ))}
           <div className="mt-4 text-sm text-gray-500">
@@ -81,6 +81,8 @@ const ProjectDetailPageDetailSection = () => {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
             })}
           </div>
         </div>
