@@ -170,7 +170,7 @@ const Markdown = ({
             </h3>
           ),
           h3: ({ children }) => (
-            <h4 className="mb-4 inline-flex items-center gap-2 text-xl font-semibold text-gray-700 before:h-2 before:w-2 before:rounded-full before:bg-orange-400">
+            <h4 className="mb-4 inline-flex items-center text-xl font-semibold text-gray-700 before:mr-4 before:h-2 before:w-2 before:rounded-full before:bg-orange-400">
               {typeof children === 'string'
                 ? highlightText(children, highlight)
                 : children}
