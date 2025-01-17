@@ -206,6 +206,51 @@ async function setupProjectData() {
   }
 }
 
+async function fixBlogData() {
+  logDivider();
+  logInfo('🎯 Fixing Blog Data...');
+
+  const blogs = BlogModel.find({}).cursor();
+
+  for await (const blog of blogs) {
+    await BlogModel.deleteOne({ _id: blog._id });
+
+    await BlogModel.create({
+      _id: blog._id,
+      image: blog.image,
+      slug: blog.slug,
+      title: blog.title,
+      description: blog.description,
+      categories: blog.categories,
+      views: blog.views,
+      publishedAt: blog.publishedAt,
+    });
+  }
+}
+
+async function fixProjectData() {
+  logDivider();
+  logInfo('🎯 Fixing Project Data...');
+
+  const projects = ProjectModel.find({}).cursor();
+
+  for await (const project of projects) {
+    await ProjectModel.deleteOne({ _id: project._id });
+
+    await ProjectModel.create({
+      _id: project._id,
+      image: project.image,
+      slug: project.slug,
+      title: project.title,
+      description: project.description,
+      categories: project.categories,
+      links: project.links,
+      views: project.views,
+      publishedAt: project.publishedAt,
+    });
+  }
+}
+
 async function initializeDatabase() {
   logDivider();
   logInfo('🚀 Initializing Database Setup...');
@@ -217,6 +262,8 @@ async function initializeDatabase() {
 
     await setupBlogData();
     await setupProjectData();
+    await fixBlogData();
+    await fixProjectData();
 
     logDivider();
     logSuccess('✨ Database Setup Completed Successfully!');
