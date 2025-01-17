@@ -54,6 +54,7 @@ async function updateBlog(slug: string, metaData: any) {
         title: metaData.title,
         description: metaData.description,
         categories: metaData.categories,
+        keywords: metaData.keywords,
         image: `/blogs/${slug}/cover.png`,
         publishedAt: new Date(metaData.publishedAt),
       }
@@ -87,7 +88,8 @@ async function setupBlogData() {
             JSON.stringify(metaData.categories) ||
           blogData._doc.image !== `/blogs/${slug}/cover.png` ||
           new Date(blogData._doc.publishedAt).getTime() !==
-            new Date(metaData.publishedAt).getTime()
+            new Date(metaData.publishedAt).getTime() ||
+          blogData._doc.keywords !== metaData.keywords
         ) {
           await updateBlog(slug, metaData);
         } else {
@@ -142,6 +144,7 @@ async function updateProject(slug: string, metaData: any) {
         title: metaData.title,
         description: metaData.description,
         categories: metaData.categories,
+        keywords: metaData.keywords,
         image: `/projects/${slug}/cover.png`,
         publishedAt: new Date(metaData.publishedAt),
       }
@@ -176,7 +179,8 @@ async function setupProjectData() {
           projectData._doc.status !== metaData.status ||
           projectData._doc.image !== `/projects/${slug}/cover.png` ||
           new Date(projectData._doc.publishedAt).getTime() !==
-            new Date(metaData.publishedAt).getTime()
+            new Date(metaData.publishedAt).getTime() ||
+          projectData._doc.keywords !== metaData.keywords
         ) {
           await updateProject(slug, metaData);
         } else {
@@ -220,6 +224,7 @@ async function fixBlogData() {
       slug: blog.slug,
       title: blog.title,
       description: blog.description,
+      keywords: blog.keywords,
       categories: blog.categories,
       views: blog.views,
       publishedAt: blog.publishedAt,
@@ -242,12 +247,45 @@ async function fixProjectData() {
       slug: project.slug,
       title: project.title,
       description: project.description,
+      keywords: project.keywords,
       categories: project.categories,
       links: project.links,
       views: project.views,
       publishedAt: project.publishedAt,
     });
   }
+}
+
+async function resetDatabase() {
+  logDivider();
+  logInfo('🎯 Resetting Database...');
+
+  logInfo('🗑️ Removing all indexes...');
+  await BlogModel.collection.dropIndexes();
+  await ProjectModel.collection.dropIndexes();
+  logSuccess('✨ All indexes removed successfully!');
+
+  logInfo('🔄 Recreating indexes for Blog collection...');
+  await BlogModel.collection.createIndex({
+    title: 'text',
+    description: 'text',
+    keywords: 'text',
+  });
+  await BlogModel.collection.createIndex({ categories: 1 });
+  await BlogModel.collection.createIndex({ views: -1 });
+  await BlogModel.collection.createIndex({ publishedAt: -1 });
+  logSuccess('✨ Blog indexes recreated successfully!');
+
+  logInfo('🔄 Recreating indexes for Project collection...');
+  await ProjectModel.collection.createIndex({
+    title: 'text',
+    description: 'text',
+    keywords: 'text',
+  });
+  await ProjectModel.collection.createIndex({ categories: 1 });
+  await ProjectModel.collection.createIndex({ views: -1 });
+  await ProjectModel.collection.createIndex({ publishedAt: -1 });
+  logSuccess('✨ Project indexes recreated successfully!');
 }
 
 async function initializeDatabase() {
@@ -263,7 +301,7 @@ async function initializeDatabase() {
     await setupProjectData();
     await fixBlogData();
     await fixProjectData();
-
+    await resetDatabase();
     logDivider();
     logSuccess('✨ Database Setup Completed Successfully!');
     logDivider();
