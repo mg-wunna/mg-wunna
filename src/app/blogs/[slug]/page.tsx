@@ -1,6 +1,7 @@
+import fs from 'fs';
 import { Metadata } from 'next';
+import path from 'path';
 import BlogDetailPage from '../../../components/pages/blog-detail-page/blog-detail-page';
-import BlogModel from '../../../models/blog-model';
 
 export async function generateMetadata({
   params,
@@ -9,7 +10,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const slug = (await params).slug;
 
-  const blog = await BlogModel.findOne({ slug });
+  const blog = fs.readFileSync(
+    path.join(process.cwd(), 'public', 'blogs', slug, 'meta.json'),
+    'utf8'
+  );
 
   if (!blog) {
     return {
@@ -18,23 +22,25 @@ export async function generateMetadata({
     };
   }
 
+  const blogData = JSON.parse(blog);
+
   return {
-    title: `Mg Wunna — ${blog.title}`,
-    description: blog.description,
-    keywords: blog.keywords.split(' ').join(', '),
+    title: `Mg Wunna — ${blogData.title}`,
+    description: blogData.description,
+    keywords: blogData.keywords.split(' ').join(', '),
     openGraph: {
       type: 'website',
-      title: `Mg Wunna — ${blog.title}`,
-      description: blog.description,
+      title: `Mg Wunna — ${blogData.title}`,
+      description: blogData.description,
       url: `https://mg-wunna.vercel.app/blogs/${slug}`,
-      siteName: `Mg Wunna — ${blog.title}`,
+      siteName: `Mg Wunna — ${blogData.title}`,
       locale: 'en_US',
       images: [
         {
           url: `https://mg-wunna.vercel.app/blogs/${slug}/cover.png`,
           width: 1200,
           height: 630,
-          alt: `${blog.title} Blog Cover Image`,
+          alt: `${blogData.title} Blog Cover Image`,
           type: 'image/jpeg',
         },
       ],
