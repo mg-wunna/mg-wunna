@@ -22,6 +22,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       );
     }
 
+    await BlogModel.findOneAndUpdate({ slug }, { $inc: { views: 1 } });
+
     return NextResponse.json({
       status: '200',
       message: 'Blog fetched successfully.',

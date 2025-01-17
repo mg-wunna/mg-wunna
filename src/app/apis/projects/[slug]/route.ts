@@ -24,6 +24,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       );
     }
 
+    await ProjectModel.findOneAndUpdate({ slug }, { $inc: { views: 1 } });
+
     return NextResponse.json({
       status: '200',
       message: 'Project fetched successfully.',

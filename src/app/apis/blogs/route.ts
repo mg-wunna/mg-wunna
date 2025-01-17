@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     const blogs: Blog[] = await BlogModel.find(
       category === 'all' ? {} : { categories: { $in: [category] } }
     )
-      .sort({ createdAt: -1 })
+      .sort({ views: -1, createdAt: -1 })
       .limit(10);
 
     return NextResponse.json({
