@@ -12,6 +12,7 @@ type CardProps = {
   date: Date;
   imageUrl: string;
   href: string;
+  highlight?: string;
 };
 
 const intervals = {
@@ -31,6 +32,7 @@ const Card = ({
   date,
   imageUrl,
   href,
+  highlight,
 }: CardProps) => {
   const formattedDate = useMemo(() => {
     const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
@@ -47,7 +49,7 @@ const Card = ({
 
   return (
     <Link
-      href={href}
+      href={highlight ? `${href}?highlight=${highlight}` : href}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-tr from-white via-white to-orange-50 shadow-lg transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
       tabIndex={0}
     >
@@ -106,13 +108,35 @@ const Card = ({
             );
             const isNewLine = currentLength + word.length > 30;
 
+            // Check if word matches highlight
+            const parts = highlight
+              ? word.split(
+                  new RegExp(`(${highlight.split(' ').join('|')})`, 'gi')
+                )
+              : [word];
+
+            const wordContent = parts.map((part, partIndex) =>
+              highlight
+                ?.split(' ')
+                .some((word) => part.toLowerCase() === word.toLowerCase()) ? (
+                <span
+                  key={`highlight-${partIndex}`}
+                  className="bg-yellow-200"
+                >
+                  {part}
+                </span>
+              ) : (
+                part
+              )
+            );
+
             if (isNewLine) {
               acc.push(
                 <span
                   key={i}
                   className="relative mb-0.5 mr-1 inline-block"
                 >
-                  {word}
+                  {wordContent}
                   <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
                 </span>
               );
@@ -142,7 +166,7 @@ const Card = ({
                     key={i}
                     className="relative mb-0.5 mr-1 inline-block"
                   >
-                    {word}
+                    {wordContent}
                     <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
                   </span>
                 );
@@ -152,9 +176,32 @@ const Card = ({
           }, [])}
         </h2>
 
-        <p className="mb-6 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-600">
-          {description}
-        </p>
+        <div className="mb-6 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-600">
+          <p className="line-clamp-2">
+            {highlight
+              ? description
+                  .split(
+                    new RegExp(`(${highlight.split(' ').join('|')})`, 'gi')
+                  )
+                  .map((part, i) =>
+                    highlight
+                      .split(' ')
+                      .some(
+                        (word) => part.toLowerCase() === word.toLowerCase()
+                      ) ? (
+                      <span
+                        key={i}
+                        className="bg-yellow-200"
+                      >
+                        {part}
+                      </span>
+                    ) : (
+                      part
+                    )
+                  )
+              : description}
+          </p>
+        </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm font-medium text-orange-500">

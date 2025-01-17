@@ -18,6 +18,8 @@ const BlogsPageBlogsSection = () => {
     null
   );
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [highlight, setHighlight] = useState('');
+
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await fetch('/apis/blogs/category');
@@ -70,8 +72,8 @@ const BlogsPageBlogsSection = () => {
       }&${searchKeyword ? `search=${searchKeyword}` : ''}`
     );
     const data = await response.json();
-    console.log('data.data :>> ', data.data);
     setBlogs(data.data);
+    setHighlight(searchKeyword);
     previousLoadedBlogs = data.data.length;
     setIsMoreBlogsExist(
       previousLoadedBlogs > 30 ? false : data.meta.isMoreBlogsExist
@@ -284,6 +286,7 @@ const BlogsPageBlogsSection = () => {
                 href={`/blogs/${blog.slug}`}
                 type="blog"
                 date={new Date(blog.publishedAt)}
+                highlight={highlight}
               />
             </motion.div>
           ))}

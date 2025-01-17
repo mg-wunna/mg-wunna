@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { Blog } from '../../../types/blog-type';
+import highlightText from '../../../utilities/highligh-text';
 import Markdown from '../../commons/markdown/markdown';
 import CommentsSection from '../../sections/comments-section/comments-section';
 import BlogDetailSkeletonSection from './blog-detail-page--skeleton-section';
@@ -12,6 +13,8 @@ import BlogDetailSkeletonSection from './blog-detail-page--skeleton-section';
 const BlogDetailPageBlogDetailSection = () => {
   const [blog, setBlog] = useState<Blog | null>(null);
   const params = useParams();
+  const searchParams = useSearchParams();
+  const highlight = searchParams.get('highlight');
 
   const slug = useMemo(() => {
     return typeof params?.slug === 'string' ? params.slug : '';
@@ -66,7 +69,7 @@ const BlogDetailPageBlogDetailSection = () => {
         {/* Title Section */}
         <div className="mb-8">
           <h1 className="mb-4 text-3xl font-bold text-gray-900">
-            {blog.title}
+            {highlightText(blog.title, highlight || undefined)}
           </h1>
           {blog.categories.map((category) => (
             <div
@@ -103,13 +106,16 @@ const BlogDetailPageBlogDetailSection = () => {
         {/* Description */}
         <div className="mb-12">
           <p className="text-lg leading-relaxed text-gray-600">
-            {blog.description}
+            {highlightText(blog.description, highlight || undefined)}
           </p>
         </div>
 
         {/* Tools and Technology */}
         <div className="prose prose-lg max-w-none">
-          <Markdown content={blog.content} />
+          <Markdown
+            content={blog.content}
+            highlight={highlight || undefined}
+          />
         </div>
 
         <CommentsSection

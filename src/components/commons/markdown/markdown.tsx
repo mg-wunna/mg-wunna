@@ -7,7 +7,37 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { twMerge } from 'tailwind-merge';
 
-const Markdown = ({ content }: { content: string }) => {
+const highlightText = (text: string, highlight?: string): React.ReactNode => {
+  if (!highlight) return text;
+
+  return text
+    .split(new RegExp(`(${highlight.split(' ').join('|')})`, 'gi'))
+    .map((part, i) => {
+      const isHighlighted = highlight
+        .split(' ')
+        .some((word) => part.toLowerCase() === word.toLowerCase());
+
+      return isHighlighted ? (
+        <span
+          key={i}
+          className="bg-yellow-200"
+          aria-label={`Highlighted text: ${part}`}
+        >
+          {part}
+        </span>
+      ) : (
+        part
+      );
+    });
+};
+
+const Markdown = ({
+  content,
+  highlight,
+}: {
+  content: string;
+  highlight?: string;
+}) => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<{
     src: string;
@@ -124,20 +154,26 @@ const Markdown = ({ content }: { content: string }) => {
         components={{
           h1: ({ children }) => (
             <h2 className="relative mb-8 text-3xl font-bold text-gray-900 before:absolute before:-left-4 before:top-1/2 before:h-8 before:w-1 before:-translate-y-1/2 before:bg-orange-500">
-              {children}
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
             </h2>
           ),
           h2: ({ children }) => (
             <h3 className="group mb-6 text-2xl font-bold text-gray-800">
               <span className="relative">
-                {children}
+                {typeof children === 'string'
+                  ? highlightText(children, highlight)
+                  : children}
                 <span className="absolute -bottom-1 left-0 h-[3px] w-0 bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
               </span>
             </h3>
           ),
           h3: ({ children }) => (
             <h4 className="mb-4 inline-flex items-center gap-2 text-xl font-semibold text-gray-700 before:h-2 before:w-2 before:rounded-full before:bg-orange-400">
-              {children}
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
             </h4>
           ),
           p: ({ children, node }) => {
@@ -162,32 +198,52 @@ const Markdown = ({ content }: { content: string }) => {
                     : 'mb-6 text-base leading-relaxed text-gray-600'
                 } ${hasSingleImage ? 'mx-auto w-2/3' : ''}`}
               >
-                {children}
+                {typeof children === 'string'
+                  ? highlightText(children, highlight)
+                  : children}
               </div>
             );
           },
           ul: ({ children }) => (
-            <ul className="mb-8 space-y-3 pl-6">{children}</ul>
+            <ul className="mb-8 space-y-3 pl-6">
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
+            </ul>
           ),
           ol: ({ children }) => (
-            <ol className="mb-8 space-y-3 pl-6">{children}</ol>
+            <ol className="mb-8 space-y-3 pl-6">
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
+            </ol>
           ),
           li: ({ children }) => (
             <li className="group relative pl-6 text-base leading-relaxed text-gray-600 before:absolute before:left-0 before:top-[0.6em] before:h-2 before:w-2 before:rounded-full before:bg-orange-200 before:transition-all before:duration-200 hover:before:scale-150 hover:before:bg-orange-400">
-              {children}
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
             </li>
           ),
           strong: ({ children }) => (
             <strong className="font-semibold text-orange-600">
-              {children}
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
             </strong>
           ),
           em: ({ children }) => (
-            <em className="font-serif italic text-gray-800">{children}</em>
+            <em className="font-serif italic text-gray-800">
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
+            </em>
           ),
           blockquote: ({ children }) => (
             <blockquote className="my-8 border-l-4 border-orange-200 bg-orange-50 p-6 italic text-gray-700 shadow-lg">
-              {children}
+              {typeof children === 'string'
+                ? highlightText(children, highlight)
+                : children}
             </blockquote>
           ),
           code: ({ children, className }) => {
