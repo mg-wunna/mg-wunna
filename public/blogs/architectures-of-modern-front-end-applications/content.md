@@ -1,7 +1,3 @@
-# Architectures of Modern Front-end Applications
-
-Modern frontend applications need to be flexible, scalable, and maintainable. Let's explore different architectural approaches that can help achieve these goals.
-
 ## What's Beyond Just "Folder Structure"?
 
 Many developers think architecture is just about organizing folders, but it's much more than that. Good architecture includes:
