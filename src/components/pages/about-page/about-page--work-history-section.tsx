@@ -170,17 +170,17 @@ const WorkHistoryItem = ({
 
 const AboutPageWorkHistorySection = () => {
   return (
-    <section className="px-4 pt-20 sm:px-6 lg:px-8">
-      <div className="mb-12 flex flex-col items-center">
-        <h2 className="relative mb-4 inline-block text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
+    <section className="pt-20">
+      <div className="mb-12 flex flex-col items-center md:block">
+        <h2 className="relative mb-4 inline-block text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:-translate-x-[30px]">
           Work History
           <div className="absolute -right-6 -top-6 h-12 w-12 rotate-12 rounded-lg bg-orange-500/50 blur-xl" />
           <div className="absolute -bottom-6 -left-6 h-12 w-12 -rotate-12 rounded-lg bg-orange-500/50 blur-xl" />
         </h2>
-        <p className="max-w-2xl text-base text-gray-600 sm:text-lg">
+        <p className="max-w-2xl text-lg text-gray-600 md:-translate-x-[30px]">
           Explore my work history
         </p>
-        <div className="z-50 mt-4 h-1 w-20 rounded bg-gradient-to-r from-orange-500/5 via-orange-500 to-orange-500/5"></div>
+        <div className="z-50 mt-4 h-1 w-20 rounded bg-gradient-to-r from-orange-500/5 via-orange-500 to-orange-500/5 md:-translate-x-[calc(50%-8px)]"></div>
       </div>
       <div className="relative">
         {workHistoryData.map((item, index) => (
