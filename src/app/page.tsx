@@ -278,7 +278,7 @@ export default async function Home() {
           <Link
             href="https://tailwindui.com/templates/spotlight"
             target="_blank"
-            className="text-teal-500 dark:text-teal-400"
+            className="text-red-500 dark:text-red-400"
           >
             Tailwind CSS UI
           </Link>{' '}
