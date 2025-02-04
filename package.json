@@ -16,7 +16,7 @@
     "lint": "next lint",
     "prepare": "husky",
     "push": "git push --no-verify && git push --tags --no-verify",
-    "release": "npm run lint && npm run build && standard-version"
+    "release": "npm run lint && npm run build && standard-version && npm run push"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
