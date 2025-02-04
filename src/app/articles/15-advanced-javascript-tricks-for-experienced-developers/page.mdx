@@ -1,0 +1,228 @@
+import { ArticleLayout } from '@/components/article-layout.component'
+import imageCover from './cover.png'
+
+export const article = {
+  author: 'Mg Wunna',
+  date: '2025-02-04',
+  title: '15 Advanced JavaScript Tricks for Experienced Developers',
+  description:
+    "JavaScript is constantly evolving, and staying up-to-date with its advanced features can significantly improve your code quality. Here's a collection of powerful JavaScript tricks that every experienced developer should know:",
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={imageCover} alt="Cover" />
+
+JavaScript is constantly evolving, and staying up-to-date with its advanced features can significantly improve your code quality. Here's a collection of powerful JavaScript tricks that every experienced developer should know:
+
+## 1. Nullish Coalescing Operator (??)
+
+The nullish coalescing operator (??) is a logical operator that returns its right-hand operand when its left-hand operand is null or undefined, and otherwise returns its left-hand operand.
+
+```javascript
+let user = {
+  name: '',
+  age: 0,
+}
+
+// Using ||
+console.log(user.name || 'Anonymous') // 'Anonymous'
+console.log(user.age || 18) // 18
+
+// Using ??
+console.log(user.name ?? 'Anonymous') // ''
+console.log(user.age ?? 18) // 0
+```
+
+## 2. Optional Chaining (?.)
+
+Optional chaining makes it easier to safely access nested object properties, even when an intermediate property doesn't exist.
+
+```javascript
+const user = {
+  details: {
+    address: {
+      street: 'Main St',
+    },
+  },
+}
+
+// Old way
+const street =
+  user && user.details && user.details.address && user.details.address.street
+
+// Using optional chaining
+const street = user?.details?.address?.street
+```
+
+## 3. Array Methods
+
+Modern array methods can make your code more readable and maintainable.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+// Map
+const doubled = numbers.map((num) => num * 2)
+
+// Filter
+const evenNumbers = numbers.filter((num) => num % 2 === 0)
+
+// Reduce
+const sum = numbers.reduce((acc, curr) => acc + curr, 0)
+```
+
+## 4. Object Destructuring
+
+Destructuring makes it easier to extract multiple properties from objects.
+
+```javascript
+const user = {
+  name: 'John',
+  age: 30,
+  city: 'New York',
+}
+
+const { name, age, city } = user
+
+// With default values
+const { country = 'USA' } = user
+```
+
+## 5. Spread Operator
+
+The spread operator (...) allows an array or object to be expanded.
+
+```javascript
+// Arrays
+const arr1 = [1, 2, 3]
+const arr2 = [...arr1, 4, 5] // [1, 2, 3, 4, 5]
+
+// Objects
+const defaultSettings = { theme: 'dark', font: 'Arial' }
+const userSettings = { ...defaultSettings, font: 'Helvetica' }
+```
+
+## 6. Template Literals
+
+Template literals provide an elegant way to work with strings.
+
+```javascript
+const name = 'John'
+const age = 30
+
+const greeting = `Hello, ${name}!
+You are ${age} years old.`
+```
+
+## 7. Short-Circuit Evaluation
+
+Use logical operators for conditional execution.
+
+```javascript
+// Using &&
+isLoggedIn && showDashboard()
+
+// Using ||
+const username = user.name || 'Guest'
+```
+
+## 8. Array/Object Methods
+
+Powerful methods for working with arrays and objects.
+
+```javascript
+// Object.entries()
+const obj = { a: 1, b: 2 }
+Object.entries(obj).forEach(([key, value]) => {
+  console.log(`${key}: ${value}`)
+})
+
+// Array.includes()
+const numbers = [1, 2, 3]
+console.log(numbers.includes(2)) // true
+```
+
+## 9. Async/Await with Promise.all
+
+Handle multiple asynchronous operations efficiently.
+
+```javascript
+const fetchUserData = async () => {
+  const [user, posts, comments] = await Promise.all([
+    fetchUser(),
+    fetchPosts(),
+    fetchComments(),
+  ])
+  return { user, posts, comments }
+}
+```
+
+## 10. Set for Unique Values
+
+Use Set to handle unique values efficiently.
+
+```javascript
+const numbers = [1, 2, 2, 3, 3, 4]
+const uniqueNumbers = [...new Set(numbers)] // [1, 2, 3, 4]
+```
+
+## 11. Dynamic Object Properties
+
+Compute object property names dynamically.
+
+```javascript
+const dynamic = 'title'
+const item = {
+  [dynamic]: 'JavaScript Tricks',
+  ['price_' + dynamic]: 100,
+}
+```
+
+## 12. Array Destructuring with Rest Parameters
+
+Combine destructuring with rest parameters for flexible array handling.
+
+```javascript
+const [first, second, ...rest] = [1, 2, 3, 4, 5]
+console.log(first) // 1
+console.log(rest) // [3, 4, 5]
+```
+
+## 13. Object Property Shorthand
+
+Write cleaner object literals when property names match variable names.
+
+```javascript
+const name = 'John'
+const age = 30
+const user = { name, age } // { name: 'John', age: 30 }
+```
+
+## 14. Optional Function Parameters
+
+Use parameter defaults for cleaner function definitions.
+
+```javascript
+function greet(name = 'Guest', greeting = 'Hello') {
+  return `${greeting}, ${name}!`
+}
+```
+
+## 15. String Methods
+
+Utilize powerful string methods for text manipulation.
+
+```javascript
+const text = '  Hello World  '
+console.log(text.trim()) // 'Hello World'
+console.log(text.includes('World')) // true
+console.log(text.startsWith('Hello')) // true
+```
+
+Remember that while these tricks can make your code more elegant and efficient, it's important to use them judiciously and maintain code readability. Always consider your team's coding standards and the project's requirements when implementing these patterns.
