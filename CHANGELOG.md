@@ -2,6 +2,17 @@
 
 Mg Wunna's Portfolio Website
 
+### [2.0.1](https://github.com/mg-wunna/mg-wunna/compare/v2.0.0...v2.0.1) (2025-02-04)
+
+### Build process or auxiliary tool changes
+
+- add 15 advanced javascript tricks for experienced developers article ([9d030b5](https://github.com/mg-wunna/mg-wunna/commits/9d030b528393a86d4a4a38252c40b6fbe1ca8f54))
+- add 15 free react templates and themes article ([afafe70](https://github.com/mg-wunna/mg-wunna/commits/afafe70a5e140d78814dc233de13bc9b1bd6b4a4))
+
+### A bug fix
+
+- link does not open in new tab error ([7918d3e](https://github.com/mg-wunna/mg-wunna/commits/7918d3ef2e26a8706dae83dc053bfe1e7a86434b))
+
 ## 2.0.0 (2025-02-03)
 
 ### A code change that neither fixes a bug or adds a feature
