@@ -2,6 +2,12 @@
 
 Mg Wunna's Portfolio Website
 
+### [2.0.2](https://github.com/mg-wunna/mg-wunna/compare/v2.0.1...v2.0.2) (2025-02-04)
+
+### A bug fix
+
+- articles limit in home page wrong error ([d84a912](https://github.com/mg-wunna/mg-wunna/commits/d84a9125fb38728775045328c51edaec9ca301d1))
+
 ### [2.0.1](https://github.com/mg-wunna/mg-wunna/compare/v2.0.0...v2.0.1) (2025-02-04)
 
 ### Build process or auxiliary tool changes
