@@ -18,6 +18,26 @@ export const metadata: Metadata = {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
     },
   },
+  keywords:
+    'Mg Wunna, Fullstack Developer, Portfolio, React, Next.js, Node.js, JavaScript, TypeScript, HTML, CSS, Tailwind CSS, UI/UX, Design, Web Development, Web Design, Web Application, Web Development, Web Design, Web Application, Web Development, Web Design, Web Application',
+  openGraph: {
+    type: 'website',
+    title:
+      'Mg Wunna - Turning Ideas into Digital Reality with Code & Creativity',
+    description:
+      "Hey there! I'm Wunna, a full-stack developer crafting exceptional digital experiences from Myanmar. With expertise in React, Next.js, and Node.js, I transform complex challenges into elegant, user-centric solutions. My passion lies in building performant web applications that make a real impact.",
+    url: 'https://mg-wunna.vercel.app/',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://mg-wunna.vercel.app/thumbnail.png',
+        width: 1280,
+        height: 720,
+        alt: 'Mg Wunna Portfolio Website Preview',
+        type: 'image/png',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
