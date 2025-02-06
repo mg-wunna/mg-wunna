@@ -2,6 +2,25 @@
 
 Mg Wunna's Portfolio Website
 
+## [2.1.0](https://github.com/mg-wunna/mg-wunna/compare/v2.0.2...v2.1.0) (2025-02-06)
+
+### CI related changes
+
+- add push script in release script ([fb385fc](https://github.com/mg-wunna/mg-wunna/commits/fb385fc34474c56e6918a36bbe1fb15b7d64329e))
+
+### Build process or auxiliary tool changes
+
+- update article date ([d6850b6](https://github.com/mg-wunna/mg-wunna/commits/d6850b6babf46413f2b84c53558d7dfc56c085dd))
+
+### A new feature
+
+- add home page navigation link ([ae4f013](https://github.com/mg-wunna/mg-wunna/commits/ae4f013131c4e96aa41ec0d0a0832870df87df94))
+
+### A bug fix
+
+- save duplicate email error ([bd5765c](https://github.com/mg-wunna/mg-wunna/commits/bd5765c51b78aca36b32fe0931a4e3cd3f24ffa1))
+- thumbnail image missing error ([84bf049](https://github.com/mg-wunna/mg-wunna/commits/84bf0496948f16d0de891e1ff300de6a246771c9))
+
 ### [2.0.2](https://github.com/mg-wunna/mg-wunna/compare/v2.0.1...v2.0.2) (2025-02-04)
 
 ### A bug fix
