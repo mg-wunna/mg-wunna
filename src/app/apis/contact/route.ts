@@ -10,12 +10,11 @@ export async function POST(request: Request) {
     await mongoose.connect(process.env.MONGODB_URI as string)
 
     // Create new contact
-    const contact = new ContactModel({
-      email: body.email,
-    })
-
-    // Save to database
-    await contact.save()
+    await ContactModel.findOneAndUpdate(
+      { email: body.email },
+      { email: body.email },
+      { upsert: true },
+    )
 
     return NextResponse.json(
       {
