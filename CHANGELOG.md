@@ -2,6 +2,13 @@
 
 Mg Wunna's Portfolio Website
 
+### [2.1.1](https://github.com/mg-wunna/mg-wunna/compare/v2.1.0...v2.1.1) (2025-02-07)
+
+### A new feature
+
+- add responsive design for road map ([bc14d51](https://github.com/mg-wunna/mg-wunna/commits/bc14d511d8b6cd506b7b3159bc627fd30940602a))
+- add skills page ([3d6f958](https://github.com/mg-wunna/mg-wunna/commits/3d6f95845da72b121bd8b1b8a1ab57a312913523))
+
 ## [2.1.0](https://github.com/mg-wunna/mg-wunna/compare/v2.0.2...v2.1.0) (2025-02-06)
 
 ### CI related changes
