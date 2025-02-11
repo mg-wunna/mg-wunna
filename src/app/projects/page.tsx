@@ -5,7 +5,7 @@ import { Card } from '@/components/card.component'
 import { SimpleLayout } from '@/components/simple-layout.component'
 import logoAnaget from '@/images/logos/anaget-logo.png'
 import logoReturningAi from '@/images/logos/returning-ai-logo.png'
-import logoFitty from '@/images/logos/fitty-logo.png'
+import logoJudy from '@/images/logos/judy-logo.png'
 import logoNovaLearn from '@/images/logos/nova-learn-logo.png'
 import logoSpring from '@/images/logos/spring-logo.png'
 
@@ -18,21 +18,28 @@ const projects = [
     logo: logoReturningAi,
   },
   {
+    name: 'Tr Judy',
+    description:
+      'Limitless learning at your fingertips, pay once and learn forever',
+    link: { href: 'https://tr-judy.vercel.app/', label: 'tr-judy.vercel.app' },
+    logo: logoJudy,
+  },
+  {
     name: 'Spring',
     description: 'All in one tool for your business, with POS, CRM and more',
     link: { href: '#', label: 'Coming Soon' },
     logo: logoSpring,
   },
-  {
-    name: 'Fitty “Now you can!”',
-    description:
-      'Transform your health journey with personalized fitness plans and nutrition guidance',
-    /* 
-      “Now you can!” embodies Fitty’s mission to empower users to take control of their health and weight loss journey. It highlights the accessibility and effectiveness of our app, which offers tools for exercise workouts, calorie tracking, water intake monitoring, and sleep tracking—making healthy living achievable for everyone.
-    */
-    link: { href: '#', label: 'Coming Soon' },
-    logo: logoFitty,
-  },
+  // {
+  //   name: 'Fitty “Now you can!”',
+  //   description:
+  //     'Transform your health journey with personalized fitness plans and nutrition guidance',
+  //   /*
+  //     “Now you can!” embodies Fitty’s mission to empower users to take control of their health and weight loss journey. It highlights the accessibility and effectiveness of our app, which offers tools for exercise workouts, calorie tracking, water intake monitoring, and sleep tracking—making healthy living achievable for everyone.
+  //   */
+  //   link: { href: '#', label: 'Coming Soon' },
+  //   logo: logoFitty,
+  // },
   {
     name: 'NOVA Learn',
     description: 'New revolution in education, learn and train with AI',
@@ -80,7 +87,11 @@ export default function Projects() {
               <Image
                 src={project.logo}
                 alt=""
-                className="h-8 w-8 overflow-hidden rounded-full bg-white"
+                className={`h-8 w-8 overflow-hidden rounded-full ${
+                  ['Returning AI', 'Anaget'].includes(project.name)
+                    ? 'bg-white'
+                    : ''
+                }`}
                 unoptimized
               />
             </div>
