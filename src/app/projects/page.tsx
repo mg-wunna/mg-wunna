@@ -21,7 +21,7 @@ const projects = [
     name: 'Tr Judy',
     description:
       'Limitless learning at your fingertips, pay once and learn forever',
-    link: { href: 'https://tr-judy.vercel.app/', label: 'tr-judy.vercel.app' },
+    link: { href: 'https://trjudyenglish.com', label: 'trjudyenglish.com' },
     logo: logoJudy,
   },
   {
