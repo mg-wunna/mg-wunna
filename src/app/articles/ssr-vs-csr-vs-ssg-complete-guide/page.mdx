@@ -1,0 +1,707 @@
+import { ArticleLayout } from '@/components/article-layout.component'
+
+export const article = {
+  author: 'Mg Wunna',
+  date: '2025-07-27',
+  title: 'SSR vs CSR vs SSG: Complete Guide to Web Rendering Strategies',
+  description:
+    'Learn the differences between Server-Side Rendering, Client-Side Rendering, and Static Site Generation to choose the best approach for your web application.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<div style={{ width: '100%' }}>
+  <Image
+    src="https://placehold.co/1200x600/ef4444/ffffff.png?font=lato&text=SSR+vs+CSR+vs+SSG+Guide"
+    alt="Cover"
+    width={1200}
+    height={600}
+    style={{ width: '100%', height: 'auto' }}
+  />
+</div>
+
+When building web applications, one of the most important decisions you'll make is how to **render** your content. Should the server generate HTML pages? Should the browser handle everything? Or maybe pre-generate everything at build time? This guide breaks down **`Server-Side Rendering (SSR)`**, **`Client-Side Rendering (CSR)`**, and **`Static Site Generation (SSG)`** in simple terms.
+
+## What is Web Rendering?
+
+**`Rendering`** is the process of converting your code into HTML that browsers can display. Think of it like cooking - you can prepare meals in the kitchen (server), at the table (client), or meal prep everything in advance (static).
+
+### The Three Main Approaches
+
+1. **`Server-Side Rendering (SSR)`** - Server cooks the meal fresh for each order
+2. **`Client-Side Rendering (CSR)`** - Customer cooks their own meal at the table
+3. **`Static Site Generation (SSG)`** - Meals are pre-cooked and served ready-to-eat
+
+## Server-Side Rendering (SSR)
+
+**`SSR`** means the server generates complete HTML pages for each request. When a user visits your site, the server processes the request, runs your application code, and sends back a fully formed HTML page.
+
+### How SSR Works
+
+```
+1. User requests page → Server receives request
+2. Server runs application code → Generates HTML
+3. Server sends complete HTML → Browser displays page
+4. Browser downloads JavaScript → Page becomes interactive
+```
+
+### SSR Implementation Example
+
+Here's how SSR works with Next.js:
+
+```javascript
+// pages/products/[id].js - Next.js SSR
+export async function getServerSideProps(context) {
+  const { id } = context.params
+
+  // This runs on the server for each request
+  const product = await fetch(`https://api.example.com/products/${id}`).then(
+    (res) => res.json(),
+  )
+
+  return {
+    props: {
+      product,
+    },
+  }
+}
+
+export default function ProductPage({ product }) {
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p>Price: ${product.price}</p>
+    </div>
+  )
+}
+```
+
+### SSR Pros and Cons
+
+**Advantages:**
+
+- **Fast initial page load** - Users see content immediately
+- **Great SEO** - Search engines can easily crawl content
+- **Works without JavaScript** - Content displays even if JS fails
+- **Better performance on slow devices** - Less client-side processing
+
+**Disadvantages:**
+
+- **Slower navigation** - Each page request hits the server
+- **Higher server costs** - Server does more work
+- **Complex caching** - Dynamic content is harder to cache
+- **Server dependency** - Needs server infrastructure
+
+### When to Use SSR
+
+- **E-commerce sites** - Product pages need good SEO and fast loading
+- **News websites** - Content changes frequently and needs to be searchable
+- **User dashboards** - Personalized content that changes often
+- **Content-heavy sites** - Blogs, documentation with lots of text
+
+## Client-Side Rendering (CSR)
+
+**`CSR`** means the browser downloads a basic HTML shell and JavaScript code, then builds the page content using JavaScript. The "rendering" happens in the user's browser.
+
+### How CSR Works
+
+```
+1. User requests page → Server sends HTML shell + JavaScript
+2. Browser downloads JavaScript → Runs application code
+3. JavaScript fetches data → Updates page content
+4. Page becomes fully interactive
+```
+
+### CSR Implementation Example
+
+Here's a typical CSR setup with React:
+
+```javascript
+// App.js - Client-side React app
+import React, { useState, useEffect } from 'react'
+
+function ProductPage({ productId }) {
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // This runs in the browser
+    fetch(`https://api.example.com/products/${productId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data)
+        setLoading(false)
+      })
+  }, [productId])
+
+  if (loading) return <div>Loading...</div>
+
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p>Price: ${product.price}</p>
+    </div>
+  )
+}
+```
+
+### CSR Pros and Cons
+
+**Advantages:**
+
+- **Fast navigation** - No server requests after initial load
+- **Rich interactions** - Smooth user experience like desktop apps
+- **Lower server costs** - Server just serves static files
+- **Offline capability** - Can work without internet connection
+
+**Disadvantages:**
+
+- **Slow initial load** - Must download JavaScript before showing content
+- **Poor SEO** - Search engines struggle with JavaScript-heavy sites
+- **JavaScript dependency** - Broken if JavaScript fails to load
+- **Performance issues** - Slower on low-end devices
+
+### When to Use CSR
+
+- **Web applications** - Tools, dashboards, admin panels
+- **Interactive sites** - Games, calculators, complex user interfaces
+- **Private content** - User-specific data that doesn't need SEO
+- **Progressive Web Apps** - Apps that work offline
+
+## Static Site Generation (SSG)
+
+**`SSG`** pre-generates all HTML pages at **build time**. Instead of creating pages when users request them, you build all pages once and serve them as static files.
+
+### How SSG Works
+
+```
+1. Build process runs → Generates all HTML pages
+2. Pages deployed to CDN → Static files ready to serve
+3. User requests page → CDN serves pre-built HTML instantly
+4. Browser downloads JavaScript → Page becomes interactive
+```
+
+### SSG Implementation Example
+
+Here's SSG with Next.js:
+
+```javascript
+// pages/products/[id].js - Next.js SSG
+export async function getStaticPaths() {
+  // Generate paths for all products at build time
+  const products = await fetch('https://api.example.com/products').then((res) =>
+    res.json(),
+  )
+
+  const paths = products.map((product) => ({
+    params: { id: product.id.toString() },
+  }))
+
+  return {
+    paths,
+    fallback: false, // Show 404 for non-existent pages
+  }
+}
+
+export async function getStaticProps({ params }) {
+  // This runs at build time for each page
+  const product = await fetch(
+    `https://api.example.com/products/${params.id}`,
+  ).then((res) => res.json())
+
+  return {
+    props: {
+      product,
+    },
+    revalidate: 3600, // Regenerate page every hour
+  }
+}
+
+export default function ProductPage({ product }) {
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p>Price: ${product.price}</p>
+    </div>
+  )
+}
+```
+
+### SSG Pros and Cons
+
+**Advantages:**
+
+- **Extremely fast loading** - Pre-built pages served instantly
+- **Excellent SEO** - Search engines love static HTML
+- **High security** - No server-side code execution
+- **Cheap hosting** - Can use CDNs and static hosting
+
+**Disadvantages:**
+
+- **Build time increases** - More pages = longer builds
+- **Content updates require rebuilds** - Can't change content without rebuilding
+- **Not suitable for dynamic content** - User-specific content is challenging
+- **Complex for large sites** - Thousands of pages can be difficult to manage
+
+### When to Use SSG
+
+- **Marketing websites** - Landing pages, company websites
+- **Blogs and documentation** - Content doesn't change frequently
+- **E-commerce catalogs** - Product listings that update occasionally
+- **Portfolios** - Personal websites showcasing work
+
+## Detailed Comparison
+
+### Performance Comparison
+
+| Aspect                     | SSR       | CSR       | SSG          |
+| -------------------------- | --------- | --------- | ------------ |
+| **First Contentful Paint** | Fast ⚡   | Slow 🐌   | Fastest ⚡⚡ |
+| **Time to Interactive**    | Medium 🟡 | Slow 🐌   | Fast ⚡      |
+| **Navigation Speed**       | Slow 🐌   | Fast ⚡   | Fast ⚡      |
+| **Bundle Size Impact**     | Low 📦    | High 📦📦 | Low 📦       |
+
+### SEO and Crawling
+
+```javascript
+// SSR/SSG - Search engines see this:
+<html>
+  <head><title>Amazing Product - Best Price</title></head>
+  <body>
+    <h1>Amazing Product</h1>
+    <p>This product is amazing because...</p>
+  </body>
+</html>
+
+// CSR - Search engines might see this:
+<html>
+  <head><title>Loading...</title></head>
+  <body>
+    <div id="root"><!-- Content loads via JavaScript --></div>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+### Development Complexity
+
+**SSR Complexity:**
+
+- Server configuration required
+- **`Hydration`** issues - client and server must match
+- Environment differences (server vs browser)
+- Caching strategies needed
+
+**CSR Complexity:**
+
+- Simple setup and deployment
+- Client-side routing
+- State management for data fetching
+- Loading states and error handling
+
+**SSG Complexity:**
+
+- Build-time data fetching
+- **`Incremental Static Regeneration (ISR)`** for updates
+- Dynamic routing setup
+- Content management integration
+
+## Hybrid Approaches
+
+Modern frameworks let you mix different rendering strategies:
+
+### Next.js Hybrid Example
+
+```javascript
+// pages/index.js - SSG for homepage
+export async function getStaticProps() {
+  return { props: { posts: await getBlogPosts() } }
+}
+
+// pages/dashboard.js - CSR for user dashboard
+export default function Dashboard() {
+  const { data } = useSWR('/api/user', fetcher)
+  return <div>{data?.name}'s Dashboard</div>
+}
+
+// pages/product/[id].js - SSR for product pages
+export async function getServerSideProps({ params }) {
+  return { props: { product: await getProduct(params.id) } }
+}
+```
+
+### Progressive Enhancement
+
+Start with SSG/SSR for content, then enhance with JavaScript:
+
+```javascript
+// Base HTML works without JavaScript
+function ProductPage({ product, reviews }) {
+  const [showAllReviews, setShowAllReviews] = useState(false)
+
+  return (
+    <div>
+      {/* This content renders on server */}
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+
+      {/* This enhances with JavaScript */}
+      <div>
+        {reviews.slice(0, showAllReviews ? reviews.length : 3).map((review) => (
+          <div key={review.id}>{review.text}</div>
+        ))}
+        <button onClick={() => setShowAllReviews(!showAllReviews)}>
+          {showAllReviews ? 'Show Less' : 'Show All'} Reviews
+        </button>
+      </div>
+    </div>
+  )
+}
+```
+
+## Implementation Best Practices
+
+### SSR Best Practices
+
+**1. Implement Proper Caching**
+
+```javascript
+// Express.js caching example
+app.get('/product/:id', cache('5 minutes'), async (req, res) => {
+  const product = await getProduct(req.params.id)
+  res.render('product', { product })
+})
+```
+
+**2. Handle Loading States**
+
+```javascript
+// Show loading UI while server processes
+function ProductPage({ product, loading }) {
+  if (loading) return <ProductSkeleton />
+  return <ProductDetails product={product} />
+}
+```
+
+**3. Optimize Critical CSS**
+
+```html
+<!-- Inline critical CSS for faster rendering -->
+<style>
+  .header {
+    background: #333;
+    color: white;
+  }
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+```
+
+### CSR Best Practices
+
+**1. Implement Smart Loading**
+
+```javascript
+// Show skeleton while loading
+function ProductList() {
+  const { data: products, loading } = useProducts()
+
+  if (loading) return <ProductListSkeleton />
+
+  return (
+    <div>
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  )
+}
+```
+
+**2. Code Splitting**
+
+```javascript
+// Load components only when needed
+const Dashboard = lazy(() => import('./Dashboard'))
+const Profile = lazy(() => import('./Profile'))
+
+function App() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Suspense>
+  )
+}
+```
+
+**3. Preload Critical Data**
+
+```javascript
+// Preload data for better UX
+function App() {
+  useEffect(() => {
+    // Preload user data
+    queryClient.prefetchQuery('user', fetchUser)
+  }, [])
+
+  return <Router />
+}
+```
+
+### SSG Best Practices
+
+**1. Incremental Static Regeneration**
+
+```javascript
+// Update static pages without full rebuild
+export async function getStaticProps({ params }) {
+  const product = await getProduct(params.id)
+
+  return {
+    props: { product },
+    revalidate: 60, // Regenerate every minute if needed
+  }
+}
+```
+
+**2. Fallback Pages**
+
+```javascript
+// Handle new pages gracefully
+export async function getStaticPaths() {
+  const popularProducts = await getPopularProducts()
+
+  return {
+    paths: popularProducts.map((p) => ({ params: { id: p.id } })),
+    fallback: 'blocking', // Generate other pages on-demand
+  }
+}
+```
+
+**3. Build Optimization**
+
+```javascript
+// Only regenerate changed pages
+export async function getStaticProps({ params }) {
+  const product = await getProduct(params.id, {
+    lastModified: process.env.LAST_BUILD_TIME,
+  })
+
+  // Skip if not modified
+  if (!product.modified) {
+    return { notFound: true }
+  }
+
+  return { props: { product } }
+}
+```
+
+## Common Issues and Solutions
+
+### Hydration Mismatches (SSR)
+
+**Problem:** Client and server render different content
+
+```javascript
+// Bad - causes hydration mismatch
+function TimeComponent() {
+  return <div>Current time: {new Date().toLocaleString()}</div>
+}
+
+// Good - ensure server and client match
+function TimeComponent() {
+  const [time, setTime] = useState(null)
+
+  useEffect(() => {
+    setTime(new Date().toLocaleString())
+  }, [])
+
+  return <div>Current time: {time || 'Loading...'}</div>
+}
+```
+
+### SEO Issues (CSR)
+
+**Problem:** Search engines can't see JavaScript-rendered content
+
+**Solution:** Use **`Server-Side Rendering`** or **`Prerendering`**
+
+```javascript
+// Add prerendering for CSR apps
+// prerender.config.js
+module.exports = {
+  routes: [
+    '/',
+    '/products',
+    '/about',
+    // Add routes that need SEO
+  ],
+  renderer: '@prerenderer/renderer-puppeteer',
+}
+```
+
+### Build Time Issues (SSG)
+
+**Problem:** Too many pages causing slow builds
+
+**Solutions:**
+
+```javascript
+// 1. Use fallback pages
+export async function getStaticPaths() {
+  return {
+    paths: [], // Generate no pages at build time
+    fallback: 'blocking', // Generate on first request
+  }
+}
+
+// 2. Prioritize important pages
+export async function getStaticPaths() {
+  const importantProducts = await getImportantProducts()
+
+  return {
+    paths: importantProducts.map((p) => ({ params: { id: p.id } })),
+    fallback: true, // Generate others as needed
+  }
+}
+```
+
+## Performance Monitoring
+
+### Key Metrics to Track
+
+**Core Web Vitals:**
+
+- **`Largest Contentful Paint (LCP)`** - Loading performance
+- **`First Input Delay (FID)`** - Interactivity
+- **`Cumulative Layout Shift (CLS)`** - Visual stability
+
+### Monitoring Implementation
+
+```javascript
+// Track performance metrics
+function trackWebVitals() {
+  import('web-vitals').then(({ getCLS, getFID, getLCP }) => {
+    getCLS(console.log)
+    getFID(console.log)
+    getLCP(console.log)
+  })
+}
+
+// Track in Next.js
+export function reportWebVitals(metric) {
+  // Send to analytics
+  analytics.track(metric.name, {
+    value: metric.value,
+    page: window.location.pathname,
+  })
+}
+```
+
+## Decision Framework
+
+### Choose SSR When:
+
+- ✅ You need excellent SEO
+- ✅ Content changes frequently
+- ✅ Fast initial page load is critical
+- ✅ You have server infrastructure
+- ✅ Content is personalized
+
+### Choose CSR When:
+
+- ✅ Building an interactive web app
+- ✅ SEO is not important
+- ✅ Users spend lots of time on site
+- ✅ You want to minimize server costs
+- ✅ Offline functionality is needed
+
+### Choose SSG When:
+
+- ✅ Content doesn't change often
+- ✅ You need the fastest possible loading
+- ✅ SEO is important
+- ✅ You want minimal hosting costs
+- ✅ Security is a priority
+
+### Decision Tree
+
+```
+Does your content change frequently?
+├── Yes → Do you need SEO?
+│   ├── Yes → Use SSR
+│   └── No → Use CSR
+└── No → Do you need SEO?
+    ├── Yes → Use SSG
+    └── No → Use CSR or SSG
+```
+
+## Framework Recommendations
+
+### Next.js (React)
+
+- **Best for:** Full-stack React applications
+- **Supports:** SSR, CSR, SSG, ISR (hybrid)
+- **Ideal when:** You want flexibility to use different strategies
+
+### Nuxt.js (Vue)
+
+- **Best for:** Vue.js applications
+- **Supports:** SSR, CSR, SSG
+- **Ideal when:** You're using Vue ecosystem
+
+### Gatsby (React)
+
+- **Best for:** Static sites with rich content
+- **Supports:** SSG with hydration
+- **Ideal when:** Building content-heavy sites
+
+### SvelteKit (Svelte)
+
+- **Best for:** Performance-focused applications
+- **Supports:** SSR, CSR, SSG
+- **Ideal when:** Bundle size and performance are critical
+
+## Conclusion
+
+Understanding **`SSR`**, **`CSR`**, and **`SSG`** helps you make better decisions for your web applications. Each approach has its place:
+
+- **SSR** gives you dynamic content with good SEO
+- **CSR** provides rich interactivity with simple deployment
+- **SSG** delivers maximum performance for static content
+
+### Key Takeaways:
+
+1. **Consider your content** - Static vs dynamic determines your options
+2. **Think about your users** - Fast loading vs rich interactions
+3. **Evaluate your resources** - Server costs vs build complexity
+4. **Plan for SEO** - Search visibility requirements
+5. **Start simple** - You can always add complexity later
+
+Modern frameworks make it easy to combine approaches, so you don't have to choose just one. Start with the approach that fits your main use case, then optimize specific pages as needed.
+
+The best rendering strategy is the one that serves your users' needs while fitting your technical constraints and business goals.
+
+## References
+
+- [Next.js Rendering Documentation](https://nextjs.org/docs/basic-features/pages)
+- [Web.dev Rendering Patterns](https://web.dev/rendering-on-the-web/)
+- [React Server Components](https://reactjs.org/blog/2020/12/21/data-fetching-with-react-server-components.html)
+- [Core Web Vitals](https://web.dev/vitals/)
+- [Nuxt.js Rendering Modes](https://nuxtjs.org/docs/concepts/rendering)
+- [Gatsby Static Generation](https://www.gatsbyjs.com/docs/glossary/static-site-generator/)
+- [SvelteKit Rendering](https://kit.svelte.dev/docs/page-options)
+- [Hydration Explained](https://web.dev/rendering-on-the-web/#hydration)

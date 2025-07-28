@@ -1,5 +1,4 @@
 import { ArticleLayout } from '@/components/article-layout.component'
-import imageCover from './cover.png'
 
 export const article = {
   author: 'Mg Wunna',
@@ -17,7 +16,15 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-<Image src={imageCover} alt="Cover" />
+<div style={{ width: '100%' }}>
+  <Image
+    src="https://placehold.co/1200x600/ef4444/ffffff.png?font=lato&text=JavaScript+Memory+Optimization"
+    alt="Cover"
+    width={1200}
+    height={600}
+    style={{ width: '100%', height: 'auto' }}
+  />
+</div>
 
 Memory management is crucial for building fast and efficient JavaScript applications. Let's explore how JavaScript handles memory and learn practical techniques to optimize our code.
 

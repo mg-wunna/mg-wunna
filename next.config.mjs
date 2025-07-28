@@ -10,6 +10,9 @@ const nextConfig = {
       '/articles/*': ['./src/app/articles/**/*.mdx'],
     },
   },
+  images: {
+    domains: ['placehold.co'],
+  },
 }
 
 const withMDX = nextMDX({

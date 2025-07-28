@@ -1,5 +1,4 @@
 import { ArticleLayout } from '@/components/article-layout.component'
-import imageCover from './cover.png'
 import idealArchitecture from './images/ideal_architecture_principles_diagram.png'
 import componentsOveruse from './images/components_overuse_example.png'
 import scatteredRedux from './images/scattered_redux_logic_example.png'
@@ -22,7 +21,15 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-<Image src={imageCover} alt="Cover" />
+<div style={{ width: '100%' }}>
+  <Image
+    src="https://placehold.co/1200x600/ef4444/ffffff.png?font=lato&text=Modern+Frontend+Architectures"
+    alt="Cover"
+    width={1200}
+    height={600}
+    style={{ width: '100%', height: 'auto' }}
+  />
+</div>
 
 Modern frontend applications need to be flexible, scalable, and maintainable. Let's explore different architectural approaches that can help achieve these goals.
 

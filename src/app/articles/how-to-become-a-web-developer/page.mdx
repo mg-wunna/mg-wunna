@@ -1,5 +1,4 @@
 import { ArticleLayout } from '@/components/article-layout.component'
-import imageCover from './cover.png'
 
 export const article = {
   author: 'Mg Wunna',
@@ -16,7 +15,15 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-<Image src={imageCover} alt="Cover" />
+<div style={{ width: '100%' }}>
+  <Image
+    src="https://placehold.co/1200x600/ef4444/ffffff.png?font=lato&text=How+to+Become+Web+Developer"
+    alt="Cover"
+    width={1200}
+    height={600}
+    style={{ width: '100%', height: 'auto' }}
+  />
+</div>
 
 Have you ever wondered what it takes to become a web developer in today's fast-paced digital world? As someone who has journeyed through this path, I'm excited to share a comprehensive roadmap that will guide you from your first line of code to becoming a professional web developer.
 
