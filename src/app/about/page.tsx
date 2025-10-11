@@ -84,12 +84,13 @@ export default function About() {
             </p>
             <p>
               <span className="mr-2 text-2xl">💼</span>
-              With over 5 years of experience in web development, I&apos;ve
-              mastered technologies like React, Next.js, Node.js, and various
-              cloud platforms. I specialize in building scalable web
-              applications with a focus on performance, accessibility, and user
-              experience. My approach combines technical expertise with creative
-              problem-solving to deliver exceptional digital solutions.
+              With over {new Date().getFullYear() - 2019} years of experience in
+              web development, I&apos;ve mastered technologies like React,
+              Next.js, Node.js, and various cloud platforms. I specialize in
+              building scalable web applications with a focus on performance,
+              accessibility, and user experience. My approach combines technical
+              expertise with creative problem-solving to deliver exceptional
+              digital solutions.
             </p>
           </div>
         </div>
