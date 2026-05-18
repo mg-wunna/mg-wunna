@@ -12,7 +12,7 @@ export const PROJECTS: Project[] = [
     tagline: 'Empowering small businesses to reach more customers online.',
     oneLineImpact:
       'A modern presence that helps MSMEs build trust and grow their reach.',
-    coverImage: 'https://placehold.co/1200x800/0a0a0a/ffffff?text=MSME',
+    coverImage: 'https://placehold.co/1200x800/0a0a0a/ffffff.png?text=MSME',
     featured: true,
     year: 2024,
     overview:
@@ -39,11 +39,11 @@ export const PROJECTS: Project[] = [
     ],
     screenshots: [
       {
-        src: 'https://placehold.co/1600x1000/0a0a0a/ffffff?text=MSME+Home',
+        src: 'https://placehold.co/1600x1000/0a0a0a/ffffff.png?text=MSME+Home',
         alt: 'MSME home page',
       },
       {
-        src: 'https://placehold.co/1600x1000/0a0a0a/ffffff?text=MSME+Features',
+        src: 'https://placehold.co/1600x1000/0a0a0a/ffffff.png?text=MSME+Features',
         alt: 'MSME features section',
       },
     ],
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
     tagline: 'A premium brand site for a modern service business.',
     oneLineImpact:
       'A premium product showcase designed to increase brand trust and conversion.',
-    coverImage: 'https://placehold.co/1200x800/111111/ffffff?text=TR+Judy',
+    coverImage: 'https://placehold.co/1200x800/111111/ffffff.png?text=TR+Judy',
     featured: true,
     year: 2024,
     overview:
@@ -79,7 +79,7 @@ export const PROJECTS: Project[] = [
     ],
     screenshots: [
       {
-        src: 'https://placehold.co/1600x1000/111111/ffffff?text=TR+Judy+Home',
+        src: 'https://placehold.co/1600x1000/111111/ffffff.png?text=TR+Judy+Home',
         alt: 'TR Judy home page',
       },
     ],
