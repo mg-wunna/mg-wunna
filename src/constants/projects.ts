@@ -5,6 +5,56 @@ import { type Project } from '@/types/project.type'
 // coverImage + screenshots paths to absolute /images/... URLs.
 export const PROJECTS: Project[] = [
   {
+    slug: 'dana-app',
+    name: 'Dana',
+    category: 'saas-mvp',
+    tagline:
+      'A personal finance app that shows you exactly where your money goes — no spreadsheets, no discipline required.',
+    oneLineImpact:
+      'A pre-launch landing page that turns money anxiety into curiosity — and visitors into a qualified early-access waitlist.',
+    coverImage: '/images/projects/dana-app/cover.jpg',
+    coverImageDark: '/images/projects/dana-app/cover-dark.jpg',
+    featured: true,
+    year: 2026,
+    client: 'Dana',
+    liveUrl: 'https://www.danaapp.tech/',
+    role: 'Design & Development',
+    duration: '3 weeks',
+    services: ['UI / UX', 'Frontend', 'Brand'],
+    overview:
+      'Dana is a personal finance app launching to help people see where their money actually goes — visually, in seconds. The pre-launch site has one job: convert the right people onto an early-access waitlist before the product ships.',
+    problem:
+      'Most personal finance pages either drown visitors in features or guilt-trip them with "build better habits" copy. Dana needed a pre-launch site that felt confident and modern, made the insight feel emotional (not technical), and captured high-intent signups without a working product to demo.',
+    solution:
+      'A single-screen, editorial hero leads with a sharp reframe — "Most people are not bad with money. They\'re just blind to it." — and pairs it with one promise (clarity in 10 seconds) and one action (join the waitlist). A pre-launch badge, scarcity cue ("limited spots"), and inline name + email capture remove every step between curiosity and commitment.',
+    features: [
+      {
+        title: 'Editorial reframe hero',
+        description:
+          'A bold serif headline reframes the problem from "you\'re bad with money" to "you just can\'t see it" — emotional, not preachy.',
+      },
+      {
+        title: 'Single conversion path',
+        description:
+          'Name + email inline on the hero, with one "Get clarity" CTA — no scroll required to convert.',
+      },
+      {
+        title: 'Pre-launch trust signals',
+        description:
+          '"Pre-launch · Early access opening soon" badge plus a scarcity line ("limited spots") frame the waitlist as wanted, not begged for.',
+      },
+      {
+        title: 'Light + dark, no compromise',
+        description:
+          'A coral accent against neutral surfaces holds its weight in both themes — premium without feeling fintech-corporate.',
+      },
+    ],
+    screenshots: [],
+    outcome:
+      'A pre-launch front door that lets a finance product build a qualified waitlist on the strength of one promise — clarity in 10 seconds — before a single feature ships.',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
     slug: 'zayden-lux',
     name: 'Zayden Lux',
     category: 'business-website',
