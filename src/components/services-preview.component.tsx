@@ -1,21 +1,39 @@
-import { Container } from '@/components/container.component'
-import { SectionHeading } from '@/components/section-heading.component'
+import Link from 'next/link'
+
+import {
+  Reveal,
+  RevealItem,
+  RevealStagger,
+} from '@/components/reveal.component'
 import { ServiceCard } from '@/components/service-card.component'
 import { SERVICES } from '@/constants/services'
 
 export function ServicesPreview() {
   return (
-    <Container className="mt-24 sm:mt-32">
-      <SectionHeading
-        eyebrow="Services"
-        title="What I can build for your business."
-        description="Focused on the work that moves the needle for small businesses, startup founders, and creators."
-      />
-      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {SERVICES.map((service) => (
-          <ServiceCard key={service.id} service={service} />
-        ))}
+    <section className="border-t border-border bg-background py-xl">
+      <div className="mx-auto max-w-8xl px-margin">
+        <Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div className="max-w-2xl">
+              <p className="eyebrow">What I do</p>
+              <h2 className="mt-2 font-display text-headline-md font-medium text-on-surface">
+                Designed and built for the work that moves the needle.
+              </h2>
+            </div>
+            <Link href="/services" className="btn-tertiary">
+              All services →
+            </Link>
+          </div>
+        </Reveal>
+
+        <RevealStagger className="mt-lg grid grid-cols-1 gap-gutter sm:grid-cols-2">
+          {SERVICES.map((service, i) => (
+            <RevealItem key={service.id} className="h-full">
+              <ServiceCard service={service} index={i} />
+            </RevealItem>
+          ))}
+        </RevealStagger>
       </div>
-    </Container>
+    </section>
   )
 }
