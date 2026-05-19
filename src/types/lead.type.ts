@@ -22,6 +22,7 @@ export interface LeadInput {
   name: string
   email: string
   company?: string
+  phone?: string
   projectType: ProjectType
   budget: Budget
   description: string

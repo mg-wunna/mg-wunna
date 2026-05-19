@@ -9,6 +9,12 @@ export const leadSchema = z.object({
     .max(120, 'Keep this under 120 characters')
     .optional()
     .or(z.literal('')),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^[+0-9 ()\-.]{5,25}$/, 'Enter a valid phone number')
+    .optional()
+    .or(z.literal('')),
   projectType: z.enum(
     ['business-website', 'website-redesign', 'saas-mvp', 'dashboard', 'other'],
     { errorMap: () => ({ message: 'Pick a project type' }) },

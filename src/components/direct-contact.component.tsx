@@ -1,10 +1,4 @@
-import {
-  Mail,
-  MessageCircle,
-  MessageSquareText,
-  Phone,
-  type LucideIcon,
-} from 'lucide-react'
+import { Mail, MessageSquareText, Phone, type LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import {
@@ -12,7 +6,6 @@ import {
   CONTACT_PHONE_PRIMARY,
   CONTACT_PHONE_SECONDARY,
   CONTACT_TELEGRAM,
-  CONTACT_WHATSAPP,
 } from '@/constants/contact-channels'
 
 interface Channel {
@@ -47,45 +40,35 @@ const channels: Channel[] = [
   {
     icon: MessageSquareText,
     label: 'Telegram',
-    value: '@mgwunna',
+    value: CONTACT_TELEGRAM.username,
     href: CONTACT_TELEGRAM.href,
-  },
-  {
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    value: 'Chat on WhatsApp',
-    href: CONTACT_WHATSAPP.href,
   },
 ]
 
 export function DirectContact() {
   return (
     <div>
-      <p className="text-sm font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-        Or reach out directly
-      </p>
-      <ul className="mt-4 space-y-3">
+      <p className="eyebrow">Or reach out directly</p>
+      <ul className="mt-3 space-y-3">
         {channels.map((channel) => {
           const Icon = channel.icon
           return (
             <li key={channel.label}>
               <Link
                 href={channel.href}
-                className="group flex items-center gap-4 rounded-xl border border-zinc-200 bg-white px-4 py-3 transition hover:border-zinc-300 hover:shadow-card dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                className="focus-ring group flex items-center gap-3 rounded-md border border-border bg-surface px-4 py-3 transition-colors hover:border-on-surface"
               >
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-zinc-100 text-zinc-700 transition group-hover:bg-brand-subtle group-hover:text-brand dark:bg-zinc-800 dark:text-zinc-300">
+                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-md border border-border bg-tertiary text-on-surface">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </span>
                 <span className="flex flex-1 flex-col">
-                  <span className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
+                  <span className="flex items-center gap-2 text-caption text-secondary">
                     {channel.label}
                     {channel.hint ? (
-                      <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] uppercase tracking-wide text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
-                        {channel.hint}
-                      </span>
+                      <span className="chip">{channel.hint}</span>
                     ) : null}
                   </span>
-                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                  <span className="text-body-md text-on-surface">
                     {channel.value}
                   </span>
                 </span>

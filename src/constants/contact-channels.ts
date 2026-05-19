@@ -14,12 +14,8 @@ export const CONTACT_PHONE_SECONDARY = {
 
 export const CONTACT_TELEGRAM = {
   label: 'Telegram',
-  href: 'https://t.me/mgwunna',
-}
-
-export const CONTACT_WHATSAPP = {
-  label: 'WhatsApp',
-  href: 'https://wa.me/66989017507',
+  username: '@mg_wunna',
+  href: 'https://t.me/mg_wunna',
 }
 
 export const CONTACT_LOCATION = 'Bangkok, Thailand'

@@ -4,7 +4,7 @@ import { CheckCircle2 } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import clsx from 'clsx'
 
-import { Button } from '@/components/button.component'
+import { RESPONSE_TIME } from '@/constants/contact-channels'
 import {
   BUDGET_OPTIONS,
   GOAL_OPTIONS,
@@ -20,6 +20,7 @@ interface FormState {
   name: string
   email: string
   company: string
+  phone: string
   projectType: string
   budget: string
   description: string
@@ -32,6 +33,7 @@ const initialState: FormState = {
   name: '',
   email: '',
   company: '',
+  phone: '',
   projectType: '',
   budget: '',
   description: '',
@@ -40,19 +42,47 @@ const initialState: FormState = {
   _hp: '',
 }
 
-const labelClass = 'block text-sm font-medium text-zinc-800 dark:text-zinc-200'
+const labelClass = 'block text-label-md font-medium text-on-surface'
 const inputBase =
-  'mt-2 block w-full rounded-lg border border-zinc-300 bg-white px-3.5 py-2.5 text-sm text-zinc-900 shadow-sm transition placeholder:text-zinc-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30 disabled:cursor-not-allowed disabled:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-brand dark:disabled:bg-zinc-900/50'
-const errorClass = 'mt-2 text-sm text-brand'
-const fieldsetClass =
-  'rounded-2xl border border-zinc-200 p-6 sm:p-8 dark:border-zinc-800'
-const legendClass =
-  'px-2 text-sm font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400'
+  'mt-2 block w-full rounded-md border border-border bg-surface px-4 py-2.5 text-body-md text-on-surface transition-colors placeholder:text-secondary focus:border-on-surface focus:outline-none focus:ring-2 focus:ring-overlay disabled:cursor-not-allowed disabled:bg-muted-surface'
+const errorClass = 'mt-2 text-body-sm text-error'
+
+function FormSection({
+  number,
+  title,
+  subtitle,
+  children,
+}: {
+  number: string
+  title: string
+  subtitle?: string
+  children: React.ReactNode
+}) {
+  return (
+    <section className="border-t border-border pt-lg first:border-t-0 first:pt-0">
+      <div className="flex items-baseline gap-md">
+        <span className="font-display text-headline-sm font-medium text-secondary md:text-headline-md">
+          {number}
+        </span>
+        <div>
+          <h3 className="font-display text-subheadline font-medium text-on-surface">
+            {title}
+          </h3>
+          {subtitle ? (
+            <p className="mt-1 text-body-sm text-secondary">{subtitle}</p>
+          ) : null}
+        </div>
+      </div>
+      <div className="mt-md">{children}</div>
+    </section>
+  )
+}
 
 function validate(form: FormState): FieldErrors {
   const result = leadSchema.safeParse({
     ...form,
     company: form.company || undefined,
+    phone: form.phone || undefined,
   })
   if (result.success) return {}
   const errors: FieldErrors = {}
@@ -124,6 +154,7 @@ export function LeadForm() {
         body: JSON.stringify({
           ...form,
           company: form.company || undefined,
+          phone: form.phone || undefined,
         }),
       })
       if (!response.ok) {
@@ -140,26 +171,35 @@ export function LeadForm() {
     }
   }
 
+  function pillClass(isActive: boolean) {
+    return clsx(
+      'inline-flex h-9 items-center rounded-full border px-4 text-label-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-overlay',
+      isActive
+        ? 'border-on-surface bg-on-surface text-surface'
+        : 'border-border bg-tertiary text-on-surface hover:border-on-surface',
+    )
+  }
+
   if (submitted) {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-subtle text-brand dark:bg-zinc-900">
-          <CheckCircle2 className="h-6 w-6" aria-hidden="true" />
+      <div className="card flex flex-col items-start gap-md">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-surface">
+          <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
         </div>
-        <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
+        <h2 className="font-display text-headline-sm font-medium text-on-surface">
           Thanks — your message is in.
         </h2>
-        <p className="text-base text-zinc-600 dark:text-zinc-400">
+        <p className="text-body-md text-secondary">
           I will get back to you within 24 hours. In the meantime, feel free to
-          reply to the confirmation email or reach me on Telegram or WhatsApp.
+          reply to the confirmation email or reach me on Telegram.
         </p>
-        <Button
+        <button
           type="button"
-          variant="ghost"
           onClick={() => setSubmitted(false)}
+          className="btn-tertiary"
         >
           Send another message
-        </Button>
+        </button>
       </div>
     )
   }
@@ -168,10 +208,9 @@ export function LeadForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="space-y-8"
+      className="space-y-xl"
       aria-busy={submitting}
     >
-      {/* Honeypot — hidden from humans, irresistible to bots */}
       <input
         type="text"
         name="_hp"
@@ -183,13 +222,16 @@ export function LeadForm() {
         className="sr-only"
       />
 
-      <fieldset className={fieldsetClass}>
-        <legend className={legendClass}>About you</legend>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <FormSection
+        number="01"
+        title="About you"
+        subtitle="So I know who I'm talking to."
+      >
+        <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
           <div className="sm:col-span-1">
             <label htmlFor="lead-name" className={labelClass}>
               Name
-              <span aria-hidden="true" className="ml-0.5 text-brand">
+              <span aria-hidden="true" className="ml-0.5 text-error">
                 *
               </span>
             </label>
@@ -217,7 +259,7 @@ export function LeadForm() {
           <div className="sm:col-span-1">
             <label htmlFor="lead-email" className={labelClass}>
               Email
-              <span aria-hidden="true" className="ml-0.5 text-brand">
+              <span aria-hidden="true" className="ml-0.5 text-error">
                 *
               </span>
             </label>
@@ -243,12 +285,35 @@ export function LeadForm() {
               </p>
             ) : null}
           </div>
-          <div className="sm:col-span-2">
+          <div className="sm:col-span-1">
+            <label htmlFor="lead-phone" className={labelClass}>
+              Phone{' '}
+              <span className="font-normal text-secondary">(optional)</span>
+            </label>
+            <input
+              id="lead-phone"
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              aria-invalid={Boolean(errors.phone)}
+              aria-describedby={errors.phone ? 'lead-phone-error' : undefined}
+              value={form.phone}
+              onChange={(event) => update('phone', event.target.value)}
+              onBlur={() => handleBlur('phone')}
+              className={inputBase}
+              placeholder="+1 555 123 4567"
+            />
+            {errors.phone ? (
+              <p id="lead-phone-error" role="alert" className={errorClass}>
+                {errors.phone}
+              </p>
+            ) : null}
+          </div>
+          <div className="sm:col-span-1">
             <label htmlFor="lead-company" className={labelClass}>
               Company{' '}
-              <span className="font-normal text-zinc-400 dark:text-zinc-500">
-                (optional)
-              </span>
+              <span className="font-normal text-secondary">(optional)</span>
             </label>
             <input
               id="lead-company"
@@ -263,15 +328,18 @@ export function LeadForm() {
             />
           </div>
         </div>
-      </fieldset>
+      </FormSection>
 
-      <fieldset className={fieldsetClass}>
-        <legend className={legendClass}>The project</legend>
-        <div className="space-y-6">
+      <FormSection
+        number="02"
+        title="The project"
+        subtitle="A clear picture beats a long brief."
+      >
+        <div className="space-y-md">
           <div>
             <span className={labelClass}>
               Project type
-              <span aria-hidden="true" className="ml-0.5 text-brand">
+              <span aria-hidden="true" className="ml-0.5 text-error">
                 *
               </span>
             </span>
@@ -287,12 +355,7 @@ export function LeadForm() {
                       update('projectType', option.value)
                       setTouched((t) => ({ ...t, projectType: true }))
                     }}
-                    className={clsx(
-                      'rounded-full border px-4 py-1.5 text-sm font-medium transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-950',
-                      isActive
-                        ? 'border-brand bg-brand text-brand-fg'
-                        : 'border-zinc-300 bg-white text-zinc-700 hover:border-zinc-400 dark:border-zinc-700 dark:bg-transparent dark:text-zinc-300 dark:hover:border-zinc-600',
-                    )}
+                    className={pillClass(isActive)}
                   >
                     {option.label}
                   </button>
@@ -309,7 +372,7 @@ export function LeadForm() {
           <div>
             <label htmlFor="lead-description" className={labelClass}>
               Project description
-              <span aria-hidden="true" className="ml-0.5 text-brand">
+              <span aria-hidden="true" className="ml-0.5 text-error">
                 *
               </span>
             </label>
@@ -340,15 +403,18 @@ export function LeadForm() {
             ) : null}
           </div>
         </div>
-      </fieldset>
+      </FormSection>
 
-      <fieldset className={fieldsetClass}>
-        <legend className={legendClass}>Budget & timeline</legend>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <FormSection
+        number="03"
+        title="Budget & timeline"
+        subtitle="Honest numbers help me give you an honest answer."
+      >
+        <div className="grid grid-cols-1 gap-md sm:grid-cols-2">
           <div>
             <span className={labelClass}>
               Budget range
-              <span aria-hidden="true" className="ml-0.5 text-brand">
+              <span aria-hidden="true" className="ml-0.5 text-error">
                 *
               </span>
             </span>
@@ -364,12 +430,7 @@ export function LeadForm() {
                       update('budget', option.value)
                       setTouched((t) => ({ ...t, budget: true }))
                     }}
-                    className={clsx(
-                      'rounded-full border px-4 py-1.5 text-sm font-medium transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-950',
-                      isActive
-                        ? 'border-brand bg-brand text-brand-fg'
-                        : 'border-zinc-300 bg-white text-zinc-700 hover:border-zinc-400 dark:border-zinc-700 dark:bg-transparent dark:text-zinc-300 dark:hover:border-zinc-600',
-                    )}
+                    className={pillClass(isActive)}
                   >
                     {option.label}
                   </button>
@@ -386,7 +447,7 @@ export function LeadForm() {
           <div>
             <span className={labelClass}>
               Timeline
-              <span aria-hidden="true" className="ml-0.5 text-brand">
+              <span aria-hidden="true" className="ml-0.5 text-error">
                 *
               </span>
             </span>
@@ -402,12 +463,7 @@ export function LeadForm() {
                       update('timeline', option.value)
                       setTouched((t) => ({ ...t, timeline: true }))
                     }}
-                    className={clsx(
-                      'rounded-full border px-4 py-1.5 text-sm font-medium transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-950',
-                      isActive
-                        ? 'border-brand bg-brand text-brand-fg'
-                        : 'border-zinc-300 bg-white text-zinc-700 hover:border-zinc-400 dark:border-zinc-700 dark:bg-transparent dark:text-zinc-300 dark:hover:border-zinc-600',
-                    )}
+                    className={pillClass(isActive)}
                   >
                     {option.label}
                   </button>
@@ -421,25 +477,24 @@ export function LeadForm() {
             ) : null}
           </div>
         </div>
-      </fieldset>
+      </FormSection>
 
-      <fieldset className={fieldsetClass}>
-        <legend className={legendClass}>Goals</legend>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          Pick anything that applies — helps me understand what success looks
-          like.
-        </p>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <FormSection
+        number="04"
+        title="Goals"
+        subtitle="Pick anything that applies — helps me understand what success looks like."
+      >
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {GOAL_OPTIONS.map((option) => {
             const isChecked = form.goals.includes(option.value)
             return (
               <label
                 key={option.value}
                 className={clsx(
-                  'flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-sm font-medium transition focus-within:ring-2 focus-within:ring-brand',
+                  'flex cursor-pointer items-center gap-3 rounded-md border px-4 py-3 text-body-md transition-colors focus-within:ring-2 focus-within:ring-overlay',
                   isChecked
-                    ? 'border-brand bg-brand-subtle text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100'
-                    : 'border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 dark:border-zinc-800 dark:bg-transparent dark:text-zinc-300 dark:hover:border-zinc-700',
+                    ? 'border-on-surface bg-tertiary text-on-surface'
+                    : 'border-border bg-surface text-on-surface hover:border-on-surface',
                 )}
               >
                 <input
@@ -451,10 +506,10 @@ export function LeadForm() {
                 <span
                   aria-hidden="true"
                   className={clsx(
-                    'flex h-5 w-5 flex-none items-center justify-center rounded-md border transition',
+                    'flex h-5 w-5 flex-none items-center justify-center rounded-sm border transition-colors',
                     isChecked
-                      ? 'border-brand bg-brand text-brand-fg'
-                      : 'border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-900',
+                      ? 'border-on-surface bg-on-surface text-surface'
+                      : 'border-border bg-surface',
                   )}
                 >
                   {isChecked ? (
@@ -476,21 +531,19 @@ export function LeadForm() {
             )
           })}
         </div>
-      </fieldset>
+      </FormSection>
 
       {submitError ? (
-        <p role="alert" className="text-sm text-brand">
+        <p role="alert" className="text-body-sm text-error">
           {submitError}
         </p>
       ) : null}
 
-      <div className="flex flex-wrap items-center gap-4">
-        <Button type="submit" variant="brand" size="lg" disabled={submitting}>
+      <div className="flex flex-wrap items-center gap-md">
+        <button type="submit" className="btn-primary" disabled={submitting}>
           {submitting ? 'Sending…' : 'Send message'}
-        </Button>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          I usually respond within 24 hours.
-        </p>
+        </button>
+        <p className="text-body-sm text-secondary">{RESPONSE_TIME}</p>
       </div>
     </form>
   )
