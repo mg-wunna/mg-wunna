@@ -13,7 +13,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <Header />
-      <main id="main" className="flex-auto">
+      <main id="main" className="flex-auto pt-16">
         {children}
       </main>
       <Footer />

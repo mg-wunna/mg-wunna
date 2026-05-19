@@ -173,21 +173,25 @@ function useHeaderVisibility() {
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
+    const HIDE_THRESHOLD = 8
+    const TOP_OFFSET = 80
+
     let lastY = window.scrollY
     let ticking = false
 
     const update = () => {
       const y = window.scrollY
-      const delta = y - lastY
-      if (y <= 8) {
+      ticking = false
+
+      if (y < TOP_OFFSET) {
         setHidden(false)
-      } else if (delta > 4) {
+      } else if (y > lastY + HIDE_THRESHOLD) {
         setHidden(true)
-      } else if (delta < -4) {
+      } else if (y < lastY) {
         setHidden(false)
       }
+
       lastY = y
-      ticking = false
     }
 
     const onScroll = () => {
@@ -206,11 +210,14 @@ function useHeaderVisibility() {
 
 export function Header() {
   const hidden = useHeaderVisibility()
+  const [introDone, setIntroDone] = useState(false)
 
   return (
     <header
+      onAnimationEnd={() => setIntroDone(true)}
       className={clsx(
-        'preload-anim-header sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-xl transition-transform duration-300 ease-out motion-reduce:transition-none',
+        'fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl transition-transform duration-300 ease-out motion-reduce:transition-none',
+        !introDone && 'preload-anim-header',
         hidden ? '-translate-y-full' : 'translate-y-0',
       )}
     >

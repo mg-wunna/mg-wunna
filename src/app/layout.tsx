@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`h-full antialiased ${inter.variable} ${display.variable}`}
+      className={`antialiased ${inter.variable} ${display.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -90,11 +90,9 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className="flex h-full bg-background text-on-surface">
+      <body className="bg-background text-on-surface">
         <Providers>
-          <div className="flex w-full">
-            <Layout>{children}</Layout>
-          </div>
+          <Layout>{children}</Layout>
         </Providers>
       </body>
     </html>
