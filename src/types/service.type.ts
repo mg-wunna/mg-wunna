@@ -7,6 +7,8 @@ export interface Service {
   description: string
   deliverables: string[]
   idealFor: string[]
+  timeline?: string
+  example?: string
   startingPrice?: string
   icon: ServiceIcon
 }
