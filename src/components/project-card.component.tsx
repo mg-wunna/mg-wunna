@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -12,26 +13,43 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group block focus-visible:outline-none"
+      className="focus-ring group block focus-visible:rounded-md"
     >
-      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-200 transition duration-320 ease-enter group-hover:shadow-card-hover group-focus-visible:ring-2 group-focus-visible:ring-brand dark:bg-zinc-900 dark:ring-zinc-800">
+      <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border bg-muted-surface transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover:-translate-y-1 group-hover:border-on-surface group-hover:shadow-[0_24px_48px_-20px_rgb(0_0_0_/_0.2)]">
         <Image
           src={project.coverImage}
           alt={`${project.name} cover`}
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover transition duration-320 ease-enter group-hover:scale-[1.02] motion-reduce:transform-none"
+          className={
+            project.coverImageDark ? 'object-cover dark:hidden' : 'object-cover'
+          }
         />
+        {project.coverImageDark ? (
+          <Image
+            src={project.coverImageDark}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="hidden object-cover dark:block"
+          />
+        ) : null}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute right-3 top-3 flex h-10 w-10 -translate-y-1 items-center justify-center rounded-full bg-background/95 text-on-surface opacity-0 shadow-soft ring-1 ring-black/5 backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+        >
+          <ArrowUpRight className="h-4 w-4" strokeWidth={1.75} />
+        </span>
       </div>
-      <div className="mt-5 flex items-baseline justify-between gap-4">
-        <h3 className="text-xl font-semibold text-zinc-900 group-hover:text-brand dark:text-zinc-50 dark:group-hover:text-brand">
+      <div className="mt-md flex items-baseline justify-between gap-3">
+        <h3 className="text-subheadline font-medium text-on-surface">
           {project.name}
         </h3>
-        <span className="text-xs uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-500">
+        <span className="text-caption text-secondary">
           {getCategoryLabel(project.category)}
         </span>
       </div>
-      <p className="mt-2 text-base text-zinc-600 dark:text-zinc-400">
+      <p className="mt-2 text-body-md text-secondary">
         {project.oneLineImpact}
       </p>
     </Link>

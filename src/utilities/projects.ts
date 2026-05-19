@@ -9,10 +9,9 @@ export function getAllProjects(): Project[] {
   return [...PROJECTS].sort((a, b) => b.year - a.year)
 }
 
-export function getFeaturedProjects(limit = 4): Project[] {
-  return getAllProjects()
-    .filter((project) => project.featured)
-    .slice(0, limit)
+export function getFeaturedProjects(limit?: number): Project[] {
+  const featured = getAllProjects().filter((project) => project.featured)
+  return typeof limit === 'number' ? featured.slice(0, limit) : featured
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {
@@ -28,4 +27,17 @@ export function getProjectsByCategory(
 
 export function getCategoryLabel(category: ProjectCategory): string {
   return PROJECT_CATEGORY_LABELS[category]
+}
+
+export function getNextProject(slug: string): Project | undefined {
+  const project = getProjectBySlug(slug)
+  if (project?.nextSlug) {
+    const explicit = getProjectBySlug(project.nextSlug)
+    if (explicit) return explicit
+  }
+
+  const all = getAllProjects()
+  const index = all.findIndex((p) => p.slug === slug)
+  if (index === -1) return undefined
+  return all[(index + 1) % all.length]
 }

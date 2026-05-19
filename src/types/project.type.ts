@@ -15,6 +15,11 @@ export interface ProjectScreenshot {
   caption?: string
 }
 
+export interface ProjectMetric {
+  label: string
+  value: string
+}
+
 export interface Project {
   slug: string
   name: string
@@ -22,6 +27,7 @@ export interface Project {
   tagline: string
   oneLineImpact: string
   coverImage: string
+  coverImageDark?: string
   featured: boolean
   year: number
   client?: string
@@ -33,6 +39,12 @@ export interface Project {
   screenshots: ProjectScreenshot[]
   outcome: string
   techStack?: string[]
+  role?: string
+  duration?: string
+  services?: string[]
+  heroImage?: string
+  metrics?: ProjectMetric[]
+  nextSlug?: string
 }
 
 export const PROJECT_CATEGORY_LABELS: Record<ProjectCategory, string> = {
