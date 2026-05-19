@@ -37,6 +37,7 @@ next-env.d.ts
 
 # ai
 CLAUDE.md
+DESIGN.md
 .claude/
 .cursor/
 .cursorrules
@@ -51,3 +52,9 @@ GEMINI.md
 .gemini/
 .anthropic/
 .planning/
+
+# Playwright MCP scratch (console logs and accessibility snapshots)
+.playwright-mcp/
+
+# scratch dir for screenshots, scratch images, throwaway files
+/temp/
