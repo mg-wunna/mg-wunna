@@ -31,6 +31,18 @@
 
 ---
 
+## Project purpose
+
+A premium conversion-focused studio website designed to attract freelance clients — **not** a developer portfolio. Every section is built to move a visitor from attention to a qualified lead.
+
+## Key features
+
+- **Framer Porty-style work showcase** — every project is a cinematic case study, not a card in a grid. Full-bleed cover, editorial story sections, alternating gallery, next-project navigation.
+- **Lead-qualifying contact form** — multi-step intake captures project type, budget, timeline, goals, and description. Stored to MongoDB via `POST /apis/leads`.
+- **Apple / Linear / Stripe-inspired minimalism** — Inter, generous whitespace, subtle motion, one accent color.
+- **Light + dark mode** — full parity via `next-themes` with a selector-based dark mode.
+- **Framer Motion scroll reveals** — respects `prefers-reduced-motion`.
+
 ## What I build
 
 **Business Websites** — premium product and company websites that build trust and convert.
@@ -41,15 +53,43 @@
 
 **MVP Development** — startup-ready product builds from idea to launch.
 
+## Design philosophy
+
+- Apple-style minimalism
+- Studio-grade presentation (cinematic case studies, not card grids)
+- Conversion-first UX — every section guides toward the next step
+
+## Tech
+
+- **Next.js 14** (App Router, TypeScript)
+- **Tailwind CSS** with semantic design tokens
+- **Framer Motion** for restrained scroll reveals
+- **MongoDB + Mongoose** lead store
+- **Zod** input validation
+- **Inter** via `next/font`
+
+## Routes
+
+`/` · `/work` · `/work/[slug]` · `/services` · `/about` · `/contact` · `POST /apis/leads`
+
 ## Selected work
 
-> Case studies coming soon. In the meantime, see [the live site](https://mg-wunna.vercel.app/work).
+> See [the live site](https://mg-wunna.vercel.app/work) for the full case study system.
 
 ## How I work
 
 Discovery → UI / UX Planning → Design & Development → Testing & Optimization → Launch & Support
 
 A focused process so you always know what is happening and what is next.
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+Visit `http://localhost:3000`.
 
 ---
 
