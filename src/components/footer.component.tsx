@@ -1,79 +1,120 @@
+import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
-import {
-  ContainerInner,
-  ContainerOuter,
-} from '@/components/container.component'
 import {
   CONTACT_EMAIL,
   CONTACT_LOCATION,
   CONTACT_PHONE_PRIMARY,
+  CONTACT_TELEGRAM,
 } from '@/constants/contact-channels'
 
-function NavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <Link
-      href={href}
-      className="transition hover:text-red-500 dark:hover:text-red-400"
-    >
-      {children}
-    </Link>
-  )
-}
+const NAV_GROUPS: {
+  title: string
+  links: { label: string; href: string }[]
+}[] = [
+  {
+    title: 'Studio',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Work', href: '/work' },
+      { label: 'Services', href: '/services' },
+      { label: 'Pricing', href: '/pricing' },
+      { label: 'About', href: '/about' },
+    ],
+  },
+  {
+    title: 'Services',
+    links: [
+      { label: 'Business Websites', href: '/services#business-websites' },
+      { label: 'Website Redesigns', href: '/services#website-redesigns' },
+      { label: 'Web Systems', href: '/services#web-systems' },
+      { label: 'MVP Development', href: '/services#mvp-development' },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [
+      { label: 'Start a project', href: '/contact' },
+      { label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+      { label: CONTACT_PHONE_PRIMARY.label, href: CONTACT_PHONE_PRIMARY.href },
+      { label: 'Telegram', href: CONTACT_TELEGRAM.href },
+    ],
+  },
+]
 
 export function Footer() {
   return (
-    <footer className="mt-24 flex-none sm:mt-32">
-      <ContainerOuter>
-        <div className="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-800">
-          <ContainerInner>
-            <div className="flex flex-col gap-10">
-              <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                  <NavLink href="/">Home</NavLink>
-                  <NavLink href="/work">Work</NavLink>
-                  <NavLink href="/services">Services</NavLink>
-                  <NavLink href="/about">About</NavLink>
-                  <NavLink href="/contact">Contact</NavLink>
-                </div>
-                <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-sm text-zinc-500 dark:text-zinc-400">
-                  <Link
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    className="transition hover:text-red-500 dark:hover:text-red-400"
-                  >
-                    {CONTACT_EMAIL}
-                  </Link>
-                  <span
-                    aria-hidden="true"
-                    className="text-zinc-300 dark:text-zinc-700"
-                  >
-                    ·
-                  </span>
-                  <Link
-                    href={CONTACT_PHONE_PRIMARY.href}
-                    className="transition hover:text-red-500 dark:hover:text-red-400"
-                  >
-                    {CONTACT_PHONE_PRIMARY.label}
-                  </Link>
-                </div>
+    <footer className="border-t border-border bg-background text-secondary">
+      <div className="mx-auto w-full max-w-8xl px-margin py-xl">
+        <div className="grid grid-cols-1 gap-lg lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <Link
+              href="/"
+              className="focus-ring inline-flex items-center gap-2 focus-visible:rounded-sm"
+              aria-label="Mg Wunna — Home"
+            >
+              <Image
+                src="/logo-light.svg"
+                alt=""
+                width={32}
+                height={32}
+                className="h-8 w-8 dark:hidden"
+              />
+              <Image
+                src="/logo-dark.svg"
+                alt=""
+                width={32}
+                height={32}
+                className="hidden h-8 w-8 dark:block"
+              />
+              <span className="text-subheadline font-medium text-on-surface">
+                Mg Wunna
+              </span>
+            </Link>
+            <p className="mt-md max-w-md text-body-md text-secondary">
+              Premium websites and scalable systems for businesses, startups,
+              and creators — designed and built one project at a time.
+            </p>
+            <Link href="/contact" className="btn-primary mt-md">
+              Available for 2026 projects
+              <ArrowUpRight
+                className="h-4 w-4"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-md lg:col-span-7 lg:grid-cols-3 lg:gap-gutter">
+            {NAV_GROUPS.map((group) => (
+              <div key={group.title}>
+                <h3 className="eyebrow">{group.title}</h3>
+                <ul className="mt-sm space-y-3 text-body-md text-secondary">
+                  {group.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="focus-ring transition-colors hover:text-on-surface focus-visible:rounded-sm"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="flex flex-col items-center justify-between gap-2 text-xs text-zinc-400 sm:flex-row dark:text-zinc-500">
-                <p>
-                  &copy; {new Date().getFullYear()} Mg Wunna. All rights
-                  reserved.
-                </p>
-                <p>Studio based in {CONTACT_LOCATION}.</p>
-              </div>
-            </div>
-          </ContainerInner>
+            ))}
+          </div>
         </div>
-      </ContainerOuter>
+
+        <div className="mt-lg flex flex-col items-start justify-between gap-3 border-t border-border pt-md text-caption text-secondary sm:flex-row sm:items-center">
+          <p>
+            © {new Date().getFullYear()} Mg Wunna · Studio based in{' '}
+            {CONTACT_LOCATION}.
+          </p>
+          <p>Designed and built in-house.</p>
+        </div>
+      </div>
     </footer>
   )
 }

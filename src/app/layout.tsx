@@ -1,5 +1,5 @@
 import { type Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/layout.component'
@@ -12,7 +12,19 @@ const inter = Inter({
   display: 'swap',
 })
 
+// Free Rogan substitute for Morflax display headlines (headline-display / headline-lg).
+const display = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mg-wunna.vercel.app'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     template: '%s — Mg Wunna',
     default:
@@ -28,17 +40,9 @@ export const metadata: Metadata = {
       'Mg Wunna — Premium websites designed to help businesses grow online',
     description:
       'I design and build modern, high-converting websites for businesses, startups, and creators.',
-    url: 'https://mg-wunna.vercel.app/',
+    url: '/',
     locale: 'en_US',
-    images: [
-      {
-        url: 'https://mg-wunna.vercel.app/thumbnail.png',
-        width: 1280,
-        height: 720,
-        alt: 'Mg Wunna — Premium digital studio',
-        type: 'image/png',
-      },
-    ],
+    // OG/Twitter image picked up via src/app/opengraph-image.png + twitter-image.png conventions.
   },
 }
 
@@ -50,15 +54,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`h-full antialiased ${inter.variable}`}
+      className={`h-full antialiased ${inter.variable} ${display.variable}`}
       suppressHydrationWarning
     >
       <head>
         <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
+          rel="icon"
+          type="image/svg+xml"
+          href="/logo-light.svg"
+          media="(prefers-color-scheme: light)"
         />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/logo-dark.svg"
+          media="(prefers-color-scheme: dark)"
+        />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
           rel="icon"
           type="image/png"
@@ -71,9 +83,14 @@ export default function RootLayout({
           sizes="16x16"
           href="/favicon-16x16.png"
         />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className="flex h-full bg-zinc-50 dark:bg-black">
+      <body className="flex h-full bg-background text-on-surface">
         <Providers>
           <div className="flex w-full">
             <Layout>{children}</Layout>

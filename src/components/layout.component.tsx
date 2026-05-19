@@ -1,19 +1,22 @@
 import { Footer } from '@/components/footer.component'
 import { Header } from '@/components/header.component'
+import { Preloader } from '@/components/preloader.component'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <div className="fixed inset-0 flex justify-center sm:px-8">
-        <div className="flex w-full max-w-7xl lg:px-8">
-          <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
-        </div>
-      </div>
-      <div className="relative flex w-full flex-col">
-        <Header />
-        <main className="flex-auto">{children}</main>
-        <Footer />
-      </div>
-    </>
+    <div className="relative flex min-h-dvh w-full flex-col bg-background text-on-surface">
+      <Preloader />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-sm focus:bg-primary focus:px-3 focus:py-2 focus:text-label-md focus:text-surface"
+      >
+        Skip to content
+      </a>
+      <Header />
+      <main id="main" className="flex-auto">
+        {children}
+      </main>
+      <Footer />
+    </div>
   )
 }
