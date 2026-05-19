@@ -1,3 +1,215 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --header-h: 64px;
+    /* Morflax — light theme (default). Stored as space-separated RGB
+       so Tailwind's `<alpha-value>` modifier works. */
+    --color-surface: 255 255 255;
+    --color-background: 255 255 255;
+    --color-muted-surface: 245 245 245;
+    --color-tertiary: 251 251 254;
+    --color-on-surface: 37 40 43;
+    --color-secondary: 80 83 86;
+    --color-border: 229 231 235;
+    --color-primary: 0 0 0;
+    --color-on-primary: 255 255 255;
+    --color-overlay: 0 0 0;
+  }
+  .dark {
+    --color-surface: 10 10 11;
+    --color-background: 10 10 11;
+    --color-muted-surface: 20 20 22;
+    --color-tertiary: 24 24 27;
+    --color-on-surface: 250 250 252;
+    --color-secondary: 160 162 165;
+    --color-border: 39 39 42;
+    --color-primary: 255 255 255;
+    --color-on-primary: 10 10 11;
+    --color-overlay: 255 255 255;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: rgb(var(--color-background));
+    color: rgb(var(--color-on-surface));
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    font-feature-settings: 'ss01';
+  }
+  ::selection {
+    background-color: rgb(var(--color-primary));
+    color: rgb(var(--color-on-primary));
+  }
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-label-sm font-medium uppercase tracking-[0.04em] text-secondary;
+  }
+  .btn-primary {
+    @apply inline-flex h-[42px] items-center justify-center gap-2 rounded-full border border-border bg-tertiary px-4 text-label-lg text-on-surface transition-colors duration-150 hover:bg-muted-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none;
+  }
+  .btn-secondary {
+    @apply inline-flex h-[42px] items-center justify-center gap-2 rounded-full border border-border bg-transparent px-4 text-label-lg text-secondary transition-colors duration-150 hover:border-on-surface hover:text-on-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none;
+  }
+  .btn-tertiary {
+    @apply inline-flex items-center gap-1 text-label-lg text-secondary transition-colors duration-150 hover:text-on-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none;
+  }
+  .card {
+    @apply rounded-md border border-border bg-surface p-sm;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-border bg-tertiary px-[12px] py-[6px] text-label-md text-on-surface;
+  }
+  .input-pill {
+    @apply h-[42px] rounded-full border border-border bg-surface px-4 text-body-md text-on-surface placeholder:text-secondary focus:border-on-surface focus:outline-none focus:ring-2 focus:ring-overlay;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .focus-ring {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  /* Subtle Linear/Vercel-style dot grid. Use as a background under hero / CTA
+     sections — keeps the page calm but adds quiet structure. */
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      rgb(var(--color-on-surface) / 0.08) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+    background-position: 0 0;
+  }
+  .bg-dot-grid-fade {
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      black 40%,
+      transparent 80%
+    );
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+
+  /* Brand mark pattern. The MW glyph tiled as a watermark — uses CSS mask so
+     the color follows --color-on-surface (auto-adapts to light/dark). */
+  .bg-logo-grid {
+    -webkit-mask-image: url('/pattern-mark.svg');
+    mask-image: url('/pattern-mark.svg');
+    -webkit-mask-size: 72px 72px;
+    mask-size: 72px 72px;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    background-color: rgb(var(--color-on-surface) / 0.12);
+  }
+  /* Radial fade so the pattern dissolves toward the edges. Wrap .bg-logo-grid
+     in a parent that uses this class to keep the focus on the center. */
+  .logo-grid-fade {
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      black 30%,
+      transparent 75%
+    );
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+
+  /* Logo pattern composited with a corner radial fade — drops the brand mark
+     into one corner of a card and dissolves it before it hits the content. */
+  .bg-logo-corner {
+    background-color: rgb(var(--color-on-surface) / 0.14);
+    -webkit-mask-image: url('/pattern-mark.svg'),
+      radial-gradient(circle at top right, black 0%, transparent 65%);
+    mask-image: url('/pattern-mark.svg'),
+      radial-gradient(circle at top right, black 0%, transparent 65%);
+    -webkit-mask-size:
+      44px 44px,
+      100% 100%;
+    mask-size:
+      44px 44px,
+      100% 100%;
+    -webkit-mask-repeat: repeat, no-repeat;
+    mask-repeat: repeat, no-repeat;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  /* Post-preloader reveal animations. Fire when <html> gets `.loaded`. */
+  @keyframes preload-slide-down {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes preload-fade-up {
+    from {
+      transform: translateY(24px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .preload-anim,
+  .preload-anim-header {
+    opacity: 0;
+  }
+  html.loaded .preload-anim-header {
+    animation: preload-slide-down 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  html.loaded .preload-anim {
+    animation: preload-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .preload-delay-100 {
+    animation-delay: 0.1s;
+  }
+  .preload-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .preload-delay-300 {
+    animation-delay: 0.3s;
+  }
+  .preload-delay-400 {
+    animation-delay: 0.4s;
+  }
+  .preload-delay-500 {
+    animation-delay: 0.5s;
+  }
+  .preload-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preload-anim,
+    .preload-anim-header {
+      opacity: 1 !important;
+      animation: none !important;
+    }
+  }
+}

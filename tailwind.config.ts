@@ -1,59 +1,104 @@
 import { type Config } from 'tailwindcss'
-import colors from 'tailwindcss/colors'
 
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'selector',
   theme: {
+    // Morflax type ladder. Inter for everything functional, display font for headline-display/lg.
     fontSize: {
-      xs: ['0.8125rem', { lineHeight: '1.5rem' }],
-      sm: ['0.875rem', { lineHeight: '1.5rem' }],
-      base: ['1rem', { lineHeight: '1.75rem' }],
-      lg: ['1.125rem', { lineHeight: '1.75rem' }],
-      xl: ['1.25rem', { lineHeight: '2rem' }],
-      '2xl': ['1.5rem', { lineHeight: '2rem' }],
-      '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-      '4xl': ['2.25rem', { lineHeight: '2.75rem' }],
-      '5xl': ['3rem', { lineHeight: '3.5rem' }],
-      '6xl': ['3.75rem', { lineHeight: '4rem' }],
-      '7xl': ['4.5rem', { lineHeight: '4.75rem' }],
-      '8xl': ['6rem', { lineHeight: '1' }],
-      '9xl': ['8rem', { lineHeight: '1' }],
+      'label-sm': ['0.75rem', { lineHeight: '1.2', letterSpacing: '0.04em' }],
+      caption: ['0.8125rem', { lineHeight: '1.25rem' }],
+      'label-md': ['0.875rem', { lineHeight: '1.2' }],
+      'body-sm': ['0.875rem', { lineHeight: '1.25rem' }],
+      'label-lg': ['1rem', { lineHeight: '1.2' }],
+      base: ['1rem', { lineHeight: '1.5rem' }],
+      'body-md': ['1rem', { lineHeight: '1.5rem' }],
+      nav: ['1rem', { lineHeight: '1.5rem' }],
+      'body-lg': [
+        '1.125rem',
+        { lineHeight: '1.75rem', letterSpacing: '-0.01em' },
+      ],
+      subheadline: ['1.8125rem', { lineHeight: '2.5rem' }],
+      'headline-sm': [
+        '2.375rem',
+        { lineHeight: '3rem', letterSpacing: '-0.03em' },
+      ],
+      'headline-md': ['3rem', { lineHeight: '3.625rem' }],
+      'headline-lg': ['4rem', { lineHeight: '1.05' }],
+      'headline-display': ['6rem', { lineHeight: '1' }],
+      'headline-hero': ['8rem', { lineHeight: '0.95' }],
     },
     extend: {
       fontFamily: {
         sans: [
           'var(--font-sans)',
-          'ui-sans-serif',
+          'Inter',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
           'Segoe UI',
           'sans-serif',
         ],
+        display: [
+          'var(--font-display)',
+          'Space Grotesk',
+          'var(--font-sans)',
+          'Inter',
+          'system-ui',
+          'sans-serif',
+        ],
       },
       colors: {
-        brand: {
-          DEFAULT: colors.red[600],
-          hover: colors.red[700],
-          fg: colors.white,
-          subtle: colors.red[50],
+        // Morflax palette via CSS vars — tokens flip in dark mode via .dark class.
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        'on-primary': 'rgb(var(--color-on-primary) / <alpha-value>)',
+        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        'on-surface': 'rgb(var(--color-on-surface) / <alpha-value>)',
+        background: 'rgb(var(--color-background) / <alpha-value>)',
+        border: {
+          DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
         },
-        surface: {
-          DEFAULT: colors.white,
-          muted: colors.zinc[50],
-          border: colors.zinc[200],
-        },
-        'surface-dark': {
-          DEFAULT: colors.zinc[950],
-          muted: colors.zinc[900],
-          border: colors.zinc[800],
-        },
+        'muted-surface': 'rgb(var(--color-muted-surface) / <alpha-value>)',
+        overlay: 'rgb(var(--color-overlay) / 0.1)',
+        error: '#D92D20',
       },
       boxShadow: {
-        card: '0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.05)',
+        none: 'none',
+        // Soft, atmospheric only — Morflax avoids heavy elevation.
+        soft: '0 1px 2px rgba(0, 0, 0, 0.04)',
+        lift: '0 8px 24px -12px rgba(0, 0, 0, 0.08)',
+        card: '0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px -16px rgba(0, 0, 0, 0.08)',
         'card-hover':
-          '0 4px 6px rgb(0 0 0 / 0.05), 0 10px 15px rgb(0 0 0 / 0.08)',
+          '0 1px 2px rgba(0, 0, 0, 0.05), 0 24px 48px -20px rgba(0, 0, 0, 0.18)',
+      },
+      borderRadius: {
+        none: '0',
+        sm: '4px',
+        md: '8px',
+        lg: '16px',
+        xl: '24px',
+        full: '9999px',
+      },
+      spacing: {
+        // Morflax spacing tokens — 6/16/32/48/80 with 24px gutter, 32px margin.
+        xs: '6px',
+        sm: '16px',
+        md: '32px',
+        lg: '48px',
+        xl: '80px',
+        gutter: '24px',
+        margin: '32px',
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        prose: '720px',
+        editorial: '980px',
+      },
+      aspectRatio: {
+        case: '16 / 9',
+        phone: '9 / 19.5',
       },
       transitionTimingFunction: {
         enter: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -63,6 +108,15 @@ export default {
         '150': '150ms',
         '220': '220ms',
         '320': '320ms',
+      },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.6s ease-out forwards',
       },
     },
   },
