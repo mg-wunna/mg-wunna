@@ -5,15 +5,15 @@ import { type Project } from '@/types/project.type'
 // coverImage + screenshots paths to absolute /images/... URLs.
 export const PROJECTS: Project[] = [
   {
-    slug: 'dana-app',
+    slug: 'dana',
     name: 'Dana',
     category: 'saas-mvp',
     tagline:
       'A personal finance app that shows you exactly where your money goes — no spreadsheets, no discipline required.',
     oneLineImpact:
       'A pre-launch landing page that turns money anxiety into curiosity — and visitors into a qualified early-access waitlist.',
-    coverImage: '/images/projects/dana-app/cover.jpg',
-    coverImageDark: '/images/projects/dana-app/cover-dark.jpg',
+    coverImage: '/images/projects/dana/cover.jpg',
+    coverImageDark: '/images/projects/dana/cover-dark.jpg',
     featured: true,
     year: 2026,
     client: 'Dana',
