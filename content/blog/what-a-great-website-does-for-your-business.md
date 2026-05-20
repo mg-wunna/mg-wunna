@@ -2,7 +2,7 @@
 title: 'What a great website actually does for your business'
 excerpt: 'Trust, leads, 24/7 sales — what a well-built site actually delivers in 2026.'
 category: 'Business'
-publishedAt: '2026-05-20'
+publishedAt: '2026-05-13'
 readingMinutes: 6
 coverImage: '/images/blog/what-a-great-website-does-for-your-business.png'
 ---
