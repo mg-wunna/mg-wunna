@@ -2,11 +2,7 @@ import { type Metadata } from 'next'
 
 import { BlogPostCard } from '@/components/blog-post-card.component'
 import { CtaSection } from '@/components/cta-section.component'
-import {
-  Reveal,
-  RevealItem,
-  RevealStagger,
-} from '@/components/reveal.component'
+import { Reveal } from '@/components/reveal.component'
 import { getAllPosts } from '@/utilities/blog'
 
 export const metadata: Metadata = {
@@ -44,13 +40,13 @@ export default function BlogIndexPage() {
               New articles are on the way.
             </p>
           ) : (
-            <RevealStagger className="grid grid-cols-1 gap-x-gutter gap-y-lg sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-gutter gap-y-lg sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
-                <RevealItem key={post.slug}>
+                <Reveal key={post.slug} loose>
                   <BlogPostCard post={post} />
-                </RevealItem>
+                </Reveal>
               ))}
-            </RevealStagger>
+            </div>
           )}
         </div>
       </section>

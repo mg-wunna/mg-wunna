@@ -79,13 +79,21 @@ function parseMeta(
   }
 }
 
+function todayIso(): string {
+  return new Date().toISOString().slice(0, 10)
+}
+
+const SHOW_UNPUBLISHED = process.env.NODE_ENV !== 'production'
+
 export function getAllPosts(): BlogPostMeta[] {
+  const today = todayIso()
   return readFilenames()
     .map((filename) => {
       const raw = fs.readFileSync(path.join(CONTENT_DIR, filename), 'utf8')
       const { data } = matter(raw)
       return parseMeta(filename, data as Record<string, unknown>)
     })
+    .filter((post) => SHOW_UNPUBLISHED || post.publishedAt <= today)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
 }
 
@@ -100,6 +108,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
   const raw = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(raw)
   const meta = parseMeta(filename, data as Record<string, unknown>)
+  if (!SHOW_UNPUBLISHED && meta.publishedAt > todayIso()) return null
   const html = marked.parse(content, { async: false }) as string
 
   return { ...meta, html }
