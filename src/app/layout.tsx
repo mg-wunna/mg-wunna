@@ -1,5 +1,5 @@
 import { type Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Noto_Sans_Myanmar, Space_Grotesk } from 'next/font/google'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/layout.component'
@@ -17,6 +17,13 @@ const display = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-display',
+  display: 'swap',
+})
+
+const myanmar = Noto_Sans_Myanmar({
+  subsets: ['myanmar'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-myanmar',
   display: 'swap',
 })
 
@@ -42,7 +49,22 @@ export const metadata: Metadata = {
       'I design and build modern, high-converting websites for businesses, startups, and creators.',
     url: '/',
     locale: 'en_US',
-    // OG/Twitter image picked up via src/app/opengraph-image.png + twitter-image.png conventions.
+    images: [
+      {
+        url: '/thumbnail.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Mg Wunna — Premium websites designed to help businesses grow online',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title:
+      'Mg Wunna — Premium websites designed to help businesses grow online',
+    description:
+      'I design and build modern, high-converting websites for businesses, startups, and creators.',
+    images: ['/thumbnail.jpg'],
   },
 }
 
@@ -54,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`antialiased ${inter.variable} ${display.variable}`}
+      className={`antialiased ${inter.variable} ${display.variable} ${myanmar.variable}`}
       suppressHydrationWarning
     >
       <head>
