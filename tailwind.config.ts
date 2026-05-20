@@ -158,6 +158,16 @@ export default {
               letterSpacing: '-0.01em',
             },
             blockquote: { fontStyle: 'normal', fontWeight: '500' },
+            '[lang="my"], [lang="my"] *': {
+              fontFamily:
+                'var(--font-myanmar), var(--font-sans), Inter, system-ui, sans-serif',
+              lineHeight: '1.85',
+            },
+            '[lang="my"] h2, [lang="my"] h3': {
+              fontFamily:
+                'var(--font-myanmar), var(--font-display), var(--font-sans), sans-serif',
+              letterSpacing: '0',
+            },
           },
         },
       }),

@@ -4,7 +4,7 @@ excerpt: 'Trust, leads, 24/7 sales — what a well-built site actually delivers 
 category: 'Business'
 publishedAt: '2026-05-20'
 readingMinutes: 6
-coverImage: '/images/blog/placeholder.jpg'
+coverImage: '/images/blog/what-a-great-website-does-for-your-business.png'
 ---
 
 In 2026, your website is the single most important asset your business owns online. Not your Instagram. Not your TikTok. Not your WhatsApp catalogue. Your website.

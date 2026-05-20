@@ -4,13 +4,20 @@ import path from 'path'
 import matter from 'gray-matter'
 import { marked } from 'marked'
 
-import { type BlogPost, type BlogPostMeta } from '@/types/blog.type'
+import {
+  type BlogLang,
+  type BlogPost,
+  type BlogPostMeta,
+} from '@/types/blog.type'
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'blog')
+const SUPPORT_FILENAMES = new Set(['roadmap.md', 'voice-myanmar.md'])
 
 function readFilenames(): string[] {
   if (!fs.existsSync(CONTENT_DIR)) return []
-  return fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.md'))
+  return fs
+    .readdirSync(CONTENT_DIR)
+    .filter((f) => f.endsWith('.md') && !SUPPORT_FILENAMES.has(f))
 }
 
 function requireString(
@@ -39,6 +46,14 @@ function requireNumber(
   return value
 }
 
+function parseLang(value: unknown, filename: string): BlogLang {
+  if (value === undefined || value === null) return 'en'
+  if (value === 'en' || value === 'my') return value
+  throw new Error(
+    `Blog post ${filename} has invalid frontmatter field "lang": expected "en" or "my", got ${JSON.stringify(value)}.`,
+  )
+}
+
 function parseMeta(
   filename: string,
   data: Record<string, unknown>,
@@ -49,6 +64,7 @@ function parseMeta(
     title: requireString(data.title, 'title', filename),
     excerpt: requireString(data.excerpt, 'excerpt', filename),
     category: requireString(data.category, 'category', filename),
+    lang: parseLang(data.lang, filename),
     publishedAt: requireString(data.publishedAt, 'publishedAt', filename),
     readingMinutes: requireNumber(
       data.readingMinutes,
@@ -56,6 +72,10 @@ function parseMeta(
       filename,
     ),
     coverImage: requireString(data.coverImage, 'coverImage', filename),
+    coverFocal:
+      typeof data.coverFocal === 'string' && data.coverFocal.trim() !== ''
+        ? data.coverFocal
+        : undefined,
   }
 }
 
