@@ -120,7 +120,7 @@ export const PROJECTS: Project[] = [
     featured: true,
     year: 2026,
     client: 'G3G',
-    liveUrl: 'https://msmebyg3g.pages.dev/',
+    liveUrl: 'https://msmebyg3g.com/',
     role: 'Design & Development',
     duration: '6 weeks',
     services: ['UI / UX', 'Frontend', 'Brand'],
