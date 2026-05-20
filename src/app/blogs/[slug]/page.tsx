@@ -50,7 +50,7 @@ export default function BlogPostPage({ params }: PageProps) {
 
           <div className="mt-xl border-t border-border pt-md">
             <Link
-              href="/blog"
+              href="/blogs"
               className="inline-flex items-center gap-1.5 text-caption text-secondary transition-colors hover:text-on-surface"
             >
               <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
