@@ -14,7 +14,7 @@ export function BlogPostCover({ post }: BlogPostCoverProps) {
     <header className="preload-anim preload-delay-200 bg-background pt-lg">
       <div className="mx-auto max-w-editorial px-margin text-center">
         <Link
-          href="/blog"
+          href="/blogs"
           className="inline-flex items-center gap-1.5 text-caption text-secondary transition-colors hover:text-on-surface"
         >
           <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />

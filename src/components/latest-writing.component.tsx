@@ -23,7 +23,7 @@ export function LatestWriting() {
                 Notes on building for the web.
               </h2>
             </div>
-            <Link href="/blog" className="btn-tertiary">
+            <Link href="/blogs" className="btn-tertiary">
               View all →
             </Link>
           </div>

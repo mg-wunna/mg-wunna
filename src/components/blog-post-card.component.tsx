@@ -12,7 +12,7 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/blogs/${post.slug}`}
       className="focus-ring group block focus-visible:rounded-md"
     >
       <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border bg-muted-surface transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover:-translate-y-1 group-hover:border-on-surface group-hover:shadow-[0_24px_48px_-20px_rgb(0_0_0_/_0.2)]">

@@ -5,7 +5,6 @@ category: 'Business'
 publishedAt: '2026-05-15'
 readingMinutes: 6
 coverImage: '/images/blog/the-hidden-cost-of-a-cheap-website.png'
-tags: ['Pricing', 'Strategy']
 ---
 
 A founder I spoke to recently had finally launched her business website. She had been quoted ten thousand dollars by a studio, balked at the number, and went with a freelancer on a marketplace for three hundred.
