@@ -2,7 +2,9 @@
 //
 // Modes:
 //   default          — full page, 1440×900 desktop viewport
-//   --hero           — viewport only, 1920×1080 (16:9) — for project cover images
+//   --hero           — viewport only, 1440×810 (16:9) @ 3x DPR — for project cover images.
+//                      Renders at the CSS width sites are actually designed for so the
+//                      layout doesn't look zoomed-out; final output is 4320×2430.
 //   --mobile         — full page, 390×844 mobile viewport
 //   --theme=light    — force light mode (default)
 //   --theme=dark     — force dark mode (sets localStorage + emulates prefers-color-scheme)
@@ -49,14 +51,15 @@ if (!url) {
 const isHero = flag('hero', false)
 const isMobile = flag('mobile', false)
 const noWait = flag('no-wait', false)
-const deviceScaleFactor = Number(flag('dpr', 2))
+const isHeroEarly = process.argv.includes('--hero')
+const deviceScaleFactor = Number(flag('dpr', isHeroEarly ? 3 : 2))
 const theme = String(flag('theme', 'light')).toLowerCase()
 const isDark = theme === 'dark'
 
 let width, height, fullPage
 if (isHero) {
-  width = Number(flag('width', 1920))
-  height = Number(flag('height', 1080))
+  width = Number(flag('width', 1440))
+  height = Number(flag('height', 810))
   fullPage = false
 } else if (isMobile) {
   width = Number(flag('width', 390))
