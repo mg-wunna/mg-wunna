@@ -42,7 +42,7 @@ export default function BlogPostPage({ params }: PageProps) {
         <div className="mx-auto max-w-prose px-margin">
           <Reveal>
             <article
-              className="prose prose-zinc max-w-none dark:prose-invert"
+              className="prose max-w-none dark:prose-invert"
               dangerouslySetInnerHTML={{ __html: post.html }}
             />
           </Reveal>
