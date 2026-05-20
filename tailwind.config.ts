@@ -1,4 +1,5 @@
 import { type Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography'
 
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -118,6 +119,49 @@ export default {
       animation: {
         'fade-in': 'fade-in 0.6s ease-out forwards',
       },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': 'rgb(var(--color-secondary))',
+            '--tw-prose-headings': 'rgb(var(--color-on-surface))',
+            '--tw-prose-lead': 'rgb(var(--color-secondary))',
+            '--tw-prose-links': 'rgb(var(--color-primary))',
+            '--tw-prose-bold': 'rgb(var(--color-on-surface))',
+            '--tw-prose-counters': 'rgb(var(--color-secondary))',
+            '--tw-prose-bullets': 'rgb(var(--color-tertiary))',
+            '--tw-prose-hr': 'rgb(var(--color-border))',
+            '--tw-prose-quotes': 'rgb(var(--color-on-surface))',
+            '--tw-prose-quote-borders': 'rgb(var(--color-primary))',
+            '--tw-prose-captions': 'rgb(var(--color-secondary))',
+            '--tw-prose-code': 'rgb(var(--color-on-surface))',
+            '--tw-prose-pre-code': 'rgb(var(--color-on-surface))',
+            '--tw-prose-pre-bg': 'rgb(var(--color-muted-surface))',
+            '--tw-prose-th-borders': 'rgb(var(--color-border))',
+            '--tw-prose-td-borders': 'rgb(var(--color-border))',
+            '--tw-prose-invert-body': 'rgb(var(--color-secondary))',
+            '--tw-prose-invert-headings': 'rgb(var(--color-on-surface))',
+            '--tw-prose-invert-links': 'rgb(var(--color-primary))',
+            '--tw-prose-invert-bold': 'rgb(var(--color-on-surface))',
+            '--tw-prose-invert-hr': 'rgb(var(--color-border))',
+            '--tw-prose-invert-quotes': 'rgb(var(--color-on-surface))',
+            '--tw-prose-invert-quote-borders': 'rgb(var(--color-primary))',
+            fontFamily: 'var(--font-sans), Inter, system-ui, sans-serif',
+            a: { textDecoration: 'underline', textUnderlineOffset: '3px' },
+            h2: {
+              fontFamily: 'var(--font-display), var(--font-sans), sans-serif',
+              fontWeight: '500',
+              letterSpacing: '-0.02em',
+            },
+            h3: {
+              fontFamily: 'var(--font-display), var(--font-sans), sans-serif',
+              fontWeight: '500',
+              letterSpacing: '-0.01em',
+            },
+            blockquote: { fontStyle: 'normal', fontWeight: '500' },
+          },
+        },
+      }),
     },
   },
+  plugins: [typography],
 } satisfies Config
