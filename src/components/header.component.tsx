@@ -19,8 +19,8 @@ const NAV_ITEMS: { href: string; label: string; includes?: boolean }[] = [
   { href: '/work', label: 'Work', includes: true },
   { href: '/services', label: 'Services' },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/blog', label: 'Blogs', includes: true },
   { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Blog', includes: true },
 ]
 
 function Logotype() {

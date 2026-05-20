@@ -20,8 +20,8 @@ const NAV_GROUPS: {
       { label: 'Work', href: '/work' },
       { label: 'Services', href: '/services' },
       { label: 'Pricing', href: '/pricing' },
+      { label: 'Blogs', href: '/blog' },
       { label: 'About', href: '/about' },
-      { label: 'Blog', href: '/blog' },
     ],
   },
   {
