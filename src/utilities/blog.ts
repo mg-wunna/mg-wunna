@@ -70,6 +70,9 @@ export function getAllPosts(): BlogPostMeta[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
+  if (slug.includes('/') || slug.includes('\\') || slug.startsWith('.')) {
+    return null
+  }
   const filename = `${slug}.md`
   const fullPath = path.join(CONTENT_DIR, filename)
   if (!fs.existsSync(fullPath)) return null
